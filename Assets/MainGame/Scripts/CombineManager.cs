@@ -5,7 +5,7 @@ using System.Collections.Generic;
 public class CombineManager : MonoBehaviour
 {
     public CombineArea combineArea;
-    public GameObject cardPrefab;
+    //public GameObject cardPrefab;
 
     [System.Serializable]
     public class IngredientPrefab
@@ -24,7 +24,11 @@ public class CombineManager : MonoBehaviour
         {"麵粉+水", "麵糰"},
         {"麵糰+火", "麵包"},
         {"pork+rice", "porkRice"},
-        {"bread+ham", "火腿三明治"}
+        {"bread+ham", "火腿三明治"},
+
+        // ★ 新增的合成
+        {"beef+burgerbun+cheese+lettuce", "hamburger"},
+        {"mushroom+salmon+sandwich", "salmonMushroomsandwich"}
     };
 
     
@@ -37,12 +41,20 @@ public class CombineManager : MonoBehaviour
 
     void SpawnNewCard(string name)
     {
-        GameObject prefabToUse;
-        if (!prefabDict.TryGetValue(name, out prefabToUse))
-            prefabToUse = cardPrefab; // fallback
+        // GameObject prefabToUse;
+        // if (!prefabDict.TryGetValue(name, out prefabToUse))
+        //     prefabToUse = cardPrefab; // fallback
 
-        GameObject newCard = Instantiate(prefabToUse, combineArea.transform);
-        newCard.GetComponent<IngredientCard>().ingredientName = name;
+        // GameObject newCard = Instantiate(prefabToUse, combineArea.transform);
+        // newCard.GetComponent<IngredientCard>().ingredientName = name;
+        if (prefabDict.TryGetValue(name, out GameObject prefab))
+        {
+            Instantiate(prefab, combineArea.transform);
+        }
+        else
+        {
+            Debug.LogError($"找不到 {name} 的 Prefab！");
+        }
     }
 
     public void OnCombineButtonClicked()
@@ -67,9 +79,24 @@ public class CombineManager : MonoBehaviour
             combineArea.ingredientsInArea.Clear();
 
             // 4️⃣ 在合成區生成新卡
-            GameObject newCard = Instantiate(cardPrefab, combineArea.transform);
-            //newCard.GetComponentInChildren<Text>().text = resultName;
-            newCard.GetComponent<FoodCard>().foodName = resultName;
+            // 4️⃣ 在合成區生成新卡（根據結果名稱決定用哪個 Prefab）
+            if (prefabDict.TryGetValue(resultName, out GameObject resultPrefab))
+            {
+                GameObject newCard = Instantiate(resultPrefab, combineArea.transform);
+
+                Debug.Log($"生成 Prefab：{resultPrefab.name}");
+                Debug.Log($"Instance 名稱：{newCard.name}");
+
+                // 如果你的成品卡片也需要 FoodCard
+                FoodCard card = newCard.GetComponent<FoodCard>();
+                if (card != null)
+                    card.foodName = resultName;
+            }
+            else
+            {
+                Debug.LogError($"找不到 {resultName} 對應的 Prefab！");
+            }
+
         }
         else
         {

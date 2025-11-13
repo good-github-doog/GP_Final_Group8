@@ -18,14 +18,25 @@ public class FoodCard : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
     public void OnBeginDrag(PointerEventData eventData)
     {
         originalParent = transform.parent;
-        transform.SetParent(transform.root); // 提升層級避免被 UI 蓋住
+        //transform.SetParent(transform.root);
+
+        transform.SetParent(originalParent.parent);  // 提升層級避免被 UI 蓋住
         canvasGroup.blocksRaycasts = false; // 避免卡牌阻擋 Drop 區
     }
 
     public void OnDrag(PointerEventData eventData)
     {
-        rectTransform.anchoredPosition += eventData.delta / transform.root.localScale.x;
+        //rectTransform.anchoredPosition += eventData.delta / transform.root.localScale.x;
+        RectTransformUtility.ScreenPointToWorldPointInRectangle(
+        rectTransform,
+        eventData.position,
+        eventData.pressEventCamera,
+        out Vector3 worldPos
+        );
+
+        rectTransform.position = worldPos;
     }
+
 
     public void OnEndDrag(PointerEventData eventData)
     {
