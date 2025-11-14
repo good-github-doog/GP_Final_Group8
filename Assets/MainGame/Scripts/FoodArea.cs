@@ -34,7 +34,7 @@ public class FoodArea : MonoBehaviour, IDropHandler
                 return;
             }
 
-            Debug.Log(card.transform.position.x);
+            //Debug.Log(card.transform.position.x);
 
             /*
             else if (card.transform.position.x < 380)
