@@ -7,20 +7,27 @@ using System.Collections.Generic;
 public class shopmanager : MonoBehaviour
 {
     public TextMeshProUGUI show;
+    public TextMeshProUGUI itemprise;
     public Slider slider;
     public AudioSource bgm;
     public GameObject setpanel;
+    public GameObject buypanel;
+    public TextMeshProUGUI itemNameText;
     public bagpool pool;
+
+
+    private string nowbuyingitem;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        show.text = "value : " + data.val;
+        show.text = "" + data.money;
         slider.value = data.bgmvol;
         bgm.volume = data.bgmvol;
         slider.onValueChanged.AddListener(setvolume);
 
         foreach (var remains in data.inbag)
         {
+            if (remains.quantity == 0) continue;
             GameObject uiObj = pool.GetObject();
             uiObj.GetComponent<ingredient>().setingredient(remains.name, remains.quantity);
         }
@@ -49,28 +56,46 @@ public class shopmanager : MonoBehaviour
         Time.timeScale = 1f;
     }
 
+    public void openbuy(string itname)
+    {
+        buypanel.SetActive(true);
+        data.setnowprise(itname);
+        itemprise.text = "$ " + data.nowprise;
+        nowbuyingitem = itname;
+        itemNameText.text = itname;
+    }
+
+    public void closebuy()
+    {
+        buypanel.SetActive(false);
+    }
+
     public void setvolume(float value)
     {
         bgm.volume = value;
         data.bgmvol = value;
     }
 
-    public void AddItem(string item)
+    public void AddItem()
     {
-        data.ingreds_data isexist = data.inbag.Find(x => x.name == item);
+        if (data.money < data.nowprise) return;
+        data.money -= data.nowprise;
+        show.text = "" + data.money;
+
+        data.ingreds_data isexist = data.inbag.Find(x => x.name == nowbuyingitem);
         if (isexist != null)
         {
             isexist.quantity++;
-            GameObject numup = pool.pool.Find(obj => obj.GetComponent<ingredient>().thename == item);
+            GameObject numup = pool.pool.Find(obj => obj.GetComponent<ingredient>().thename == nowbuyingitem);
             if (numup != null)
                 numup.GetComponent<ingredient>().updatenum(isexist.quantity);
         }
         else
         {
-            data.inbag.Add(new data.ingreds_data(item));
+            data.inbag.Add(new data.ingreds_data(nowbuyingitem));
 
             GameObject uiObj = pool.GetObject();
-            uiObj.GetComponent<ingredient>().setingredient(item, 1);
+            uiObj.GetComponent<ingredient>().setingredient(nowbuyingitem, 1);
         }
     }
 }
