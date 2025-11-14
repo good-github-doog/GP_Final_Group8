@@ -111,7 +111,6 @@ RectTransform:
   m_Children:
   - {fileID: 141789459611964188}
   - {fileID: 5692619814691951279}
-  - {fileID: 7052210717208185656}
   - {fileID: 1524174001951276305}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -302,8 +301,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: c7e17dd28b4050340b513dca21a12151, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -485,77 +484,3 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
---- !u!1001 &3230676547706489033
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 2522375962466773541}
-    m_Modifications:
-    - target: {fileID: 3835549143923760998, guid: 2601b9b216a41b3439bee25abdfa6ebc, type: 3}
-      propertyPath: m_Name
-      value: cheeseSlice_Melted
-      objectReference: {fileID: 0}
-    - target: {fileID: 5551767895158981617, guid: 2601b9b216a41b3439bee25abdfa6ebc, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 5551767895158981617, guid: 2601b9b216a41b3439bee25abdfa6ebc, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 5551767895158981617, guid: 2601b9b216a41b3439bee25abdfa6ebc, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 5551767895158981617, guid: 2601b9b216a41b3439bee25abdfa6ebc, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5551767895158981617, guid: 2601b9b216a41b3439bee25abdfa6ebc, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5551767895158981617, guid: 2601b9b216a41b3439bee25abdfa6ebc, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -1.3
-      objectReference: {fileID: 0}
-    - target: {fileID: 5551767895158981617, guid: 2601b9b216a41b3439bee25abdfa6ebc, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: -0.7071068
-      objectReference: {fileID: 0}
-    - target: {fileID: 5551767895158981617, guid: 2601b9b216a41b3439bee25abdfa6ebc, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0.7071068
-      objectReference: {fileID: 0}
-    - target: {fileID: 5551767895158981617, guid: 2601b9b216a41b3439bee25abdfa6ebc, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5551767895158981617, guid: 2601b9b216a41b3439bee25abdfa6ebc, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5551767895158981617, guid: 2601b9b216a41b3439bee25abdfa6ebc, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 270
-      objectReference: {fileID: 0}
-    - target: {fileID: 5551767895158981617, guid: 2601b9b216a41b3439bee25abdfa6ebc, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5551767895158981617, guid: 2601b9b216a41b3439bee25abdfa6ebc, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 2601b9b216a41b3439bee25abdfa6ebc, type: 3}
---- !u!4 &7052210717208185656 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 5551767895158981617, guid: 2601b9b216a41b3439bee25abdfa6ebc, type: 3}
-  m_PrefabInstance: {fileID: 3230676547706489033}
-  m_PrefabAsset: {fileID: 0}

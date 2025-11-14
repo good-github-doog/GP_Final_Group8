@@ -3826,7 +3826,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2287833098100372708, guid: 767c3c06bceec0d42824f69a37d9246b, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5793246846354536432, guid: 767c3c06bceec0d42824f69a37d9246b, type: 3}
       propertyPath: m_Pivot.x
@@ -4133,7 +4133,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5818642803362818381, guid: bee5e220d0edf334fbaa5111d851182f, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9137672668168528090, guid: bee5e220d0edf334fbaa5111d851182f, type: 3}
       propertyPath: cardSpawnParent
@@ -4159,7 +4159,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 174055279132146751, guid: 3f23d732674a1a84f9db93a289b85ea9, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2262721442800797256, guid: 3f23d732674a1a84f9db93a289b85ea9, type: 3}
       propertyPath: cardSpawnParent
@@ -4277,7 +4277,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3667018774758602869, guid: 3264b03ea5228bc4491ecfc5e1effd4d, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4452226382717729456, guid: 3264b03ea5228bc4491ecfc5e1effd4d, type: 3}
       propertyPath: cardSpawnParent
@@ -4385,6 +4385,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1824400588}
     m_Modifications:
+    - target: {fileID: 1951357747050067839, guid: 0e115d9af43d98e439a0783cac56615c, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3237559957908982310, guid: 0e115d9af43d98e439a0783cac56615c, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -4471,7 +4475,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6011553434268573585, guid: 0e115d9af43d98e439a0783cac56615c, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7961957070326302175, guid: 0e115d9af43d98e439a0783cac56615c, type: 3}
       propertyPath: m_Type
@@ -4482,6 +4486,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300000, guid: 2cc4ce6c5f9a04a419a6a72852524606, type: 3}
     - target: {fileID: 8180760937234183883, guid: 0e115d9af43d98e439a0783cac56615c, type: 3}
+      propertyPath: icon
+      value: 
+      objectReference: {fileID: 2629999279099383207}
+    - target: {fileID: 8180760937234183883, guid: 0e115d9af43d98e439a0783cac56615c, type: 3}
       propertyPath: cardSpawnParent
       value: 
       objectReference: {fileID: 1824400588}
@@ -4491,6 +4499,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0e115d9af43d98e439a0783cac56615c, type: 3}
+--- !u!114 &2629999279099383207 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1313891914953079143, guid: 0e115d9af43d98e439a0783cac56615c, type: 3}
+  m_PrefabInstance: {fileID: 2629999279099383206}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
 --- !u!1001 &2890768075927038552
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4619,7 +4638,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1693884202926555888, guid: 515e1b32a964de6478468a915a813ccd, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2359413490906175358, guid: 515e1b32a964de6478468a915a813ccd, type: 3}
       propertyPath: cardSpawnParent
@@ -4878,7 +4897,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3096590169376583389, guid: 0a1ca494a3210024da393039985792a8, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7153587888067249573, guid: 0a1ca494a3210024da393039985792a8, type: 3}
       propertyPath: m_Type
