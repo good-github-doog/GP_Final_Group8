@@ -41,6 +41,7 @@ public class bagpool : MonoBehaviour
         }
         GameObject newObj = Instantiate(ingredient_prefeb, transform);
         pool.Add(newObj);
+        //newObj.thename = item;
         return newObj;
     }
 

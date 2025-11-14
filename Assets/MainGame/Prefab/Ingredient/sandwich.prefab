@@ -167,7 +167,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::IngredientCard
   droppedInCombine: 0
-  ingredientName: rice
+  ingredientName: sandwich
 --- !u!225 &4583803097986597148
 CanvasGroup:
   m_ObjectHideFlags: 0

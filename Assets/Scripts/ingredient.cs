@@ -20,7 +20,7 @@ public class ingredient : MonoBehaviour
 
     public void setingredient(string item, int nn)
     {
-        number.text = "" + nn;
+        number.text = item +' ' +  nn;
         Color cc = Color.white;
         switch(item)
         {
@@ -38,6 +38,6 @@ public class ingredient : MonoBehaviour
 
     public void updatenum(int nn)
     {
-        number.text = "" + nn;
+        number.text = thename +  " " + nn;
     }
 }

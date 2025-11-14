@@ -25,6 +25,19 @@ public class IngredientSlot : MonoBehaviour, IPointerDownHandler
         UpdateUI();
     }
 
+    public void Initialize(string name, int quantity)
+    {
+        ingredientName = name;
+        count = quantity;
+        
+        if (parentCanvas == null)
+        {
+            parentCanvas = GetComponentInParent<Canvas>().GetComponent<RectTransform>();
+        }
+        
+        UpdateUI();
+    }
+
     public void OnPointerDown(PointerEventData eventData)
     {
         Debug.Log($"點擊了食材槽：{ingredientName}，剩餘數量：{count}");
@@ -70,5 +83,10 @@ public class IngredientSlot : MonoBehaviour, IPointerDownHandler
             canvasGroup.alpha = 1f;
             canvasGroup.interactable = true;
         }
+    }
+
+    public int GetCurrentCount()
+    {
+        return count;
     }
 }
