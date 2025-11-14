@@ -110,4 +110,11 @@ public class IngredientManager : MonoBehaviour
     {
         SaveSlotsToData();
     }
+
+    public void RefreshSlots()
+    {
+        //SaveSlotsToData();
+        LoadSlotsFromData();
+    }
+    
 }

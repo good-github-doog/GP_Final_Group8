@@ -4,14 +4,7 @@ public class CustomerSpot : MonoBehaviour
 {
     [Header("Spot Status")]
     private bool isOccupied = false;
-    private Customer currentCustomer;
-
-    [Header("Meal Request")]
-    public int maxMealIndex = 1;         // 隨機餐點範圍 (0 ~ x)
-    public int wantedMeal = -1;          // 客人想要的餐點編號
-
-    [Header("Food Area Reference")]
-    public FoodArea myFoodArea;          // 對應的 FoodArea（記得在 Inspector 拖入）
+    public Customer currentCustomer;
 
     public bool IsOccupied => isOccupied;
     public Customer CurrentCustomer => currentCustomer;
