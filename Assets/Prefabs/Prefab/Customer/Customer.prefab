@@ -967,9 +967,10 @@ GameObject:
   - component: {fileID: 3526111578370628322}
   - component: {fileID: 5611092961737139701}
   - component: {fileID: 2932594717542060005}
+  - component: {fileID: -7382345193026391986}
   m_Layer: 0
   m_Name: Customer
-  m_TagString: Untagged
+  m_TagString: Customer
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1108,6 +1109,33 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Customer
   burgerRecipeUI: {fileID: 748692760035798799}
   salmonRecipeUI: {fileID: 1767976599268765640}
+--- !u!54 &-7382345193026391986
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7659413501412707173}
+  serializedVersion: 5
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1001 &515167427241967110
 PrefabInstance:
   m_ObjectHideFlags: 0

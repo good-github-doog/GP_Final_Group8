@@ -9,6 +9,7 @@ TagManager:
   - Chicken
   - Pig
   - Ground
+  - Customer
   layers:
   - Default
   - TransparentFX

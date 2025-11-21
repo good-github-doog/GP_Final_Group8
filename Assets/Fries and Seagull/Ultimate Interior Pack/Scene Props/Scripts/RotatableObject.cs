@@ -20,13 +20,13 @@ namespace Seagull.Interior_I1.SceneProps {
         }
 
         public void rotate(string id, float rotation01) {
-            rotation01 = Mathf.Clamp01(rotation01);
+            rotation01 = Mathf.Clamp(rotation01, -1f, 1f);
             rotatableMap[id].rotation = rotation01;
         }
-        
+
         public void rotate(float rotation01) {
-            rotation01 = Mathf.Clamp01(rotation01);
-            foreach (var rot in rotatableMap.Values) 
+            rotation01 = Mathf.Clamp(rotation01, -1f, 1f);
+            foreach (var rot in rotatableMap.Values)
                 rot.rotation = rotation01;
         }
     }
