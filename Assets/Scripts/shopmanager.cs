@@ -8,6 +8,7 @@ public class shopmanager : MonoBehaviour
 {
     public TextMeshProUGUI show;
     public TextMeshProUGUI itemprise;
+    public TextMeshProUGUI itemdisc;
     public Slider slider;
     public AudioSource bgm;
     public GameObject setpanel;
@@ -63,6 +64,7 @@ public class shopmanager : MonoBehaviour
         itemprise.text = "$ " + data.nowprise;
         nowbuyingitem = itname;
         itemNameText.text = itname;
+        itemdisc.text = ingreddiscription.getinfo(itname);
     }
 
     public void closebuy()

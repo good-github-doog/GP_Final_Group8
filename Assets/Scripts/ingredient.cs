@@ -20,24 +20,14 @@ public class ingredient : MonoBehaviour
 
     public void setingredient(string item, int nn)
     {
-        number.text = item +' ' +  nn;
-        Color cc = Color.white;
-        switch(item)
-        {
-            case "4" :
-                cc = Color.red;
-                break;
-            case "5" :
-                cc = Color.blue;
-                break;
-        }
-        gameObject.GetComponent<Image>().color = cc;
+        number.text = "" +  nn;
+        gameObject.GetComponent<Image>().sprite = Resources.Load<Sprite>(item);
 
         thename = item;
     }
 
     public void updatenum(int nn)
     {
-        number.text = thename +  " " + nn;
+        number.text = "" + nn;
     }
 }
