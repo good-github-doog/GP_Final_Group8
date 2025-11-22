@@ -8,12 +8,16 @@ public class GameManager : MonoBehaviour
     private float timer = 60f;
     public TextMeshProUGUI timerText;
     public TextMeshProUGUI moneyText;
+    public GameObject recipePanel;
+    public Button recipeButton;
     void Start()
     {
         if (moneyText != null)
         {
             moneyText.text = "$ " + data.money;  // <-- 開始時顯示
         }
+        if (recipePanel != null)
+            recipePanel.SetActive(true);
     }
 
     // Update is called once per frame
@@ -38,6 +42,23 @@ public class GameManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
             SceneManager.LoadScene("Counting");
+        }
+    }
+
+    public void OpenRecipe()
+    {
+        if (recipePanel != null)
+        {
+            recipePanel.SetActive(true);
+        }
+    }
+
+    // ⭐ 關閉食譜（給 UI 的 Close button 用）
+    public void CloseRecipe()
+    {
+        if (recipePanel != null)
+        {
+            recipePanel.SetActive(false);
         }
     }
 }
