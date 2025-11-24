@@ -30,6 +30,12 @@ public class Customer : MonoBehaviour
     [Header("Leave Settings")]
     public float leaveDistanceThreshold = 3.0f;
 
+    [Header("Waiting Settings")]
+    public float waitTimeLimit = 20f;
+    private float waitTimer = 0f;
+    private bool isWaiting = false;
+    private bool leftDueToTimeout = false;
+
     public void SetFoodArea(FoodArea area)
     {
         myFoodArea = area;
@@ -48,6 +54,11 @@ public class Customer : MonoBehaviour
     public bool IsPanicking()
     {
         return isPanicking;
+    }
+
+    public bool LeftDueToTimeout()
+    {
+        return leftDueToTimeout;
     }
 
     void Awake()
@@ -147,6 +158,18 @@ public class Customer : MonoBehaviour
     void Update()
     {
         DetectAndResolveStuck();
+
+        // 檢查等待計時器
+        if (isWaiting && !isLeaving)
+        {
+            waitTimer += Time.deltaTime;
+            if (waitTimer >= waitTimeLimit)
+            {
+                // 等待超時，顧客離開
+                OnWaitTimeout();
+            }
+        }
+
         if (isFollowingWaypoints)
         {
             bool shouldProceed = !agent.pathPending &&
@@ -195,6 +218,10 @@ public class Customer : MonoBehaviour
         Debug.Log($"[Customer] 已到達座位: {targetSpot.name}");
         targetSpot.OnCustomerArrived();
         ShowCorrectRecipe();
+
+        // 開始等待計時
+        isWaiting = true;
+        waitTimer = 0f;
     }
 
     private void ShowCorrectRecipe()
@@ -214,6 +241,9 @@ public class Customer : MonoBehaviour
 
     public void OnFoodServed(bool isCorrect)
     {
+        // 停止等待計時器
+        isWaiting = false;
+
         if (burgerRecipeUI != null) burgerRecipeUI.SetActive(false);
         if (salmonRecipeUI != null) salmonRecipeUI.SetActive(false);
 
@@ -234,6 +264,38 @@ public class Customer : MonoBehaviour
         }
 
         StartCoroutine(LeaveAfterDelay());
+    }
+
+    private void OnWaitTimeout()
+    {
+        Debug.Log($"[Customer] 等待超時，顧客離開！等待了 {waitTimer:F1} 秒");
+
+        // 標記為超時離開
+        leftDueToTimeout = true;
+        isWaiting = false;
+
+        // 隱藏 UI
+        if (burgerRecipeUI != null) burgerRecipeUI.SetActive(false);
+        if (salmonRecipeUI != null) salmonRecipeUI.SetActive(false);
+
+        // 清理 food area
+        if (myFoodArea != null)
+        {
+            myFoodArea.ClearFoodOnTable();
+            myFoodArea.ClearCustomer();
+            myFoodArea = null;
+        }
+
+        // 釋放座位
+        if (assignedSpot != null)
+        {
+            assignedSpot.ReleaseSpot();
+            assignedSpot = null;
+            CustomerManager.Instance.NotifyCustomerLeft();
+        }
+
+        // 離開餐廳
+        CustomerManager.Instance.MoveCustomerToLeavePoint(this);
     }
 
     private IEnumerator LeaveAfterDelay()

@@ -94,9 +94,26 @@ public class CustomerManager : MonoBehaviour
         if (spot.IsOccupied && spot.CurrentCustomer != null)
         {
             Customer servedCustomer = spot.CurrentCustomer;
-            Destroy(servedCustomer.gameObject);
 
-            AddIngredientReward();
+            // 檢查顧客狀態：只有正常等待的顧客才給獎勵
+            // 超時離開或正在 panic 的顧客不給獎勵
+            if (!servedCustomer.LeftDueToTimeout() && !servedCustomer.IsPanicking())
+            {
+                AddIngredientReward();
+            }
+            else
+            {
+                if (servedCustomer.LeftDueToTimeout())
+                {
+                    Debug.Log("[CustomerManager] 顧客已超時離開，不給予獎勵");
+                }
+                else if (servedCustomer.IsPanicking())
+                {
+                    Debug.Log("[CustomerManager] 顧客正在 panic 離開，不給予獎勵");
+                }
+            }
+
+            Destroy(servedCustomer.gameObject);
 
             int panicCount = 0;
             float delayIncrement = 0.5f;
