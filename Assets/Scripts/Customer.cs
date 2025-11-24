@@ -22,6 +22,10 @@ public class Customer : MonoBehaviour
     private bool isPanicking = false;
     private CustomerSpot assignedSpot;
     private FoodArea myFoodArea;
+    private Vector3 lastPosition;
+    private float stuckTimer = 0f;
+    private const float stuckTimeThreshold = 2f;
+    private const float stuckDistanceThreshold = 0.1f;
 
     [Header("Leave Settings")]
     public float leaveDistanceThreshold = 3.0f;
@@ -49,6 +53,62 @@ public class Customer : MonoBehaviour
     void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
+        if (agent != null)
+        {
+            agent.avoidancePriority = 50;
+            agent.radius = 0.5f;
+            agent.obstacleAvoidanceType = UnityEngine.AI.ObstacleAvoidanceType.HighQualityObstacleAvoidance;
+        }
+    }
+    private void DetectAndResolveStuck()
+    {
+        if (agent == null || !agent.enabled) return;
+
+        // 只在移動中檢測（有路徑且未到達目的地）
+        if (agent.hasPath && agent.remainingDistance > agent.stoppingDistance)
+        {
+            // 計算移動距離
+            float distanceMoved = Vector3.Distance(transform.position, lastPosition);
+
+            // 如果幾乎沒有移動
+            if (distanceMoved < stuckDistanceThreshold)
+            {
+                stuckTimer += Time.deltaTime;
+
+                // 如果卡住超過閾值時間
+                if (stuckTimer >= stuckTimeThreshold)
+                {
+                    // Debug.LogWarning($"[Customer] 檢測到卡住！嘗試解決... (已卡住 {stuckTimer:F1} 秒)");
+
+                    // 解決方案1：降低避障優先級，讓其他顧客先通過
+                    int currentPriority = agent.avoidancePriority;
+                    agent.avoidancePriority = 90; // 設為較低優先級
+                    // Debug.Log($"[Customer] 降低避障優先級：{currentPriority} → 90，讓其他顧客先通過");
+
+                    // 解決方案2：重新計算路徑
+                    Vector3 currentDestination = agent.destination;
+                    agent.ResetPath();
+                    agent.SetDestination(currentDestination);
+                    // Debug.Log($"[Customer] 重新計算路徑到：{currentDestination}");
+
+                    // 重置計時器
+                    stuckTimer = 0f;
+                }
+            }
+            else
+            {
+                // 正在移動，重置計時器
+                stuckTimer = 0f;
+            }
+        }
+        else
+        {
+            // 沒有路徑或已到達，重置計時器
+            stuckTimer = 0f;
+        }
+
+        // 更新上一幀位置
+        lastPosition = transform.position;
     }
 
     public void SetDestination(CustomerSpot spot)
@@ -86,11 +146,12 @@ public class Customer : MonoBehaviour
 
     void Update()
     {
+        DetectAndResolveStuck();
         if (isFollowingWaypoints)
         {
             bool shouldProceed = !agent.pathPending &&
                                agent.remainingDistance <= agent.stoppingDistance + 0.5f &&
-                               (!agent.hasPath || agent.velocity.sqrMagnitude < 0.1f);
+                               (!agent.hasPath || agent.velocity.sqrMagnitude == 0f);
 
             if (shouldProceed)
             {
@@ -111,7 +172,7 @@ public class Customer : MonoBehaviour
         {
             if (!agent.pathPending &&
                 agent.remainingDistance <= agent.stoppingDistance &&
-                (!agent.hasPath || agent.velocity.sqrMagnitude < 0.1f))
+                (!agent.hasPath || agent.velocity.sqrMagnitude == 0f))
             {
                 OnReachedSpot();
             }
@@ -121,7 +182,7 @@ public class Customer : MonoBehaviour
         {
             if (!agent.pathPending &&
                 agent.remainingDistance <= leaveDistanceThreshold &&
-                (!agent.hasPath || agent.velocity.sqrMagnitude < 0.1f))
+                (!agent.hasPath || agent.velocity.sqrMagnitude == 0f))
             {
                 CustomerManager.Instance.RemoveCustomer(this);
             }

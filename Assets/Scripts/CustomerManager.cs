@@ -111,7 +111,6 @@ public class CustomerManager : MonoBehaviour
                     panicCount++;
                 }
             }
-
             panicCustomerCount += panicCount;
         }
     }
@@ -215,7 +214,6 @@ public class CustomerManager : MonoBehaviour
 
             Destroy(customer.gameObject);
         }
-
         isFull = false;
     }
 

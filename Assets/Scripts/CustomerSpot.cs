@@ -6,15 +6,14 @@ public class CustomerSpot : MonoBehaviour
     private bool isOccupied = false;
     private Customer currentCustomer;
 
-    public bool IsOccupied => isOccupied;
-    public Customer CurrentCustomer => currentCustomer;
-
     [Header("Meal Request")]
     public int maxMealIndex = 1;
     public int wantedMeal = -1;
 
     [Header("Food Area Reference")]
     public FoodArea myFoodArea;
+    public bool IsOccupied => isOccupied;
+    public Customer CurrentCustomer => currentCustomer;
 
     public void OccupySpot(Customer customer)
     {

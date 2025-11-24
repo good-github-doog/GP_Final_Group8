@@ -1082,7 +1082,7 @@ NavMeshAgent:
   m_GameObject: {fileID: 7659413501412707173}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 0.3
+  m_Radius: 0.5
   m_Speed: 3.5
   m_Acceleration: 7
   avoidancePriority: 50
@@ -1109,6 +1109,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Customer
   burgerRecipeUI: {fileID: 748692760035798799}
   salmonRecipeUI: {fileID: 1767976599268765640}
+  leaveDistanceThreshold: 3
 --- !u!54 &-7382345193026391986
 Rigidbody:
   m_ObjectHideFlags: 0
