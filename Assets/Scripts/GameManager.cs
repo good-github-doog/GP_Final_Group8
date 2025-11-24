@@ -5,7 +5,7 @@ using TMPro;
 
 public class GameManager : MonoBehaviour
 {
-    private float timer = 60f;
+    private float timer = 120f;
     public TextMeshProUGUI timerText;
     public TextMeshProUGUI moneyText;
     public GameObject recipePanel;

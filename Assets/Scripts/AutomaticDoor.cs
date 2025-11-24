@@ -3,9 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using Seagull.Interior_I1.SceneProps;
 
-/// <summary>
-/// 自動門控制器 - 當顧客接近時自動開門，離開後自動關門
-/// </summary>
 public class AutomaticDoor : MonoBehaviour
 {
     [Header("門設置")]
@@ -54,7 +51,7 @@ public class AutomaticDoor : MonoBehaviour
             rotatableObject = GetComponent<RotatableObject>();
             if (rotatableObject != null)
             {
-                Debug.Log("[AutomaticDoor] 自動找到 RotatableObject 組件");
+                // Debug.Log("[AutomaticDoor] 自動找到 RotatableObject 組件");
             }
         }
 
@@ -64,7 +61,7 @@ public class AutomaticDoor : MonoBehaviour
         }
         else
         {
-            Debug.Log("[AutomaticDoor] RotatableObject 設置成功");
+            // Debug.Log("[AutomaticDoor] RotatableObject 設置成功");
         }
 
         // 檢查 Collider 設置
@@ -79,7 +76,7 @@ public class AutomaticDoor : MonoBehaviour
         }
         else
         {
-            Debug.Log("[AutomaticDoor] Collider 設置正確（Is Trigger = true）");
+            // Debug.Log("[AutomaticDoor] Collider 設置正確（Is Trigger = true）");
         }
 
         // 確保門初始是關閉的
@@ -87,10 +84,10 @@ public class AutomaticDoor : MonoBehaviour
         if (rotatableObject != null)
         {
             rotatableObject.rotate(currentRotation);
-            Debug.Log("[AutomaticDoor] 門已初始化為關閉狀態");
+            // Debug.Log("[AutomaticDoor] 門已初始化為關閉狀態");
         }
 
-        Debug.Log($"[AutomaticDoor] 觸發標籤列表：{string.Join(", ", triggerTags)}");
+        // Debug.Log($"[AutomaticDoor] 觸發標籤列表：{string.Join(", ", triggerTags)}");
     }
 
     private void Update()
@@ -107,20 +104,20 @@ public class AutomaticDoor : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log($"[AutomaticDoor] 偵測到物體進入：{other.name}，Tag: {other.tag}");
+        // Debug.Log($"[AutomaticDoor] 偵測到物體進入：{other.name}，Tag: {other.tag}");
 
         // 檢查是否是觸發開門的物體
         if (ShouldTriggerDoor(other.gameObject))
         {
             objectsInTrigger++;
-            Debug.Log($"[AutomaticDoor] ✓ {other.name} 進入觸發區域，當前數量：{objectsInTrigger}");
+            // Debug.Log($"[AutomaticDoor] ✓ {other.name} 進入觸發區域，當前數量：{objectsInTrigger}");
 
             // 有物體進入，打開門（傳入觸發物體的 Transform 來判斷方向）
             OpenDoor(other.transform);
         }
         else
         {
-            Debug.Log($"[AutomaticDoor] ✗ {other.name} 的 Tag ({other.tag}) 不在觸發列表中");
+            // Debug.Log($"[AutomaticDoor] ✗ {other.name} 的 Tag ({other.tag}) 不在觸發列表中");
         }
     }
 
@@ -130,7 +127,7 @@ public class AutomaticDoor : MonoBehaviour
         if (ShouldTriggerDoor(other.gameObject))
         {
             objectsInTrigger--;
-            Debug.Log($"[AutomaticDoor] {other.name} 離開觸發區域，當前數量：{objectsInTrigger}");
+            // Debug.Log($"[AutomaticDoor] {other.name} 離開觸發區域，當前數量：{objectsInTrigger}");
 
             // 如果沒有物體在觸發區域內，延遲關門
             if (objectsInTrigger <= 0)
@@ -187,7 +184,7 @@ public class AutomaticDoor : MonoBehaviour
                 // 從內側來 → 門向內側打開（+1）
                 direction = distanceToOuter < distanceToInner ? -1f : 1f;
 
-                Debug.Log($"[AutomaticDoor] 自動判斷方向：到外側距離 = {distanceToOuter:F2}，到內側距離 = {distanceToInner:F2}，開門方向 = {(direction > 0 ? "內側" : "外側")}");
+                // Debug.Log($"[AutomaticDoor] 自動判斷方向：到外側距離 = {distanceToOuter:F2}，到內側距離 = {distanceToInner:F2}，開門方向 = {(direction > 0 ? "內側" : "外側")}");
             }
             else
             {
@@ -198,11 +195,11 @@ public class AutomaticDoor : MonoBehaviour
         else if (openDirection != 0)
         {
             direction = Mathf.Sign(openDirection);
-            Debug.Log($"[AutomaticDoor] 使用固定方向：{(direction > 0 ? "正向" : "反向")}");
+            // Debug.Log($"[AutomaticDoor] 使用固定方向：{(direction > 0 ? "正向" : "反向")}");
         }
 
         targetRotation = direction; // 設定目標旋轉值
-        Debug.Log($"[AutomaticDoor] 門正在向 {(targetRotation > 0 ? "正向" : "反向")} 打開...");
+        // Debug.Log($"[AutomaticDoor] 門正在向 {(targetRotation > 0 ? "正向" : "反向")} 打開...");
     }
 
     /// <summary>
@@ -231,7 +228,7 @@ public class AutomaticDoor : MonoBehaviour
         if (objectsInTrigger <= 0)
         {
             targetRotation = 0f; // 完全關閉
-            Debug.Log("[AutomaticDoor] 門正在關閉...");
+            // Debug.Log("[AutomaticDoor] 門正在關閉...");
         }
 
         closeCoroutine = null;
@@ -249,7 +246,7 @@ public class AutomaticDoor : MonoBehaviour
         }
 
         targetRotation = 0f;
-        Debug.Log("[AutomaticDoor] 門立即關閉");
+        // Debug.Log("[AutomaticDoor] 門立即關閉");
     }
 
     // 在 Editor 中顯示觸發區域和參考點（方便調試）
@@ -282,9 +279,9 @@ public class AutomaticDoor : MonoBehaviour
             Gizmos.DrawLine(transform.position, outerSidePoint.position);
 
             // 顯示標籤
-            #if UNITY_EDITOR
+#if UNITY_EDITOR
             UnityEditor.Handles.Label(outerSidePoint.position + Vector3.up * 0.5f, "外側 (Outer)");
-            #endif
+#endif
         }
 
         // 繪製內側參考點（藍色球體）
@@ -295,9 +292,9 @@ public class AutomaticDoor : MonoBehaviour
             Gizmos.DrawLine(transform.position, innerSidePoint.position);
 
             // 顯示標籤
-            #if UNITY_EDITOR
+#if UNITY_EDITOR
             UnityEditor.Handles.Label(innerSidePoint.position + Vector3.up * 0.5f, "內側 (Inner)");
-            #endif
+#endif
         }
 
         // 如果兩個點都設置了，繪製連接線
