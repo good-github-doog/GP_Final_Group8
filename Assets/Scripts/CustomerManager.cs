@@ -1,25 +1,30 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class CustomerManager : MonoBehaviour
 {
+    // ==================== SINGLETON ====================
     public static CustomerManager Instance;
 
-    [Header("Prefab and Spawn")]
-    public GameObject customerPrefab;
+    // ==================== SPAWN CONFIGURATION ====================
+    [Header("Spawn Configuration")]
+    public List<GameObject> customerPrefabs = new List<GameObject>();
     public Transform spawnPoint;
-
-    [Header("Customer Spots")]
     public List<CustomerSpot> customerSpots = new List<CustomerSpot>();
+    public float spawnInterval = 3f;
 
-    [Header("Leave Point")]
+    private float spawnTimer = 0f;
+    private bool isAllSpotsFull = false;
+
+    // ==================== MOVEMENT CONFIGURATION ====================
+    [Header("Movement Configuration")]
     public Transform leavePoint;
+    public Transform doorOuterPoint;  // Waypoint when entering
+    public Transform doorInnerPoint;  // Waypoint when leaving
 
-    [Header("Door Waypoints")]
-    public Transform doorOuterPoint;
-    public Transform doorInnerPoint;
-
-    [Header("Panic Points")]
+    // ==================== PANIC SYSTEM CONFIGURATION ====================
+    [Header("Panic System Configuration")]
     public List<Transform> panicPoints = new List<Transform>();
     public int minPanicStops = 2;
     public int maxPanicStops = 4;
@@ -27,143 +32,204 @@ public class CustomerManager : MonoBehaviour
     public float panicPointOffset = 2f;
 
     private Dictionary<Transform, int> panicPointUsageCount = new Dictionary<Transform, int>();
+    private int currentPanicCustomerCount = 0;
 
-    [Header("Spawn Settings")]
-    public float spawnInterval = 3f;
-    private float spawnTimer = 0f;
-    private bool isFull = false;
-    private int panicCustomerCount = 0;
-
-    [Header("Input Settings")]
+    // ==================== INPUT CONFIGURATION ====================
+    [Header("Input Configuration")]
     public KeyCode spotAKey = KeyCode.Alpha1;
     public KeyCode spotBKey = KeyCode.Alpha2;
     public KeyCode spotCKey = KeyCode.Alpha3;
     public KeyCode spotDKey = KeyCode.Alpha4;
 
-    [Header("Reward Settings")]
-    public string rewardIngredientName = "pork";
-    public int rewardAmount = 1;
-
+    // ==================== UNITY LIFECYCLE ====================
     private void Awake()
     {
         Instance = this;
     }
 
-    void Update()
+    private void Update()
     {
-        HandleKeyInput();
-
-        if (isFull) return;
-        if (panicCustomerCount > 0) return;
-
-        spawnTimer += Time.deltaTime;
-        if (spawnTimer >= spawnInterval)
-        {
-            TrySpawnCustomer();
-            spawnTimer = 0f;
-        }
+        HandlePlayerInput();
+        HandleCustomerSpawning();
     }
 
-    private void HandleKeyInput()
+    // ==================== INPUT HANDLING ====================
+    private void HandlePlayerInput()
     {
         if (Input.GetKeyDown(spotAKey) && customerSpots.Count > 0)
         {
-            ServeCustomerAtSpot(0);
+            KillCustomerAtSpot(0);
         }
 
         if (Input.GetKeyDown(spotBKey) && customerSpots.Count > 1)
         {
-            ServeCustomerAtSpot(1);
+            KillCustomerAtSpot(1);
         }
 
         if (Input.GetKeyDown(spotCKey) && customerSpots.Count > 2)
         {
-            ServeCustomerAtSpot(2);
+            KillCustomerAtSpot(2);
         }
 
         if (Input.GetKeyDown(spotDKey) && customerSpots.Count > 3)
         {
-            ServeCustomerAtSpot(3);
+            KillCustomerAtSpot(3);
         }
     }
 
-    private void ServeCustomerAtSpot(int spotIndex)
+    // ==================== CUSTOMER INTERACTION ====================
+    private void KillCustomerAtSpot(int spotIndex)
     {
         CustomerSpot spot = customerSpots[spotIndex];
 
         if (spot.IsOccupied && spot.CurrentCustomer != null)
         {
-            Customer servedCustomer = spot.CurrentCustomer;
-            Destroy(servedCustomer.gameObject);
-
-            AddIngredientReward();
-
-            int panicCount = 0;
-            float delayIncrement = 0.5f;
-
-            for (int i = 0; i < customerSpots.Count; i++)
-            {
-                if (i != spotIndex && customerSpots[i].IsOccupied && customerSpots[i].CurrentCustomer != null)
-                {
-                    Customer otherCustomer = customerSpots[i].CurrentCustomer;
-                    float delay = panicCount * delayIncrement;
-                    StartCoroutine(RotateAndLeaveCustomerWithDelay(otherCustomer, delay));
-                    panicCount++;
-                }
-            }
-            panicCustomerCount += panicCount;
+            Customer customer = spot.CurrentCustomer;
+            KillCustomer(customer, spotIndex);
         }
     }
 
-    private void AddIngredientReward()
+    private void KillCustomer(Customer customer, int spotIndex)
     {
-        var existingIngredient = data.inbag.Find(x => x.name == rewardIngredientName);
+        CustomerType customerType = customer.GetCustomerType();
+
+        Debug.Log($"[CustomerManager] Customer killed by player. Type: {customerType}");
+
+        GiveKillReward(customerType);
+
+        Destroy(customer.gameObject);
+
+        // Increment kill counter
+        data.killCountToday++;
+        Debug.Log($"[CustomerManager] Kill count today: {data.killCountToday}");
+
+        // Check if 3 kills reached - switch to Home scene
+        if (data.killCountYesterday + data.killCountToday >= 3)
+        {
+            Debug.Log("[CustomerManager] 3 kills reached! Resetting game data and switching to Home scene...");
+            data.money = 1000;
+            data.inbag.Clear();
+            data.killCountToday = 0;
+            data.killCountYesterday = 0;
+            SceneManager.LoadScene("Home");
+            return;
+        }
+
+        TriggerPanicForOtherCustomers(spotIndex);
+    }
+
+    private void GiveKillReward(CustomerType customerType)
+    {
+        string ingredientName = "";
+
+        switch (customerType)
+        {
+            case CustomerType.Cow:
+                ingredientName = "beef";
+                break;
+            case CustomerType.Pig:
+                ingredientName = "pork";
+                break;
+            case CustomerType.Salmon:
+                ingredientName = "salmon";
+                break;
+        }
+
+        if (string.IsNullOrEmpty(ingredientName)) return;
+
+        var existingIngredient = data.inbag.Find(x => x.name == ingredientName);
 
         if (existingIngredient != null)
         {
-            existingIngredient.quantity += rewardAmount;
+            existingIngredient.quantity += 1;
         }
         else
         {
-            data.ingreds_data newIngredient = new data.ingreds_data(rewardIngredientName);
-            newIngredient.quantity = rewardAmount;
+            data.ingreds_data newIngredient = new data.ingreds_data(ingredientName)
+            {
+                quantity = 1
+            };
             data.inbag.Add(newIngredient);
         }
 
+        RefreshInventoryUI();
+
+        Debug.Log($"[CustomerManager] Reward given: {ingredientName} x1");
+    }
+
+    private void RefreshInventoryUI()
+    {
         IngredientManager ingredientManager = FindFirstObjectByType<IngredientManager>();
-        if (ingredientManager != null)
+        ingredientManager?.RefreshSlots();
+    }
+
+    private void TriggerPanicForOtherCustomers(int excludeSpotIndex)
+    {
+        int panicCount = 0;
+        float delayIncrement = 0.5f;
+
+        for (int i = 0; i < customerSpots.Count; i++)
         {
-            ingredientManager.RefreshSlots();
+            if (i != excludeSpotIndex && customerSpots[i].IsOccupied && customerSpots[i].CurrentCustomer != null)
+            {
+                Customer otherCustomer = customerSpots[i].CurrentCustomer;
+                float delay = panicCount * delayIncrement;
+                StartCoroutine(StartPanicSequenceWithDelay(otherCustomer, delay));
+                panicCount++;
+            }
+        }
+
+        currentPanicCustomerCount += panicCount;
+        Debug.Log($"[CustomerManager] Customer killed. {panicCount} other customers triggered to panic.");
+    }
+
+    // ==================== SPAWN SYSTEM ====================
+    private void HandleCustomerSpawning()
+    {
+        if (isAllSpotsFull) return;
+        if (currentPanicCustomerCount > 0) return;
+
+        spawnTimer += Time.deltaTime;
+        if (spawnTimer >= spawnInterval)
+        {
+            TrySpawnNewCustomer();
+            spawnTimer = 0f;
         }
     }
 
-    private void TrySpawnCustomer()
+    private void TrySpawnNewCustomer()
     {
         CustomerSpot availableSpot = FindAvailableSpot();
 
         if (availableSpot == null)
         {
-            isFull = true;
+            isAllSpotsFull = true;
             return;
         }
 
-        SpawnCustomer(availableSpot);
+        SpawnCustomerAtSpot(availableSpot);
     }
 
-    private void SpawnCustomer(CustomerSpot spot)
+    private void SpawnCustomerAtSpot(CustomerSpot targetSpot)
     {
-        GameObject customerObj = Instantiate(customerPrefab, spawnPoint.position, Quaternion.identity);
-        Customer customer = customerObj.GetComponent<Customer>();
+        if (customerPrefabs == null || customerPrefabs.Count == 0)
+        {
+            Debug.LogError("[CustomerManager] No customer prefabs assigned!");
+            return;
+        }
+
+        GameObject selectedPrefab = customerPrefabs[Random.Range(0, customerPrefabs.Count)];
+        GameObject customerObject = Instantiate(selectedPrefab, spawnPoint.position, Quaternion.identity);
+        Customer customer = customerObject.GetComponent<Customer>();
 
         if (doorOuterPoint != null)
         {
-            List<Vector3> waypoints = new List<Vector3>();
-            waypoints.Add(doorOuterPoint.position);
-            customer.SetDestinationWithWaypoints(spot, waypoints);
+            List<Vector3> waypoints = new List<Vector3> { doorOuterPoint.position };
+            customer.SetDestinationWithWaypoints(targetSpot, waypoints);
         }
         else
         {
-            customer.SetDestination(spot);
+            customer.SetDestination(targetSpot);
         }
     }
 
@@ -179,18 +245,18 @@ public class CustomerManager : MonoBehaviour
         return null;
     }
 
+    // ==================== MOVEMENT SYSTEM ====================
     public void MoveCustomerToLeavePoint(Customer customer)
     {
         if (leavePoint == null)
         {
-            Debug.LogError("Leave Point 未設定！");
+            Debug.LogError("[CustomerManager] Leave Point not set!");
             return;
         }
 
         if (doorInnerPoint != null)
         {
-            List<Vector3> waypoints = new List<Vector3>();
-            waypoints.Add(doorInnerPoint.position);
+            List<Vector3> waypoints = new List<Vector3> { doorInnerPoint.position };
             customer.SetDestinationToLeavePointWithWaypoints(leavePoint.position, waypoints);
         }
         else
@@ -205,27 +271,27 @@ public class CustomerManager : MonoBehaviour
         {
             if (customer.IsPanicking())
             {
-                panicCustomerCount--;
-                if (panicCustomerCount <= 0)
-                {
-                    panicCustomerCount = 0;
-                }
+                currentPanicCustomerCount--;
+                currentPanicCustomerCount = Mathf.Max(0, currentPanicCustomerCount);
             }
 
             Destroy(customer.gameObject);
         }
-        isFull = false;
+
+        isAllSpotsFull = false;
     }
 
     public void NotifyCustomerLeft()
     {
-        isFull = false;
+        isAllSpotsFull = false;
     }
 
-    private System.Collections.IEnumerator RotateAndLeaveCustomerWithDelay(Customer customer, float delay)
+    // ==================== PANIC SYSTEM ====================
+    private System.Collections.IEnumerator StartPanicSequenceWithDelay(Customer customer, float delay)
     {
         yield return new WaitForSeconds(delay);
 
+        // Set navigation priority based on delay
         UnityEngine.AI.NavMeshAgent agent = customer.GetComponent<UnityEngine.AI.NavMeshAgent>();
         if (agent != null)
         {
@@ -233,57 +299,90 @@ public class CustomerManager : MonoBehaviour
             agent.avoidancePriority = Mathf.Clamp(priority, 10, 99);
         }
 
-        yield return StartCoroutine(RotateAndLeaveCustomer(customer));
+        yield return StartCoroutine(ExecutePanicBehavior(customer));
     }
 
-    private System.Collections.IEnumerator RotateAndLeaveCustomer(Customer customer)
+    private System.Collections.IEnumerator ExecutePanicBehavior(Customer customer)
     {
+        if (customer == null)
+        {
+            yield break;
+        }
+
         customer.SetPanicking(true);
 
         UnityEngine.AI.NavMeshAgent agent = customer.GetComponent<UnityEngine.AI.NavMeshAgent>();
-
         if (agent == null)
         {
-            Debug.LogError("顧客沒有 NavMeshAgent，無法移動！");
+            Debug.LogError("[CustomerManager] Customer has no NavMeshAgent!");
             yield break;
         }
 
         float originalSpeed = agent.speed;
 
+        // Rotate customer 180 degrees
         agent.updateRotation = false;
         customer.transform.Rotate(0, 180, 0);
         yield return new WaitForSeconds(0.3f);
+
+        if (customer == null || agent == null) yield break;
+
         agent.updateRotation = true;
 
+        // Move through panic points
         if (panicPoints.Count > 0)
         {
             agent.speed = panicMoveSpeed;
 
-            int panicStopCount = Random.Range(minPanicStops, maxPanicStops + 1);
-            panicStopCount = Mathf.Min(panicStopCount, panicPoints.Count);
+            int numberOfStops = Random.Range(minPanicStops, maxPanicStops + 1);
+            numberOfStops = Mathf.Min(numberOfStops, panicPoints.Count);
 
-            List<Transform> selectedPoints = SelectLeastUsedPanicPoints(panicStopCount);
+            List<Transform> selectedPoints = SelectLeastUsedPanicPoints(numberOfStops);
 
+            // Reserve panic points
             foreach (Transform point in selectedPoints)
             {
                 IncrementPanicPointUsage(point);
             }
 
+            // Visit each panic point
             for (int i = 0; i < selectedPoints.Count; i++)
             {
+                if (customer == null || agent == null)
+                {
+                    // Cleanup panic points before breaking
+                    foreach (Transform point in selectedPoints)
+                    {
+                        DecrementPanicPointUsage(point);
+                    }
+                    yield break;
+                }
+
                 Transform panicPoint = selectedPoints[i];
                 Vector3 targetPosition = GetRandomOffsetPosition(panicPoint.position);
 
                 agent.SetDestination(targetPosition);
 
                 yield return new WaitUntil(() =>
-                    !agent.pathPending &&
-                    agent.remainingDistance <= agent.stoppingDistance + 0.5f
+                    customer == null ||
+                    agent == null ||
+                    (!agent.pathPending && agent.remainingDistance <= agent.stoppingDistance + 0.5f)
                 );
+
+                if (customer == null || agent == null)
+                {
+                    // Cleanup panic points before breaking
+                    foreach (Transform point in selectedPoints)
+                    {
+                        DecrementPanicPointUsage(point);
+                    }
+                    yield break;
+                }
 
                 yield return new WaitForSeconds(Random.Range(0.1f, 0.3f));
             }
 
+            // Release panic points
             foreach (Transform point in selectedPoints)
             {
                 DecrementPanicPointUsage(point);
@@ -296,22 +395,16 @@ public class CustomerManager : MonoBehaviour
             yield return new WaitForSeconds(1.0f);
         }
 
-        MoveCustomerToLeavePoint(customer);
-    }
-
-    private void ShuffleList<T>(List<T> list)
-    {
-        for (int i = 0; i < list.Count; i++)
+        if (customer != null && agent != null)
         {
-            T temp = list[i];
-            int randomIndex = Random.Range(i, list.Count);
-            list[i] = list[randomIndex];
-            list[randomIndex] = temp;
+            MoveCustomerToLeavePoint(customer);
         }
     }
 
+    // ==================== PANIC POINT MANAGEMENT ====================
     private List<Transform> SelectLeastUsedPanicPoints(int count)
     {
+        // Initialize usage count for new points
         foreach (Transform point in panicPoints)
         {
             if (!panicPointUsageCount.ContainsKey(point))
@@ -320,9 +413,11 @@ public class CustomerManager : MonoBehaviour
             }
         }
 
+        // Sort by usage count
         List<Transform> sortedPoints = new List<Transform>(panicPoints);
         sortedPoints.Sort((a, b) => panicPointUsageCount[a].CompareTo(panicPointUsageCount[b]));
 
+        // Select least used points
         List<Transform> selectedPoints = new List<Transform>();
         for (int i = 0; i < Mathf.Min(count, sortedPoints.Count); i++)
         {
@@ -348,10 +443,19 @@ public class CustomerManager : MonoBehaviour
         if (panicPointUsageCount.ContainsKey(point))
         {
             panicPointUsageCount[point]--;
-            if (panicPointUsageCount[point] < 0)
-            {
-                panicPointUsageCount[point] = 0;
-            }
+            panicPointUsageCount[point] = Mathf.Max(0, panicPointUsageCount[point]);
+        }
+    }
+
+    // ==================== UTILITY FUNCTIONS ====================
+    private void ShuffleList<T>(List<T> list)
+    {
+        for (int i = 0; i < list.Count; i++)
+        {
+            T temp = list[i];
+            int randomIndex = Random.Range(i, list.Count);
+            list[i] = list[randomIndex];
+            list[randomIndex] = temp;
         }
     }
 

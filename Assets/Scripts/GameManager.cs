@@ -12,6 +12,11 @@ public class GameManager : MonoBehaviour
     public Button recipeButton;
     void Start()
     {
+        // Reset kill counter at the start of each day
+        data.killCountYesterday = data.killCountToday;
+        data.killCountToday = 0;
+        Debug.Log("[GameManager] Kill counter reset for new day");
+
         if (moneyText != null)
         {
             moneyText.text = "$ " + data.money;  // <-- 開始時顯示

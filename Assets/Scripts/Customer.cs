@@ -3,6 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
+public enum CustomerType
+{
+    Cow, Pig, Salmon
+}
+
 public class Customer : MonoBehaviour
 {
     private NavMeshAgent agent;
@@ -11,6 +16,9 @@ public class Customer : MonoBehaviour
 
     public GameObject burgerRecipeUI;
     public GameObject salmonRecipeUI;
+
+    [Header("Customer Type")]
+    public CustomerType customerType = CustomerType.Cow;
 
     private int expectedMealIndex = -1;
 
@@ -30,6 +38,12 @@ public class Customer : MonoBehaviour
     [Header("Leave Settings")]
     public float leaveDistanceThreshold = 3.0f;
 
+    [Header("Waiting Settings")]
+    public float waitTimeLimit = 20f;
+    private float waitTimer = 0f;
+    private bool isWaiting = false;
+    private bool leftDueToTimeout = false;
+
     public void SetFoodArea(FoodArea area)
     {
         myFoodArea = area;
@@ -38,6 +52,11 @@ public class Customer : MonoBehaviour
     public void SetExpectedMeal(int mealIndex)
     {
         expectedMealIndex = mealIndex;
+    }
+
+    public CustomerType GetCustomerType()
+    {
+        return customerType;
     }
 
     public void SetPanicking(bool panicking)
@@ -50,6 +69,11 @@ public class Customer : MonoBehaviour
         return isPanicking;
     }
 
+    public bool LeftDueToTimeout()
+    {
+        return leftDueToTimeout;
+    }
+
     void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
@@ -57,6 +81,7 @@ public class Customer : MonoBehaviour
         {
             agent.avoidancePriority = 50;
             agent.radius = 0.5f;
+            agent.stoppingDistance = 0.3f;  // **新增這行**
             agent.obstacleAvoidanceType = UnityEngine.AI.ObstacleAvoidanceType.HighQualityObstacleAvoidance;
         }
     }
@@ -147,11 +172,22 @@ public class Customer : MonoBehaviour
     void Update()
     {
         DetectAndResolveStuck();
+
+        // 檢查等待計時器
+        if (isWaiting && !isLeaving)
+        {
+            waitTimer += Time.deltaTime;
+            if (waitTimer >= waitTimeLimit)
+            {
+                OnWaitTimeout();
+            }
+        }
+
         if (isFollowingWaypoints)
         {
+            // 放寬判斷條件
             bool shouldProceed = !agent.pathPending &&
-                               agent.remainingDistance <= agent.stoppingDistance + 0.5f &&
-                               (!agent.hasPath || agent.velocity.sqrMagnitude == 0f);
+                               agent.remainingDistance <= agent.stoppingDistance + 0.5f;
 
             if (shouldProceed)
             {
@@ -170,9 +206,8 @@ public class Customer : MonoBehaviour
 
         if (!isLeaving && !hasArrived && targetSpot != null && !isFollowingWaypoints)
         {
-            if (!agent.pathPending &&
-                agent.remainingDistance <= agent.stoppingDistance &&
-                (!agent.hasPath || agent.velocity.sqrMagnitude == 0f))
+            // 簡化到達判斷條件
+            if (!agent.pathPending && agent.remainingDistance <= agent.stoppingDistance + 0.2f)
             {
                 OnReachedSpot();
             }
@@ -180,9 +215,8 @@ public class Customer : MonoBehaviour
 
         if (isLeaving && !isFollowingWaypoints)
         {
-            if (!agent.pathPending &&
-                agent.remainingDistance <= leaveDistanceThreshold &&
-                (!agent.hasPath || agent.velocity.sqrMagnitude == 0f))
+            // 簡化離開判斷條件
+            if (!agent.pathPending && agent.remainingDistance <= leaveDistanceThreshold)
             {
                 CustomerManager.Instance.RemoveCustomer(this);
             }
@@ -192,9 +226,18 @@ public class Customer : MonoBehaviour
     private void OnReachedSpot()
     {
         hasArrived = true;
+
+        // **關鍵：停止 NavMeshAgent**
+        agent.isStopped = true;
+        agent.velocity = Vector3.zero;
+
         Debug.Log($"[Customer] 已到達座位: {targetSpot.name}");
         targetSpot.OnCustomerArrived();
         ShowCorrectRecipe();
+
+        // 開始等待計時
+        isWaiting = true;
+        waitTimer = 0f;
     }
 
     private void ShowCorrectRecipe()
@@ -214,6 +257,9 @@ public class Customer : MonoBehaviour
 
     public void OnFoodServed(bool isCorrect)
     {
+        // 停止等待計時器
+        isWaiting = false;
+
         if (burgerRecipeUI != null) burgerRecipeUI.SetActive(false);
         if (salmonRecipeUI != null) salmonRecipeUI.SetActive(false);
 
@@ -234,6 +280,38 @@ public class Customer : MonoBehaviour
         }
 
         StartCoroutine(LeaveAfterDelay());
+    }
+
+    private void OnWaitTimeout()
+    {
+        Debug.Log($"[Customer] 等待超時，顧客離開！等待了 {waitTimer:F1} 秒");
+
+        // 標記為超時離開
+        leftDueToTimeout = true;
+        isWaiting = false;
+
+        // 隱藏 UI
+        if (burgerRecipeUI != null) burgerRecipeUI.SetActive(false);
+        if (salmonRecipeUI != null) salmonRecipeUI.SetActive(false);
+
+        // 清理 food area
+        if (myFoodArea != null)
+        {
+            myFoodArea.ClearFoodOnTable();
+            myFoodArea.ClearCustomer();
+            myFoodArea = null;
+        }
+
+        // 釋放座位
+        if (assignedSpot != null)
+        {
+            assignedSpot.ReleaseSpot();
+            assignedSpot = null;
+            CustomerManager.Instance.NotifyCustomerLeft();
+        }
+
+        // 離開餐廳
+        CustomerManager.Instance.MoveCustomerToLeavePoint(this);
     }
 
     private IEnumerator LeaveAfterDelay()
@@ -259,12 +337,14 @@ public class Customer : MonoBehaviour
 
     public void SetDestinationToLeavePoint(Vector3 leavePos)
     {
+        agent.isStopped = false;
         agent.SetDestination(leavePos);
         isLeaving = true;
     }
 
     public void SetDestinationToLeavePointWithWaypoints(Vector3 leavePos, List<Vector3> waypoints)
     {
+        agent.isStopped = false;
         isLeaving = true;
         finalDestination = leavePos;
 
@@ -288,6 +368,8 @@ public class Customer : MonoBehaviour
 
     void OnDestroy()
     {
+        StopAllCoroutines();
+
         if (assignedSpot != null)
         {
             assignedSpot.ReleaseSpot();

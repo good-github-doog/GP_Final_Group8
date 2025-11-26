@@ -15,11 +15,13 @@ public static class data
             quantity = 1;
         }
     }
-    // public static int val = 10;
+
     public static int money = 1000;
     public static int nowprise = 0;
     public static float bgmvol = 1f;
     public static List<ingreds_data> inbag = new List<ingreds_data>();
+    public static int killCountToday = 0;
+    public static int killCountYesterday = 0;
 
     public static void reset()
     {
