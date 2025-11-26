@@ -5,8 +5,7 @@ using UnityEngine.AI;
 
 public enum CustomerType
 {
-    Cow,    // 牛
-    Pig     // 豬
+    Cow, Pig, Salmon
 }
 
 public class Customer : MonoBehaviour

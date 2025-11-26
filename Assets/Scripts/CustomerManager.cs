@@ -113,6 +113,9 @@ public class CustomerManager : MonoBehaviour
             case CustomerType.Pig:
                 ingredientName = "pork";
                 break;
+            case CustomerType.Salmon:
+                ingredientName = "salmon";
+                break;
         }
 
         if (string.IsNullOrEmpty(ingredientName)) return;
