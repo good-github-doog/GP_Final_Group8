@@ -97,7 +97,9 @@ public class CustomerManager : MonoBehaviour
 
         GiveKillReward(customerType);
 
-        Destroy(customer.gameObject);
+        //Destroy(customer.gameObject);
+        customer.PlayKillEffect();  // 自己做的效果
+        // 然後不要 Destroy(customer) 了！
 
         // Increment kill counter
         data.killCountToday++;

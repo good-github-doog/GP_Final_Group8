@@ -984,6 +984,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Customer
   burgerRecipeUI: {fileID: 8233942209207791119}
   salmonRecipeUI: {fileID: 3855331990367882009}
+  killEffectPrefab: {fileID: 6116557191670654606, guid: 621d6fdfd10b82a49abf7b609641afd8, type: 3}
   customerType: 1
   leaveDistanceThreshold: 3
   waitTimeLimit: 20

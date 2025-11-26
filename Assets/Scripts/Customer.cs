@@ -16,6 +16,8 @@ public class Customer : MonoBehaviour
 
     public GameObject burgerRecipeUI;
     public GameObject salmonRecipeUI;
+    public GameObject killEffectPrefab;
+
 
     [Header("Customer Type")]
     public CustomerType customerType = CustomerType.Cow;
@@ -375,5 +377,21 @@ public class Customer : MonoBehaviour
             assignedSpot.ReleaseSpot();
             assignedSpot = null;
         }
+    }
+
+    public void PlayKillEffect()
+    {
+        // 生成破碎或爆炸特效
+        Vector3 spawnPos = transform.position + Vector3.up * 0.5f;   // 稍微往上
+        Quaternion spawnRot = Quaternion.Euler(-90f, 0f, 0f);
+
+        GameObject fx = Instantiate(killEffectPrefab, spawnPos, spawnRot);
+
+        // 🔥 強制 Particle System 重播
+        fx.GetComponent<ParticleSystem>().Play();
+
+        print("[Customer] 播放顧客被消滅特效");
+
+        Destroy(gameObject);
     }
 }
