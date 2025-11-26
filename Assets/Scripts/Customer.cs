@@ -3,6 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
+public enum CustomerType
+{
+    Cow,    // 牛
+    Pig     // 豬
+}
+
 public class Customer : MonoBehaviour
 {
     private NavMeshAgent agent;
@@ -11,6 +17,9 @@ public class Customer : MonoBehaviour
 
     public GameObject burgerRecipeUI;
     public GameObject salmonRecipeUI;
+
+    [Header("Customer Type")]
+    public CustomerType customerType = CustomerType.Cow;
 
     private int expectedMealIndex = -1;
 
@@ -46,6 +55,11 @@ public class Customer : MonoBehaviour
         expectedMealIndex = mealIndex;
     }
 
+    public CustomerType GetCustomerType()
+    {
+        return customerType;
+    }
+
     public void SetPanicking(bool panicking)
     {
         isPanicking = panicking;
@@ -68,6 +82,7 @@ public class Customer : MonoBehaviour
         {
             agent.avoidancePriority = 50;
             agent.radius = 0.5f;
+            agent.stoppingDistance = 0.3f;  // **新增這行**
             agent.obstacleAvoidanceType = UnityEngine.AI.ObstacleAvoidanceType.HighQualityObstacleAvoidance;
         }
     }
@@ -165,16 +180,15 @@ public class Customer : MonoBehaviour
             waitTimer += Time.deltaTime;
             if (waitTimer >= waitTimeLimit)
             {
-                // 等待超時，顧客離開
                 OnWaitTimeout();
             }
         }
 
         if (isFollowingWaypoints)
         {
+            // 放寬判斷條件
             bool shouldProceed = !agent.pathPending &&
-                               agent.remainingDistance <= agent.stoppingDistance + 0.5f &&
-                               (!agent.hasPath || agent.velocity.sqrMagnitude == 0f);
+                               agent.remainingDistance <= agent.stoppingDistance + 0.5f;
 
             if (shouldProceed)
             {
@@ -193,9 +207,8 @@ public class Customer : MonoBehaviour
 
         if (!isLeaving && !hasArrived && targetSpot != null && !isFollowingWaypoints)
         {
-            if (!agent.pathPending &&
-                agent.remainingDistance <= agent.stoppingDistance &&
-                (!agent.hasPath || agent.velocity.sqrMagnitude == 0f))
+            // 簡化到達判斷條件
+            if (!agent.pathPending && agent.remainingDistance <= agent.stoppingDistance + 0.2f)
             {
                 OnReachedSpot();
             }
@@ -203,9 +216,8 @@ public class Customer : MonoBehaviour
 
         if (isLeaving && !isFollowingWaypoints)
         {
-            if (!agent.pathPending &&
-                agent.remainingDistance <= leaveDistanceThreshold &&
-                (!agent.hasPath || agent.velocity.sqrMagnitude == 0f))
+            // 簡化離開判斷條件
+            if (!agent.pathPending && agent.remainingDistance <= leaveDistanceThreshold)
             {
                 CustomerManager.Instance.RemoveCustomer(this);
             }
@@ -215,6 +227,11 @@ public class Customer : MonoBehaviour
     private void OnReachedSpot()
     {
         hasArrived = true;
+
+        // **關鍵：停止 NavMeshAgent**
+        agent.isStopped = true;
+        agent.velocity = Vector3.zero;
+
         Debug.Log($"[Customer] 已到達座位: {targetSpot.name}");
         targetSpot.OnCustomerArrived();
         ShowCorrectRecipe();
@@ -321,12 +338,14 @@ public class Customer : MonoBehaviour
 
     public void SetDestinationToLeavePoint(Vector3 leavePos)
     {
+        agent.isStopped = false;
         agent.SetDestination(leavePos);
         isLeaving = true;
     }
 
     public void SetDestinationToLeavePointWithWaypoints(Vector3 leavePos, List<Vector3> waypoints)
     {
+        agent.isStopped = false;
         isLeaving = true;
         finalDestination = leavePos;
 
@@ -350,6 +369,8 @@ public class Customer : MonoBehaviour
 
     void OnDestroy()
     {
+        StopAllCoroutines();
+
         if (assignedSpot != null)
         {
             assignedSpot.ReleaseSpot();

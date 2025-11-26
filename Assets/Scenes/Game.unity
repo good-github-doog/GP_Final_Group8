@@ -3189,13 +3189,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 998dc8f466ebf450992194def35ccbfc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CustomerManager
-  customerPrefab: {fileID: 7659413501412707173, guid: 830247cdc91ad4d418cc6fa355a3e070, type: 3}
+  customerPrefabs:
+  - {fileID: 7659413501412707173, guid: 830247cdc91ad4d418cc6fa355a3e070, type: 3}
+  - {fileID: 6106864551007087575, guid: 1f1cf2efc2ebc9b4bac1ba7f022262f3, type: 3}
   spawnPoint: {fileID: 807128602}
   customerSpots:
   - {fileID: 519685162}
   - {fileID: 797360491}
   - {fileID: 1440577584}
   - {fileID: 115672379}
+  spawnInterval: 3
   leavePoint: {fileID: 718677289}
   doorOuterPoint: {fileID: 1035053316}
   doorInnerPoint: {fileID: 1478547650}
@@ -3208,13 +3211,10 @@ MonoBehaviour:
   maxPanicStops: 4
   panicMoveSpeed: 5
   panicPointOffset: 2
-  spawnInterval: 3
   spotAKey: 49
   spotBKey: 50
   spotCKey: 51
   spotDKey: 52
-  rewardIngredientName: pork
-  rewardAmount: 1
 --- !u!4 &1339529658
 Transform:
   m_ObjectHideFlags: 0

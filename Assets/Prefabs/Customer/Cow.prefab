@@ -969,7 +969,7 @@ GameObject:
   - component: {fileID: 2932594717542060005}
   - component: {fileID: -7382345193026391986}
   m_Layer: 0
-  m_Name: Customer
+  m_Name: Cow
   m_TagString: Customer
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
