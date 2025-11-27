@@ -969,7 +969,7 @@ GameObject:
   - component: {fileID: 2932594717542060005}
   - component: {fileID: -7382345193026391986}
   m_Layer: 0
-  m_Name: Customer
+  m_Name: Cow
   m_TagString: Customer
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1109,7 +1109,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Customer
   burgerRecipeUI: {fileID: 748692760035798799}
   salmonRecipeUI: {fileID: 1767976599268765640}
+  killEffectPrefab: {fileID: 6116557191670654606, guid: 621d6fdfd10b82a49abf7b609641afd8, type: 3}
+  customerType: 0
   leaveDistanceThreshold: 3
+  waitTimeLimit: 20
 --- !u!54 &-7382345193026391986
 Rigidbody:
   m_ObjectHideFlags: 0

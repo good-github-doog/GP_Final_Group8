@@ -3059,6 +3059,26 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 60975080292001492, guid: b19f88f8db5728649a27be356c91029a, type: 3}
+      propertyPath: openDirection
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3638398639688144523, guid: b19f88f8db5728649a27be356c91029a, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3638398639688144523, guid: b19f88f8db5728649a27be356c91029a, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3638398639688144523, guid: b19f88f8db5728649a27be356c91029a, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3638398639688144523, guid: b19f88f8db5728649a27be356c91029a, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3989718663874529631, guid: b19f88f8db5728649a27be356c91029a, type: 3}
       propertyPath: m_LocalScale.x
       value: 1.2
@@ -3081,7 +3101,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3989718663874529631, guid: b19f88f8db5728649a27be356c91029a, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 5.37
+      value: 5.89
       objectReference: {fileID: 0}
     - target: {fileID: 3989718663874529631, guid: b19f88f8db5728649a27be356c91029a, type: 3}
       propertyPath: m_LocalRotation.w
@@ -3553,13 +3573,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 998dc8f466ebf450992194def35ccbfc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CustomerManager
-  customerPrefab: {fileID: 7659413501412707173, guid: 830247cdc91ad4d418cc6fa355a3e070, type: 3}
+  customerPrefabs:
+  - {fileID: 7659413501412707173, guid: 830247cdc91ad4d418cc6fa355a3e070, type: 3}
+  - {fileID: 6106864551007087575, guid: 1f1cf2efc2ebc9b4bac1ba7f022262f3, type: 3}
+  - {fileID: 6106864551007087575, guid: 05e351c7f4ba74345add7a52094ce84d, type: 3}
   spawnPoint: {fileID: 807128602}
   customerSpots:
   - {fileID: 519685162}
   - {fileID: 797360491}
   - {fileID: 1440577584}
   - {fileID: 115672379}
+  spawnInterval: 3
   leavePoint: {fileID: 718677289}
   doorOuterPoint: {fileID: 1035053316}
   doorInnerPoint: {fileID: 1478547650}
@@ -3572,13 +3596,10 @@ MonoBehaviour:
   maxPanicStops: 4
   panicMoveSpeed: 5
   panicPointOffset: 2
-  spawnInterval: 3
   spotAKey: 49
   spotBKey: 50
   spotCKey: 51
   spotDKey: 52
-  rewardIngredientName: pork
-  rewardAmount: 1
 --- !u!4 &1339529658
 Transform:
   m_ObjectHideFlags: 0

@@ -180,9 +180,9 @@ public class AutomaticDoor : MonoBehaviour
                 float distanceToInner = Vector3.Distance(triggerObject.position, innerSidePoint.position);
 
                 // 顧客離哪個點更近，就表示從那邊來
-                // 從外側來 → 門向外側打開（-1）
-                // 從內側來 → 門向內側打開（+1）
-                direction = distanceToOuter < distanceToInner ? -1f : 1f;
+                // 從外側來 → 門向內側打開（+1），讓顧客進入
+                // 從內側來 → 門向外側打開（-1），讓顧客離開
+                direction = distanceToOuter < distanceToInner ? 1f : -1f;
 
                 // Debug.Log($"[AutomaticDoor] 自動判斷方向：到外側距離 = {distanceToOuter:F2}，到內側距離 = {distanceToInner:F2}，開門方向 = {(direction > 0 ? "內側" : "外側")}");
             }
