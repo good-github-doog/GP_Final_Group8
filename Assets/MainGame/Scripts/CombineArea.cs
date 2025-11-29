@@ -5,6 +5,7 @@ using System.Collections.Generic;
 public class CombineArea : MonoBehaviour, IDropHandler
 {
     public List<string> ingredientsInArea = new List<string>();
+    public List<string> ingredstypeInArea = new List<string>();
 
     public void OnDrop(PointerEventData eventData)
     {
@@ -14,6 +15,7 @@ public class CombineArea : MonoBehaviour, IDropHandler
             if (card.droppedInCombine) return;
             card.MarkAsDropped();
             ingredientsInArea.Add(card.ingredientName);
+            ingredstypeInArea.Add(card.ingredinetType);
             card.transform.SetParent(transform); // 把卡放進合成區
             Debug.Log($"放入合成區：{card.ingredientName}");
         }
