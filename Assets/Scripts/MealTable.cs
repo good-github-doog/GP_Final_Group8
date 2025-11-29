@@ -4,7 +4,7 @@ public static class MealTable
 {
     public static Dictionary<string, int> MealMap = new Dictionary<string, int>()
     {
-        { "hamburger", 0 },
-        { "salmonMushroomsandwich", 1 }
+        { "beefburger", 0 },
+        { "salmonsandwich", 1 }
     };
 }

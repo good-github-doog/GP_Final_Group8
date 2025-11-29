@@ -11,11 +11,13 @@ public class IngredientCard : MonoBehaviour, IBeginDragHandler, IDragHandler, IE
     public bool droppedInCombine = false;
 
     public string ingredientName;
+    public string ingredinetType;
 
     public void Setup(IngredientSlot slot, string name)
     {
         sourceSlot = slot;
         ingredientName = name;
+        ingredinetType = data.gettype(name);
     }
 
     private void Awake()
