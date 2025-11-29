@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 8664656549131453614}
   - component: {fileID: 8063309423826764751}
   m_Layer: 5
-  m_Name: salmonMushroomsandwich
+  m_Name: salmonsandwich
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

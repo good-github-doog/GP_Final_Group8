@@ -35,7 +35,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -36, y: -45}
+  m_AnchoredPosition: {x: 25, y: -35}
   m_SizeDelta: {x: 25, y: 25}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &755071816579324612
@@ -109,9 +109,9 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 5688267041153314305}
   - {fileID: 2241380248618377437}
   - {fileID: 5227464410695378039}
+  - {fileID: 5688267041153314305}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
@@ -172,12 +172,9 @@ MonoBehaviour:
   ingredientName: pork
   count: 4
   ingredientCardPrefab: {fileID: 99001164574655833, guid: d9cbb33b6522bfc45b4ebd6c5cc8f27d, type: 3}
-  cardSpawnParent: {fileID: 0}
   countText: {fileID: 6497695172950823178}
   icon: {fileID: 7365919734615014666}
-  spawnPoint: {fileID: 5227464410695378039}
   canvasGroup: {fileID: 9073562053780560391}
-  parentCanvas: {fileID: 0}
 --- !u!225 &9073562053780560391
 CanvasGroup:
   m_ObjectHideFlags: 0

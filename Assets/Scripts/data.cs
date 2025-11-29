@@ -44,7 +44,8 @@ public static class data
     public static List<ingreds_data> inbag = new List<ingreds_data>();
     public static int killCountToday = 0;
     public static int killCountYesterday = 0;
-    public static int stage = 1;
+    public static int clearstage = 1;
+    public static int nowstage = 0;
 
     public static void reset()
     {

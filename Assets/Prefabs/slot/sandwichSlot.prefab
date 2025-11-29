@@ -33,9 +33,9 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 5304753185595415495}
   - {fileID: 2022753712921071887}
   - {fileID: 5697189397586149628}
+  - {fileID: 5304753185595415495}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
@@ -96,12 +96,9 @@ MonoBehaviour:
   ingredientName: sandwich
   count: 10
   ingredientCardPrefab: {fileID: 2330581428382174369, guid: d97898685fc5ae14b980c6acbfc1523d, type: 3}
-  cardSpawnParent: {fileID: 0}
   countText: {fileID: 5535944376715348599}
   icon: {fileID: 6808087263442365533}
-  spawnPoint: {fileID: 5697189397586149628}
   canvasGroup: {fileID: 4376502910497804539}
-  parentCanvas: {fileID: 0}
 --- !u!225 &4376502910497804539
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -443,7 +440,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -36, y: -45}
+  m_AnchoredPosition: {x: 25, y: -35}
   m_SizeDelta: {x: 25, y: 25}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &52073914462615392
