@@ -246,9 +246,9 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 3208101925787929526}
   - {fileID: 7595615370544949681}
   - {fileID: 8776832919365427860}
+  - {fileID: 3208101925787929526}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
@@ -309,12 +309,9 @@ MonoBehaviour:
   ingredientName: salmon
   count: 10
   ingredientCardPrefab: {fileID: 2330581428382174369, guid: a3b55591f248f2c4f83be9c014ab5b1e, type: 3}
-  cardSpawnParent: {fileID: 0}
   countText: {fileID: 7579283154033068067}
   icon: {fileID: 7410467750990173586}
-  spawnPoint: {fileID: 8776832919365427860}
   canvasGroup: {fileID: 4405028053709710046}
-  parentCanvas: {fileID: 0}
 --- !u!225 &4405028053709710046
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -408,7 +405,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -36, y: -45}
+  m_AnchoredPosition: {x: 25, y: -35}
   m_SizeDelta: {x: 25, y: 25}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6989144233063286476

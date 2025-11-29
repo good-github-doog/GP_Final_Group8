@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using TMPro;
+using UnityEngine.UI;
 
 public enum CustomerType
 {
@@ -16,6 +18,7 @@ public class Customer : MonoBehaviour
 
     public GameObject burgerRecipeUI;
     public GameObject salmonRecipeUI;
+    public TextMeshProUGUI therecipe;
     public GameObject killEffectPrefab;
 
 
@@ -249,11 +252,13 @@ public class Customer : MonoBehaviour
 
         if (expectedMealIndex == 0)
         {
+            therecipe.text = "beef burger...";
             if (burgerRecipeUI != null) burgerRecipeUI.SetActive(true);
         }
         else if (expectedMealIndex == 1)
         {
-            if (salmonRecipeUI != null) salmonRecipeUI.SetActive(true);
+            therecipe.text = "some kind of sand...";
+            if (burgerRecipeUI != null) burgerRecipeUI.SetActive(true);
         }
     }
 

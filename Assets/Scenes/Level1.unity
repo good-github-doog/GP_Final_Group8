@@ -183,9 +183,9 @@ MonoBehaviour:
   prefabList:
   - name: porkRice
     prefab: {fileID: 1084129990771008315, guid: 601ce2bb23e70b54fb593cb706b59d6a, type: 3}
-  - name: hamburger
+  - name: beefburger
     prefab: {fileID: 1084129990771008315, guid: 601ce2bb23e70b54fb593cb706b59d6a, type: 3}
-  - name: salmonMushroomsandwich
+  - name: salmonsandwich
     prefab: {fileID: 1084129990771008315, guid: d06479baf95522544b2053b307bd7727, type: 3}
   expectedMealIndex: -1
 --- !u!114 &174474444
@@ -316,9 +316,9 @@ MonoBehaviour:
   prefabList:
   - name: porkRice
     prefab: {fileID: 1084129990771008315, guid: 601ce2bb23e70b54fb593cb706b59d6a, type: 3}
-  - name: hamburger
+  - name: beefburger
     prefab: {fileID: 1084129990771008315, guid: 601ce2bb23e70b54fb593cb706b59d6a, type: 3}
-  - name: salmonMushroomsandwich
+  - name: salmonsandwich
     prefab: {fileID: 1084129990771008315, guid: d06479baf95522544b2053b307bd7727, type: 3}
   expectedMealIndex: -1
 --- !u!114 &217303761
@@ -1681,9 +1681,13 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Recipe here
+  m_text: 'margherita
 
-'
+    hawaii
+
+    seafood
+
+    ...'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1748,7 +1752,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_margin: {x: 0, y: -124.595894, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -1826,9 +1830,9 @@ MonoBehaviour:
   prefabList:
   - name: porkRice
     prefab: {fileID: 1084129990771008315, guid: 601ce2bb23e70b54fb593cb706b59d6a, type: 3}
-  - name: hamburger
+  - name: beefburger
     prefab: {fileID: 1084129990771008315, guid: 601ce2bb23e70b54fb593cb706b59d6a, type: 3}
-  - name: salmonMushroomsandwich
+  - name: salmonsandwich
     prefab: {fileID: 1084129990771008315, guid: d06479baf95522544b2053b307bd7727, type: 3}
   expectedMealIndex: -1
 --- !u!114 &1148384001
@@ -2027,7 +2031,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 860090360}
   m_Direction: 0
   m_Value: 0
-  m_Size: 0.9999998
+  m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -2464,7 +2468,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1645290758}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4183d9008e500d544b2c95fefac68222, type: 3}
   m_Name: 
@@ -2491,10 +2495,10 @@ MonoBehaviour:
   m_ChildAlignment: 0
   m_StartCorner: 0
   m_StartAxis: 0
-  m_CellSize: {x: 70, y: 70}
+  m_CellSize: {x: 70, y: 80}
   m_Spacing: {x: 5, y: 5}
-  m_Constraint: 1
-  m_ConstraintCount: 6
+  m_Constraint: 2
+  m_ConstraintCount: 1
 --- !u!114 &1645290762
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3260,7 +3264,7 @@ MonoBehaviour:
     slotPrefab: {fileID: 5818642803362818381, guid: bee5e220d0edf334fbaa5111d851182f, type: 3}
   - ingredientName: beef
     slotPrefab: {fileID: 174055279132146751, guid: 3f23d732674a1a84f9db93a289b85ea9, type: 3}
-  slotContainer: {fileID: 251952871}
+  slotContainer: {fileID: 1645290759}
 --- !u!4 &2069349290
 Transform:
   m_ObjectHideFlags: 0

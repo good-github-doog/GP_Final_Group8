@@ -35,6 +35,7 @@ public class homemanager : MonoBehaviour
 
     public void nextscene()
     {
+        data.nowstage = 1;
         SceneManager.LoadScene("Shopping");
     }
 

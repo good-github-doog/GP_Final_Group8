@@ -35,7 +35,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -36, y: -45}
+  m_AnchoredPosition: {x: 25, y: -35}
   m_SizeDelta: {x: 25, y: 25}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1207754018517265794
@@ -109,9 +109,9 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 5542587373543462668}
   - {fileID: 1390743006910912338}
   - {fileID: 5421719110191535867}
+  - {fileID: 5542587373543462668}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
@@ -172,12 +172,9 @@ MonoBehaviour:
   ingredientName: mushroom
   count: 10
   ingredientCardPrefab: {fileID: 2330581428382174369, guid: d4718b08b12c4784d9c8e7cb4e00e230, type: 3}
-  cardSpawnParent: {fileID: 0}
   countText: {fileID: 1812464384184256337}
   icon: {fileID: 4633774227394251469}
-  spawnPoint: {fileID: 5421719110191535867}
   canvasGroup: {fileID: 837313919958542478}
-  parentCanvas: {fileID: 0}
 --- !u!225 &837313919958542478
 CanvasGroup:
   m_ObjectHideFlags: 0
