@@ -85,11 +85,11 @@ public class CustomerManager : MonoBehaviour
         if (spot.IsOccupied && spot.CurrentCustomer != null)
         {
             Customer customer = spot.CurrentCustomer;
-            KillCustomer(customer, spotIndex);
+            StartCoroutine(KillCustomer(customer, spotIndex));
         }
     }
 
-    private void KillCustomer(Customer customer, int spotIndex)
+    private System.Collections.IEnumerator KillCustomer(Customer customer, int spotIndex)
     {
         CustomerType customerType = customer.GetCustomerType();
 
@@ -97,15 +97,64 @@ public class CustomerManager : MonoBehaviour
 
         GiveKillReward(customerType);
 
-        //Destroy(customer.gameObject);
-        customer.PlayKillEffect();  // 自己做的效果
-        // 然後不要 Destroy(customer) 了！
+        // 線性調暗整體lighting
+        // 保存原始環境光設定
+        Color originalAmbientColor = RenderSettings.ambientLight;
+        float originalAmbientIntensity = RenderSettings.ambientIntensity;
+
+        // 保存所有燈光的原始強度
+        Light[] allLights = FindObjectsByType<Light>(FindObjectsSortMode.None);
+        float[] originalIntensities = new float[allLights.Length];
+
+        for (int i = 0; i < allLights.Length; i++)
+        {
+            originalIntensities[i] = allLights[i].intensity;
+        }
+
+        // 調暗參數
+        float darknessFactor = 0.2f; // 調暗到20%
+        float fadeOutDuration = 0.3f; // 調暗持續時間
+        float fadeInDuration = 0.3f;  // 恢復持續時間
+
+        // 線性調暗
+        float elapsedTime = 0f;
+        while (elapsedTime < fadeOutDuration)
+        {
+            elapsedTime += Time.deltaTime;
+            float t = elapsedTime / fadeOutDuration;
+
+            // 調暗環境光
+            RenderSettings.ambientLight = Color.Lerp(originalAmbientColor, originalAmbientColor * darknessFactor, t);
+            RenderSettings.ambientIntensity = Mathf.Lerp(originalAmbientIntensity, originalAmbientIntensity * darknessFactor, t);
+
+            // 調暗所有燈光
+            for (int i = 0; i < allLights.Length; i++)
+            {
+                if (allLights[i] != null)
+                {
+                    allLights[i].intensity = Mathf.Lerp(originalIntensities[i], originalIntensities[i] * darknessFactor, t);
+                }
+            }
+
+            yield return null;
+        }
+
+        Debug.Log("[CustomerManager] 整體lighting已調暗");
+
+        // 等待一小段時間
+        yield return new WaitForSeconds(0.2f);
+
+        // 播放粒子效果和相機抖動
+        customer.PlayKillEffect();
 
         if (CameraShake.Instance != null)
         {
             CameraShake.Instance.ShakeOnce(0.2f, 0.2f);
+            Debug.Log("Shake Shake Shake!");
         }
 
+        // 等待粒子效果播放完成
+        yield return new WaitForSeconds(1.0f);
 
         // Increment kill counter
         data.killCountToday++;
@@ -120,10 +169,51 @@ public class CustomerManager : MonoBehaviour
             data.killCountToday = 0;
             data.killCountYesterday = 0;
             SceneManager.LoadScene("Home");
-            return;
+            yield break;
         }
 
         TriggerPanicForOtherCustomers(spotIndex);
+
+        // 閃爍5秒
+        float flickerDuration = 5f; // 閃爍總時長
+        float flickerInterval = 0.15f; // 每次閃爍間隔
+        float flickerElapsed = 0f;
+        bool isLightOn = false; // 當前燈光狀態
+
+        while (flickerElapsed < flickerDuration)
+        {
+            isLightOn = !isLightOn;
+            float targetFactor = isLightOn ? 1f : darknessFactor;
+
+            // 快速切換燈光
+            RenderSettings.ambientLight = originalAmbientColor * targetFactor;
+            RenderSettings.ambientIntensity = originalAmbientIntensity * targetFactor;
+
+            for (int i = 0; i < allLights.Length; i++)
+            {
+                if (allLights[i] != null)
+                {
+                    allLights[i].intensity = originalIntensities[i] * targetFactor;
+                }
+            }
+
+            yield return new WaitForSeconds(flickerInterval);
+            flickerElapsed += flickerInterval;
+        }
+
+        // 最後恢復到正常亮度
+        RenderSettings.ambientLight = originalAmbientColor;
+        RenderSettings.ambientIntensity = originalAmbientIntensity;
+
+        for (int i = 0; i < allLights.Length; i++)
+        {
+            if (allLights[i] != null)
+            {
+                allLights[i].intensity = originalIntensities[i];
+            }
+        }
+
+        Debug.Log("[CustomerManager] 閃爍完成，整體lighting已恢復");
     }
 
     private void GiveKillReward(CustomerType customerType)
