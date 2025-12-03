@@ -2396,7 +2396,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2048587296}
   m_HandleRect: {fileID: 2048587295}
   m_Direction: 2
-  m_Value: 1
+  m_Value: 0
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -2595,7 +2595,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1241048526}
   m_Direction: 0
   m_Value: 1
-  m_Size: 0.99999994
+  m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -3562,6 +3562,7 @@ MonoBehaviour:
   - ingredientName: beef
     slotPrefab: {fileID: 174055279132146751, guid: 3f23d732674a1a84f9db93a289b85ea9, type: 3}
   slotContainer: {fileID: 251952871}
+  gameslotprefeb: {fileID: 3667018774758602869, guid: f911435cc6b30f746b3a1789aeceeb3a, type: 3}
 --- !u!4 &2069349290
 Transform:
   m_ObjectHideFlags: 0

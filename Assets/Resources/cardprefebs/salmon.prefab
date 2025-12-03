@@ -58,14 +58,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 0.38039216, g: 0.8117647, b: 0.3254902, a: 1}
+  m_Color: {r: 0.4392157, g: 0.6862745, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: ca40bf42de281164ab0ca59a83eec9f5, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 9de5a4ae334b67141a5849c9bf0dd6e2, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -89,7 +89,7 @@ GameObject:
   - component: {fileID: 652094887631969924}
   - component: {fileID: 4583803097986597148}
   m_Layer: 5
-  m_Name: lettuce
+  m_Name: salmon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -136,7 +136,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 0.654902, g: 1, b: 0.5529412, a: 1}
+  m_Color: {r: 0.33490568, g: 0.5575363, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -166,8 +166,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::IngredientCard
   droppedInCombine: 0
-  ingredientName: letuce
-  ingredinetType: 
+  ingredientName: salmon
 --- !u!225 &4583803097986597148
 CanvasGroup:
   m_ObjectHideFlags: 0

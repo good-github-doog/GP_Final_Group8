@@ -1,21 +1,18 @@
 using UnityEngine;
 using System.Collections.Generic;
+using UnityEngine.UI;
 
 public class IngredientManager : MonoBehaviour
 {
-    [System.Serializable]
-    public class IngredientSlotMapping
-    {
-        public string ingredientName;
-        public GameObject slotPrefab; // 每種食材對應的 Slot Prefab
-    }
 
     [Header("Slot 配置")]
-    public List<IngredientSlotMapping> slotMappings = new List<IngredientSlotMapping>();
     public Transform slotContainer; // 放置所有 Slot 的父物件（例如一個 Panel）
 
     [Header("參考")]
     private List<IngredientSlot> activeSlots = new List<IngredientSlot>();
+
+    private Image foodpic;
+    public GameObject gameslotprefeb;
 
     private void Start()
     {
@@ -48,17 +45,9 @@ public class IngredientManager : MonoBehaviour
         // 根據 data.inbag 生成 Slot
         foreach (var ingredData in data.inbag)
         {
-            // 找到對應的 Slot Prefab
-            GameObject slotPrefab = GetSlotPrefabByName(ingredData.name);
-            
-            if (slotPrefab == null)
-            {
-                Debug.LogWarning($"找不到食材 {ingredData.name} 對應的 Slot Prefab！");
-                continue;
-            }
-
-            // 生成 Slot
-            GameObject slotObj = Instantiate(slotPrefab, slotContainer);
+            GameObject slotObj = Instantiate(gameslotprefeb, slotContainer);
+            foodpic = slotObj.transform.Find("content").GetComponent<Image>();
+            foodpic.sprite = Resources.Load<Sprite>(ingredData.name);
             IngredientSlot slot = slotObj.GetComponent<IngredientSlot>();
 
             if (slot != null)
@@ -66,6 +55,7 @@ public class IngredientManager : MonoBehaviour
                 // 設定 Slot 的初始數據
                 slot.ingredientName = ingredData.name;
                 slot.count = ingredData.quantity;
+                slot.ingredientCardPrefab = Resources.Load<GameObject>("cardprefebs/" + ingredData.name);
                 
                 activeSlots.Add(slot);
                 
@@ -92,15 +82,6 @@ public class IngredientManager : MonoBehaviour
                 Debug.Log($"保存食材數據：{slot.ingredientName}，數量：{slot.count}");
             }
         }
-    }
-
-    /// <summary>
-    /// 根據食材名稱獲取對應的 Slot Prefab
-    /// </summary>
-    private GameObject GetSlotPrefabByName(string name)
-    {
-        var mapping = slotMappings.Find(x => x.ingredientName == name);
-        return mapping?.slotPrefab;
     }
 
     /// <summary>
