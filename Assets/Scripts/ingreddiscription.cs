@@ -12,7 +12,22 @@ public static class ingreddiscription
         { "salmon", "fisssssh" },
         { "mushroom", "wierd shape" },
         { "sandwich", "toast of triangle" },
-        { "burgerbun", "hamberger!!" }
+        { "burgerbun", "hamberger!!" },
+        { "tomato", "red fruit? vegetable?" },
+        { "pineapple", "stab" },
+        { "apple", "!doctor" },
+        { "kiwi", "I'm bird~" },
+        { "dough", "need to bake" },
+        { "butter", "exquisite~" },
+        { "pepper", "blaaaack" },
+        { "shrimp", "emmm...." },
+        { "lobster", "high level ingred" },
+
+        { "steak", "2nd ingred" },
+        { "doublesauce", "yuck" },
+
+        { "mixer", "make things together" },
+        { "oven", "hitttttt up" }
     };
 
     public static string getinfo(string tag)

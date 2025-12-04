@@ -15,9 +15,10 @@ public class shopmanager : MonoBehaviour
     public GameObject buypanel;
     public TextMeshProUGUI itemNameText;
     public bagpool pool;
-
+    public bagpool poolforgoods;
 
     private string nowbuyingitem;
+    private List<string> nowgoods;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -31,6 +32,16 @@ public class shopmanager : MonoBehaviour
             if (remains.quantity == 0) continue;
             GameObject uiObj = pool.GetObject();
             uiObj.GetComponent<ingredient>().setingredient(remains.name, remains.quantity);
+        }
+
+        data.goodsmap.TryGetValue(data.nowstage, out nowgoods);
+        foreach (var good in nowgoods)
+        {
+            GameObject obj = poolforgoods.GetObject();
+            obj.GetComponent<Image>().sprite = data.GetSprite(good);
+            Button btn = obj.GetComponent<Button>();
+            btn.onClick.RemoveAllListeners();
+            btn.onClick.AddListener(() => openbuy(good));
         }
     }
 

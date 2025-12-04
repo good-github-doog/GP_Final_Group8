@@ -21,7 +21,7 @@ public class ingredient : MonoBehaviour
     public void setingredient(string item, int nn)
     {
         number.text = "" +  nn;
-        gameObject.GetComponent<Image>().sprite = Resources.Load<Sprite>(item);
+        gameObject.GetComponent<Image>().sprite = data.GetSprite(item);
 
         thename = item;
     }

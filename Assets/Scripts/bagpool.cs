@@ -5,7 +5,7 @@ public class bagpool : MonoBehaviour
 {
 
     public GameObject ingredient_prefeb;
-    private int inipoolsize = 20;
+    private int inipoolsize = 15;
     public List<GameObject> pool = new List<GameObject>();
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()

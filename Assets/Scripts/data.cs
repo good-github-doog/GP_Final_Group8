@@ -45,7 +45,7 @@ public static class data
     public static int killCountToday = 0;
     public static int killCountYesterday = 0;
     public static int clearstage = 1;
-    public static int nowstage = 0;
+    public static int nowstage = 1;
 
     public static void reset()
     {
@@ -58,34 +58,37 @@ public static class data
         return tp;
     }
 
+    private static Dictionary<string, int> prisemap = new Dictionary<string, int>() {
+        {"burgerbun", 20}, {"sandwich", 25}, {"mushroom", 35}, {"cheese", 40},
+        {"salmon", 60}, {"lettuce", 15}, {"beef", 70}, {"pork", 50},
+        {"apple", 20}, {"pineapple", 20}, {"tomato", 25}, {"butter", 40},
+        {"pepper", 35}, {"shrimp", 60}, {"dough", 30}
+    };
     public static void setnowprise(string ss)
     {
-        switch (ss)
-        {
-            case "burgerbun":
-                nowprise = 20;
-                break;
-            case "sandwich":
-                nowprise = 25;
-                break;
-            case "mushroom":
-                nowprise = 35;
-                break;
-            case "cheese":
-                nowprise = 40;
-                break;
-            case "salmon":
-                nowprise = 60;
-                break;
-            case "lettuce":
-                nowprise = 15;
-                break;
-            case "beef":
-                nowprise = 70;
-                break;
-            case "pork":
-                nowprise = 50;
-                break;
-        }
+        prisemap.TryGetValue(ss, out nowprise);
+    }
+
+    private static List<string> stage1goods = new List<string>() {
+        "burgerbun", "sandwich", "beef", "pork", "salmon", "mushroom", "cheese", "lettuce", "apple"
+    };
+    private static List<string> stage2goods = new List<string>() {
+        "dough", "cheese", "tomato", "pineapple", "mushroom", "shrimp", "salmon", "beef", "pork"
+    };
+    private static List<string> stage3goods = new List<string>() {
+        "pepper", "butter", "tomato", "lettuce", "pineapple", "mushroom", "shrimp", "salmon", "beef", "pork", "dough", "burgerbun", "sandwich"
+    };
+    public static Dictionary<int, List<string>> goodsmap = new Dictionary<int, List<string>>() {
+        {1, stage1goods}, {2, stage2goods}, {3, stage3goods}
+    };
+    
+    private static Dictionary<string, Sprite> piccache = new Dictionary<string, Sprite>();
+    public static Sprite GetSprite(string path)
+    {
+        if (piccache.TryGetValue(path, out Sprite sp)) return sp;
+        
+        sp = Resources.Load<Sprite>(path);
+        if (sp != null) piccache[path] = sp;
+        return sp;
     }
 }

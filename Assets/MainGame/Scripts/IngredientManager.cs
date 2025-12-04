@@ -47,7 +47,7 @@ public class IngredientManager : MonoBehaviour
         {
             GameObject slotObj = Instantiate(gameslotprefeb, slotContainer);
             foodpic = slotObj.transform.Find("content").GetComponent<Image>();
-            foodpic.sprite = Resources.Load<Sprite>(ingredData.name);
+            foodpic.sprite = data.GetSprite(ingredData.name);
             IngredientSlot slot = slotObj.GetComponent<IngredientSlot>();
 
             if (slot != null)
