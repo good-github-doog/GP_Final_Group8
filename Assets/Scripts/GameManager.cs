@@ -18,6 +18,7 @@ public class GameManager : MonoBehaviour
     public AutoFlip autoFlip;
     public int recipeStartPage = 4;
     public bool FirstTimeInGame = true;
+    public bool isRecipeOpen = false;
 
     void Start()
     {
@@ -78,6 +79,8 @@ public class GameManager : MonoBehaviour
 
     IEnumerator SlideInRecipe()
     {
+        if (isRecipeOpen) yield break; // 如果已經開啟就不再執行
+        isRecipeOpen = true;
         if (autoFlip != null)
             autoFlip.AutoFlipToPage(recipeStartPage);
         Vector2 start = new Vector2(0, -Screen.height);
@@ -125,5 +128,6 @@ public class GameManager : MonoBehaviour
             yield return null;
         }
         recipePanel.SetActive(false);
+        isRecipeOpen = false;
     }
 }

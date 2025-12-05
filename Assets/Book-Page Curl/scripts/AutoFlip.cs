@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using TMPro;
 [RequireComponent(typeof(Book))]
 public class AutoFlip : MonoBehaviour {
     public FlipMode Mode;
@@ -11,6 +12,10 @@ public class AutoFlip : MonoBehaviour {
     public int AnimationFramesCount = 40;
     bool isFlipping = false;
     public GameManager gm;   // 直接拖進 Inspector
+    public float textFadeDuration = 0.6f;   // ⭐ 文字淡入時間
+    public TextMeshProUGUI[] pageTexts;
+    public UnityEngine.UI.Image[] pageImages;
+
 
     // Use this for initialization
     void Start () {
@@ -29,6 +34,7 @@ public class AutoFlip : MonoBehaviour {
     IEnumerator AutoFlipTo(int targetPage)
     {
         yield return new WaitForEndOfFrame(); // 等 Book 初始化完成
+        HidePageText();
 
         if (targetPage > ControledBook.currentPage)
         {
@@ -46,11 +52,69 @@ public class AutoFlip : MonoBehaviour {
                 yield return new WaitForSeconds(PageFlipTime + TimeBetweenPages);
             }
         }
+        yield return StartCoroutine(FadeInPageText());  // ⭐ 開始淡入
 
         if (gm.FirstTimeInGame)
         {
             Time.timeScale = 0f;
             gm.FirstTimeInGame = false;
+        }
+        
+    }
+
+    void HidePageText()
+    {
+        foreach (var t in pageTexts)
+        {
+            if (t == null) continue;
+            var c = t.color;
+            c.a = 0;
+            t.color = c;
+        }
+
+        foreach (var img in pageImages)
+        {
+            if (img == null) continue;
+            var c = img.color;
+            c.a = 0;
+            img.color = c;
+        }
+    }
+
+
+    // ============================
+    // ⭐ 文字淡入效果
+    // ============================
+    IEnumerator FadeInPageText()
+    {
+        float t = 0;
+        while (t < textFadeDuration)
+        {
+            t += Time.deltaTime;
+            float alpha = t / textFadeDuration;
+
+            // Debug 看透明度
+            // Debug.Log("Current Alpha = " + alpha.ToString("F2"));
+
+            // ---- 淡入文字 ----
+            foreach (var txt in pageTexts)
+            {
+                if (txt == null) continue;
+                var c = txt.color;
+                c.a = alpha;
+                txt.color = c;
+            }
+
+            // ---- 淡入圖片 ----
+            foreach (var img in pageImages)
+            {
+                if (img == null) continue;
+                var c = img.color;
+                c.a = alpha;
+                img.color = c;
+            }
+
+            yield return null;
         }
     }
 
