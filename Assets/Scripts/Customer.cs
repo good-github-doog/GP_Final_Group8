@@ -102,6 +102,16 @@ public class Customer : MonoBehaviour
             // 獲取 Slider 的 Fill Image 引用
             sliderFillImage = waitTimerSlider.fillRect?.GetComponent<Image>();
         }
+
+        // 初始化 Recipe UI 為隱藏狀態
+        if (burgerRecipeUI != null)
+        {
+            burgerRecipeUI.SetActive(false);
+        }
+        if (salmonRecipeUI != null)
+        {
+            salmonRecipeUI.SetActive(false);
+        }
     }
     private void DetectAndResolveStuck()
     {
