@@ -53,7 +53,21 @@ public class shopmanager : MonoBehaviour
 
     public void nextscene()
     {
-        SceneManager.LoadScene("Game");
+        // Choose scene based on the current stage.
+        string sceneName = "Game";
+        switch (data.nowstage)
+        {
+            case 1:
+                sceneName = "Level1";
+                break;
+            case 2:
+                sceneName = "Game";
+                break;
+            case 3:
+                sceneName = "Level 3";
+                break;
+        }
+        SceneManager.LoadScene(sceneName);
     }
 
     public void opensetting()

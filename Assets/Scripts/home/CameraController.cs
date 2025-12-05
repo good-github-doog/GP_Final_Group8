@@ -12,6 +12,7 @@ public class CameraController : MonoBehaviour
 
     void Start()
     {
+        SyncStage();
         UpdateButtons();
     }
 
@@ -36,6 +37,7 @@ public class CameraController : MonoBehaviour
         if (currentIndex < spots.Length - 1)
         {
             currentIndex++;
+            SyncStage();
             UpdateButtons();
         }
     }
@@ -45,6 +47,7 @@ public class CameraController : MonoBehaviour
         if (currentIndex > 0)
         {
             currentIndex--;
+            SyncStage();
             UpdateButtons();
         }
     }
@@ -53,5 +56,11 @@ public class CameraController : MonoBehaviour
     {
         leftBtn.interactable = (currentIndex < spots.Length - 1);
         rightBtn.interactable = (currentIndex > 0);
+    }
+
+    private void SyncStage()
+    {
+        // currentIndex is 0-based, nowstage is 1-based.
+        data.nowstage = currentIndex + 1;
     }
 }
