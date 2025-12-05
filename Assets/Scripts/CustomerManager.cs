@@ -114,7 +114,6 @@ public class CustomerManager : MonoBehaviour
         // 調暗參數
         float darknessFactor = 0.2f; // 調暗到20%
         float fadeOutDuration = 0.3f; // 調暗持續時間
-        float fadeInDuration = 0.3f;  // 恢復持續時間
 
         // 線性調暗
         float elapsedTime = 0f;

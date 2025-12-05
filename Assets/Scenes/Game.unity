@@ -4158,9 +4158,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CustomerManager
   customerPrefabs:
-  - {fileID: 9114591265118845542, guid: 2f071552a2ad6bc4084108928c90b9c8, type: 3}
-  - {fileID: 7085267883806946490, guid: f0bf5415523d7d042b14771407236a82, type: 3}
-  - {fileID: 6737229777737315436, guid: f64dc08af26004440aac118e12924b35, type: 3}
+  - {fileID: 1783674938678670017, guid: 08f41db095c5ba04ab830a0c799469e3, type: 3}
+  - {fileID: 8483565010245126895, guid: f103c3b6b2074a749a74e54116f35c1f, type: 3}
+  - {fileID: 6691817358236258769, guid: b34b04ed1b195014c89ae336db3af1e7, type: 3}
   spawnPoint: {fileID: 807128602}
   customerSpots:
   - {fileID: 519685162}

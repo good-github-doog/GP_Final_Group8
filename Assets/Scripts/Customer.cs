@@ -21,6 +21,10 @@ public class Customer : MonoBehaviour
     public TextMeshProUGUI therecipe;
     public GameObject killEffectPrefab;
 
+    [Header("Timer UI")]
+    public Slider waitTimerSlider;
+    private Image sliderFillImage;
+
 
     [Header("Customer Type")]
     public CustomerType customerType = CustomerType.Cow;
@@ -88,6 +92,25 @@ public class Customer : MonoBehaviour
             agent.radius = 0.5f;
             agent.stoppingDistance = 0.3f;  // **新增這行**
             agent.obstacleAvoidanceType = UnityEngine.AI.ObstacleAvoidanceType.HighQualityObstacleAvoidance;
+        }
+
+        // 初始化計時器 Slider 為隱藏狀態
+        if (waitTimerSlider != null)
+        {
+            waitTimerSlider.gameObject.SetActive(false);
+
+            // 獲取 Slider 的 Fill Image 引用
+            sliderFillImage = waitTimerSlider.fillRect?.GetComponent<Image>();
+        }
+
+        // 初始化 Recipe UI 為隱藏狀態
+        if (burgerRecipeUI != null)
+        {
+            burgerRecipeUI.SetActive(false);
+        }
+        if (salmonRecipeUI != null)
+        {
+            salmonRecipeUI.SetActive(false);
         }
     }
     private void DetectAndResolveStuck()
@@ -182,6 +205,35 @@ public class Customer : MonoBehaviour
         if (isWaiting && !isLeaving)
         {
             waitTimer += Time.deltaTime;
+
+            // 更新 Slider UI (從 1 到 0，表示時間遞減)
+            if (waitTimerSlider != null)
+            {
+                float timeRemaining = 1f - (waitTimer / waitTimeLimit);
+                waitTimerSlider.value = timeRemaining;
+
+                // 更新 Slider 顏色：綠色 → 黃色 → 紅色 (平滑漸變)
+                if (sliderFillImage != null)
+                {
+                    Color sliderColor;
+
+                    if (timeRemaining > 0.5f) // 100%-50%: 綠色 → 黃色
+                    {
+                        // t = 0 (50%) -> 1 (100%)
+                        float t = (timeRemaining - 0.5f) / 0.5f;
+                        sliderColor = Color.Lerp(Color.yellow, Color.green, t);
+                    }
+                    else // 50%-0%: 黃色 → 紅色
+                    {
+                        // t = 0 (0%) -> 1 (50%)
+                        float t = timeRemaining / 0.5f;
+                        sliderColor = Color.Lerp(Color.red, Color.yellow, t);
+                    }
+
+                    sliderFillImage.color = sliderColor;
+                }
+            }
+
             if (waitTimer >= waitTimeLimit)
             {
                 OnWaitTimeout();
@@ -243,6 +295,19 @@ public class Customer : MonoBehaviour
         // 開始等待計時
         isWaiting = true;
         waitTimer = 0f;
+
+        // 顯示並初始化計時器 Slider
+        if (waitTimerSlider != null)
+        {
+            waitTimerSlider.gameObject.SetActive(true);
+            waitTimerSlider.value = 1f;
+
+            // 初始化顏色為綠色
+            if (sliderFillImage != null)
+            {
+                sliderFillImage.color = Color.green;
+            }
+        }
     }
 
     private void ShowCorrectRecipe()
@@ -266,6 +331,12 @@ public class Customer : MonoBehaviour
     {
         // 停止等待計時器
         isWaiting = false;
+
+        // 隱藏計時器 Slider
+        if (waitTimerSlider != null)
+        {
+            waitTimerSlider.gameObject.SetActive(false);
+        }
 
         if (burgerRecipeUI != null) burgerRecipeUI.SetActive(false);
         if (salmonRecipeUI != null) salmonRecipeUI.SetActive(false);
@@ -296,6 +367,12 @@ public class Customer : MonoBehaviour
         // 標記為超時離開
         leftDueToTimeout = true;
         isWaiting = false;
+
+        // 隱藏計時器 Slider
+        if (waitTimerSlider != null)
+        {
+            waitTimerSlider.gameObject.SetActive(false);
+        }
 
         // 隱藏 UI
         if (burgerRecipeUI != null) burgerRecipeUI.SetActive(false);
