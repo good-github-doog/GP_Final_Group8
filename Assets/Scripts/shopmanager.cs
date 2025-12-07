@@ -58,7 +58,7 @@ public class shopmanager : MonoBehaviour
         switch (data.nowstage)
         {
             case 1:
-                sceneName = "Level1";
+                sceneName = "Level 1";
                 break;
             case 2:
                 sceneName = "Game";
