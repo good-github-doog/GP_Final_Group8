@@ -45,7 +45,7 @@ public class CustomerSpot : MonoBehaviour
         if (r < weightBurger)
             wantedMeal = 0;
         else
-            wantedMeal = 1;
+            wantedMeal = 8;
 
         if (myFoodArea != null)
         {

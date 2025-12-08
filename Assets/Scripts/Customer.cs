@@ -320,7 +320,7 @@ public class Customer : MonoBehaviour
             therecipe.text = "beef burger...";
             if (burgerRecipeUI != null) burgerRecipeUI.SetActive(true);
         }
-        else if (expectedMealIndex == 1)
+        else if (expectedMealIndex == 8)
         {
             therecipe.text = "some kind of sand...";
             if (burgerRecipeUI != null) burgerRecipeUI.SetActive(true);

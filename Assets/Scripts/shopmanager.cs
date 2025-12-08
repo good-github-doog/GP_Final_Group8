@@ -9,6 +9,7 @@ public class shopmanager : MonoBehaviour
     public TextMeshProUGUI show;
     public TextMeshProUGUI itemprise;
     public TextMeshProUGUI itemdisc;
+    public TMP_InputField nowamount;
     public Slider slider;
     public AudioSource bgm;
     public GameObject setpanel;
@@ -19,6 +20,9 @@ public class shopmanager : MonoBehaviour
 
     private string nowbuyingitem;
     private List<string> nowgoods;
+    private int amount = 1;
+    private int totalprise = 0;
+    private int maxbuyamount = 99;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -85,12 +89,42 @@ public class shopmanager : MonoBehaviour
 
     public void openbuy(string itname)
     {
+        amount = 1;
+        nowamount.text = "" + amount;
         buypanel.SetActive(true);
         data.setnowprise(itname);
+        totalprise = data.nowprise;
         itemprise.text = "$ " + data.nowprise;
         nowbuyingitem = itname;
         itemNameText.text = itname;
         itemdisc.text = ingreddiscription.getinfo(itname);
+    }
+
+    public void plusnum(int nn)
+    {
+        amount += nn;
+        amount = Mathf.Clamp(amount, 1, maxbuyamount);
+        totalprise = amount * data.nowprise;
+        itemprise.text = "$ " + totalprise;
+        nowamount.text = "" + amount;
+    }
+
+    public void minusnum(int nn)
+    {
+        amount -= nn;
+        amount = Mathf.Clamp(amount, 1, maxbuyamount);
+        totalprise = amount * data.nowprise;
+        itemprise.text = "$ " + totalprise;
+        nowamount.text = "" + amount;
+    }
+
+    public void keyinchange(string vv)
+    {
+        if (int.TryParse(vv, out int n)) amount = Mathf.Clamp(n, 1, maxbuyamount);
+        else amount = 1;
+        totalprise = amount * data.nowprise;
+        itemprise.text = "$ " + totalprise;
+        nowamount.text = "" + amount;
     }
 
     public void closebuy()
@@ -106,14 +140,14 @@ public class shopmanager : MonoBehaviour
 
     public void AddItem()
     {
-        if (data.money < data.nowprise) return;
-        data.money -= data.nowprise;
+        if (data.money < totalprise) return;
+        data.money -= totalprise;
         show.text = "" + data.money;
 
         data.ingreds_data isexist = data.inbag.Find(x => x.name == nowbuyingitem);
         if (isexist != null)
         {
-            isexist.quantity++;
+            isexist.quantity += amount;
             GameObject numup = pool.pool.Find(obj => obj.GetComponent<ingredient>().thename == nowbuyingitem);
             if (numup != null)
                 numup.GetComponent<ingredient>().updatenum(isexist.quantity);
@@ -123,7 +157,7 @@ public class shopmanager : MonoBehaviour
             data.inbag.Add(new data.ingreds_data(nowbuyingitem));
 
             GameObject uiObj = pool.GetObject();
-            uiObj.GetComponent<ingredient>().setingredient(nowbuyingitem, 1);
+            uiObj.GetComponent<ingredient>().setingredient(nowbuyingitem, amount);
         }
     }
 }
