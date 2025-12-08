@@ -55,7 +55,6 @@ public class IngredientManager : MonoBehaviour
                 // 設定 Slot 的初始數據
                 slot.ingredientName = ingredData.name;
                 slot.count = ingredData.quantity;
-                slot.ingredientCardPrefab = Resources.Load<GameObject>("cardprefebs/" + ingredData.name);
                 
                 activeSlots.Add(slot);
                 

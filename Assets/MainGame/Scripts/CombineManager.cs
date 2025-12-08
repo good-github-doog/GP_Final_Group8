@@ -6,6 +6,7 @@ public class CombineManager : MonoBehaviour
 {
     public CombineArea combineArea;
     //public GameObject cardPrefab;
+    public GameObject resultPrefab;
 
     [System.Serializable]
     public class IngredientPrefab
@@ -99,9 +100,16 @@ public class CombineManager : MonoBehaviour
                 Destroy(child.gameObject);
             }
             combineArea.ingredientsInArea.Clear();
+            combineArea.ingredstypeInArea.Clear();
+
+            GameObject newCard = Instantiate(resultPrefab, combineArea.transform);
+            FoodCard card = newCard.GetComponent<FoodCard>();
+            card.setup(resultName);
+            card.foodName = resultName;
 
             // 4️⃣ 在合成區生成新卡
             // 4️⃣ 在合成區生成新卡（根據結果名稱決定用哪個 Prefab）
+            /*
             if (prefabDict.TryGetValue(resultName, out GameObject resultPrefab))
             {
                 GameObject newCard = Instantiate(resultPrefab, combineArea.transform);
@@ -118,7 +126,7 @@ public class CombineManager : MonoBehaviour
             {
                 Debug.LogError($"找不到 {resultName} 對應的 Prefab！");
             }
-
+            */
         }
         else
         {

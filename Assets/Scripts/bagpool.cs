@@ -21,6 +21,7 @@ public class bagpool : MonoBehaviour
 
     void Awake()
     {
+        if (ingredient_prefeb == null) return;
         for (int i = 0; i < inipoolsize; i++)
         {
             GameObject obj = Instantiate(ingredient_prefeb, transform);

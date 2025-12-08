@@ -9,6 +9,12 @@ public class FoodCard : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
     private Transform originalParent;
     private RectTransform rectTransform;
 
+    public void setup(string name)
+    {
+        Image foodpic = transform.Find("content").GetComponent<Image>();
+        foodpic.sprite = data.GetSprite("donefoods/" + name);
+    }
+
     private void Awake()
     {
         rectTransform = GetComponent<RectTransform>();

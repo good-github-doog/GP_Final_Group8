@@ -26,6 +26,7 @@ public class CombineArea : MonoBehaviour, IDropHandler
         //Debug.Log($"[ClearArea] 開始清除，當前子物件數量: {transform.childCount}");
 
         ingredientsInArea.Clear();
+        ingredstypeInArea.Clear();
 
         foreach (Transform child in transform)
         {

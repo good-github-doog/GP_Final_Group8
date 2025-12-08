@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class IngredientCard : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
@@ -18,6 +19,8 @@ public class IngredientCard : MonoBehaviour, IBeginDragHandler, IDragHandler, IE
         sourceSlot = slot;
         ingredientName = name;
         ingredinetType = data.gettype(name);
+        Image foodpic = transform.Find("content").GetComponent<Image>();
+        foodpic.sprite = data.GetSprite(name);
     }
 
     private void Awake()
