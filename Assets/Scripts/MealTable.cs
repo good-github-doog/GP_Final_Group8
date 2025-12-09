@@ -15,4 +15,18 @@ public static class MealTable
         {"grilllobimp", 22}, {"gumbo", 23}, {"doublesaucesteak", 24},
         {"chaos", 25}
     };
+
+    public static Dictionary<int, string> OrderText = new Dictionary<int, string>()
+    {
+        {0, "beef burger..."}, {1, "burger with pig"}, {2, "fish burger ?"}, {3, "burger...but shrimp"}, {4, "higher level of shrimp burger.."}, {5, "i want steak...but still burger"},
+        {6, "beef sand..."}, {7, "sand with pig"}, {8, "fish sand ?"}, {9, "sand...but shrimp"}, {10, "higher level of shrimp sand.."}, {11, "i want steak...but still sand"},
+        {12, "salad with no doctor"}, {13, "green salad"}, {14, "toto salad"}, {15, "yello ..lad"},
+        {16, "juice ??"}, {17, "juice??"},
+        
+        {18, "classic marg.."}, {19, "exotic one.."}, {20, "seeeaaa foooood~~"},
+        {21, "something special..."},
+
+        {22, "lobimp ?"}, {23, "some soup.."}, {24, "steak...with sauce"},
+        {25, "Chaos~!>?~!<"}
+    };
 }

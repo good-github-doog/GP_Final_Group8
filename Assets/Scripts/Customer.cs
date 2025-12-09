@@ -315,16 +315,9 @@ public class Customer : MonoBehaviour
         if (burgerRecipeUI != null) burgerRecipeUI.SetActive(false);
         if (salmonRecipeUI != null) salmonRecipeUI.SetActive(false);
 
-        if (expectedMealIndex == 0)
-        {
-            therecipe.text = "beef burger...";
-            if (burgerRecipeUI != null) burgerRecipeUI.SetActive(true);
-        }
-        else if (expectedMealIndex == 8)
-        {
-            therecipe.text = "some kind of sand...";
-            if (burgerRecipeUI != null) burgerRecipeUI.SetActive(true);
-        }
+        MealTable.OrderText.TryGetValue(expectedMealIndex, out string ordering);
+        therecipe.text = ordering;
+        if (burgerRecipeUI != null) burgerRecipeUI.SetActive(true);
     }
 
     public void OnFoodServed(bool isCorrect)

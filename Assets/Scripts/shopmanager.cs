@@ -91,7 +91,7 @@ public class shopmanager : MonoBehaviour
     {
         amount = 1;
         nowamount.text = "" + amount;
-        buypanel.SetActive(true);
+        if (!buypanel.activeSelf) buypanel.SetActive(true);
         data.setnowprise(itname);
         totalprise = data.nowprise;
         itemprise.text = "$ " + data.nowprise;
@@ -154,7 +154,7 @@ public class shopmanager : MonoBehaviour
         }
         else
         {
-            data.inbag.Add(new data.ingreds_data(nowbuyingitem));
+            data.inbag.Add(new data.ingreds_data(nowbuyingitem, amount));
 
             GameObject uiObj = pool.GetObject();
             uiObj.GetComponent<ingredient>().setingredient(nowbuyingitem, amount);

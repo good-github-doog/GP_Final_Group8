@@ -30,10 +30,10 @@ public static class data
         public int quantity;
         public string type;
 
-        public ingreds_data(string nn)
+        public ingreds_data(string nn, int n)
         {
             name = nn;
-            quantity = 1;
+            quantity = n;
             typemap.TryGetValue(nn, out type);
         }
     }

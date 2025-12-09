@@ -242,10 +242,7 @@ public class CustomerManager : MonoBehaviour
         }
         else
         {
-            data.ingreds_data newIngredient = new data.ingreds_data(ingredientName)
-            {
-                quantity = 1
-            };
+            data.ingreds_data newIngredient = new data.ingreds_data(ingredientName, 1);
             data.inbag.Add(newIngredient);
         }
 
