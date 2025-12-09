@@ -40,12 +40,39 @@ public static class data
 
     public static int money = 1000;
     public static int nowprise = 0;
+
+    // ▶ 一天開始時的金額
+    public static int dayStartMoney = 1000;
+
+    // ▶ 今日收支細項
+    public static int costIngredients = 0; // 買材料花費
+    public static int incomeServe     = 0; // 正確送餐收入
+    public static int penaltyWrong    = 0; // 送錯 / 其他失誤扣錢
+    public static int penaltyKill     = 0; // 殺顧客扣錢
+    public static int penaltyOther    = 0; // 其他想加的懲罰
     public static float bgmvol = 1f;
     public static List<ingreds_data> inbag = new List<ingreds_data>();
     public static int killCountToday = 0;
     public static int killCountYesterday = 0;
     public static int clearstage = 1;
     public static int nowstage = 1;
+
+    // ===========================
+    // ▶ 開始「新的一天」時呼叫
+    // ===========================
+    public static void BeginNewDay()
+    {
+        dayStartMoney   = money;
+
+        costIngredients = 0;
+        incomeServe     = 0;
+        penaltyWrong    = 0;
+        penaltyKill     = 0;
+        penaltyOther    = 0;
+
+        killCountYesterday = killCountToday;
+        killCountToday     = 0;
+    }
 
     public static void reset()
     {
