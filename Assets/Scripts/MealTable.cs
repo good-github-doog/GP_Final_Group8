@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using UnityEngine;
 
 public static class MealTable
 {
@@ -29,4 +30,14 @@ public static class MealTable
         {22, "lobimp ?"}, {23, "some soup.."}, {24, "steak...with sauce"},
         {25, "Chaos~!>?~!<"}
     };
+
+    private static Dictionary<string, GameObject> foodprefebs = new Dictionary<string, GameObject>();
+    public static GameObject GetFood(string path)
+    {
+        if (foodprefebs.TryGetValue(path, out GameObject pf)) return pf;
+        
+        pf = Resources.Load<GameObject>(path);
+        if (pf != null) foodprefebs[path] = pf;
+        return pf;
+    }
 }

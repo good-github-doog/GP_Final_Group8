@@ -46,9 +46,16 @@ public class FoodArea : MonoBehaviour, IDropHandler
     {
         FoodCard card = eventData.pointerDrag.GetComponent<FoodCard>();
         if (card == null) return;
-
+/*
         if (!prefabDict.TryGetValue(card.foodName, out GameObject prefabToUse))
         {
+            Debug.LogError($"找不到對應的食物 Prefab：{card.foodName}");
+            return;
+        }
+*/
+        GameObject prefabToUse = null;
+        prefabToUse = MealTable.GetFood("foodprefebs/" + card.foodName);
+        if (prefabToUse == null){
             Debug.LogError($"找不到對應的食物 Prefab：{card.foodName}");
             return;
         }
