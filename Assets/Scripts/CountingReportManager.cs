@@ -58,17 +58,17 @@ public class CountingReportManager : MonoBehaviour
         if (dateText != null)
         {
             // 先簡單用系統日期，你也可以自己傳字串進來
-            dateText.text = "today's date";
+            dateText.text = "Day " + data.daynumber;
         }
 
         if (incomeText != null)
         {
-            incomeText.text = $"收入：+{incomeValue}";
+            incomeText.text = $"+{incomeValue}";
         }
 
         if (penaltyText != null)
         {
-            penaltyText.text = $"懲罰：-{penaltyValue}";
+            penaltyText.text = $"-{penaltyValue}";
         }
 
         if (netText != null)

@@ -41,6 +41,7 @@ public static class data
     public static int money = 1000;
     public static int nowprise = 0;
 
+    public static int daynumber = 1;
     // ▶ 一天開始時的金額
     public static int dayStartMoney = 1000;
 
