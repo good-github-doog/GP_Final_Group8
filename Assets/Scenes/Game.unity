@@ -3271,8 +3271,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 169531756}
   m_HandleRect: {fileID: 169531755}
   m_Direction: 0
-  m_Value: 0
-  m_Size: 0.99999994
+  m_Value: 1
+  m_Size: 0.9999998
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -4028,6 +4028,7 @@ MonoBehaviour:
   customerPrefabs:
   - {fileID: 1783674938678670017, guid: 08f41db095c5ba04ab830a0c799469e3, type: 3}
   - {fileID: 8483565010245126895, guid: f103c3b6b2074a749a74e54116f35c1f, type: 3}
+  - {fileID: 8483565010245126895, guid: 085d4cc387586504aa2d4f14a20065c1, type: 3}
   - {fileID: 6691817358236258769, guid: b34b04ed1b195014c89ae336db3af1e7, type: 3}
   spawnPoint: {fileID: 807128602}
   customerSpots:
