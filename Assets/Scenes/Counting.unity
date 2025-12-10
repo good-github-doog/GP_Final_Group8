@@ -1039,7 +1039,7 @@ GameObject:
   - component: {fileID: 797628241}
   - component: {fileID: 797628240}
   m_Layer: 5
-  m_Name: outcome
+  m_Name: income
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1430,8 +1430,8 @@ MonoBehaviour:
   penaltyBar: {fileID: 1865447330}
   maxBarHeight: 150
   dateText: {fileID: 26679259}
-  incomeText: {fileID: 1388627795}
-  penaltyText: {fileID: 797628240}
+  incomeText: {fileID: 797628240}
+  penaltyText: {fileID: 1388627795}
   netText: {fileID: 0}
   incomeValue: 1000
   penaltyValue: 1000
@@ -2024,7 +2024,7 @@ GameObject:
   - component: {fileID: 1388627796}
   - component: {fileID: 1388627795}
   m_Layer: 5
-  m_Name: income
+  m_Name: outcome
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
