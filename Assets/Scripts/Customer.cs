@@ -336,14 +336,17 @@ public class Customer : MonoBehaviour
 
         if (isCorrect)
         {
-            data.money += 200;
-            data.incomeServe += 200;   // 🔸記錄服務收入
+            int price = MealTable.GetPrice(expectedMealIndex);
+            data.money += price;
+            data.incomeServe += price;   // 🔸記錄服務收入
+            print("[Customer] 顧客收到正確餐點，獲得收入: " + price);
         }
         else
         {
             data.money -= 100;
             data.penaltyWrong += 100;   // 🔸記錄送錯餐罰款
             if (data.money < 0) data.money = 0;
+            print("[Customer] 顧客收到錯誤餐點，扣除罰款: 100");
         }
 
         GameManager gm = FindAnyObjectByType<GameManager>();

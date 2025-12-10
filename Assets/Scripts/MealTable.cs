@@ -31,6 +31,56 @@ public static class MealTable
         {25, "Chaos~!>?~!<"}
     };
 
+    // 🔹 每一道料理的售價（自己改成你要的數字）
+    public static Dictionary<int, int> MealPrice = new Dictionary<int, int>()
+    {
+        {0, 80},   // beefburger
+        {1, 75},   // porkburger
+        {2, 90},   // salmonburger
+        {3, 85},   // shrimpburger
+        {4, 120},  // lobsterburger
+        {5, 130},  // steakburger
+
+        {6, 70},   // beefsandwich
+        {7, 65},   // porksandwich
+        {8, 80},   // salmonsandwich
+        {9, 78},   // shrimpsandwich
+        {10, 110}, // lobstersandwich
+        {11, 115}, // steaksandwich
+
+        {12, 50},  // applesalad
+        {13, 55},  // kiwisalad
+        {14, 55},  // tomatosalad
+        {15, 60},  // pineapplesalad
+
+        {16, 40},  // meatjuice
+        {17, 45},  // seafoodjuice
+
+        {18, 90},  // margheritapizza
+        {19, 100}, // hawaiipizza
+        {20, 120}, // seafoodpizza
+        {21, 140}, // rawsealandpizza
+
+        {22, 130}, // grilllobimp
+        {23, 95},  // gumbo
+        {24, 150}, // doublesaucesteak
+
+        {25, 999}  // chaos (想搞笑就超貴🤣)
+    };
+
+    public static int GetPrice(int mealId)
+    {
+        return MealPrice.TryGetValue(mealId, out int price) ? price : 0;
+    }
+
+    // 依照「料理名稱字串」拿價格
+    public static int GetPrice(string mealName)
+    {
+        if (MealMap.TryGetValue(mealName, out int id))
+            return GetPrice(id);
+        return 0;
+    }
+
     private static Dictionary<string, GameObject> foodprefebs = new Dictionary<string, GameObject>();
     public static GameObject GetFood(string path)
     {
