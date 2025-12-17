@@ -79,7 +79,22 @@ public class FoodArea : MonoBehaviour, IDropHandler
 
         Debug.Log($"[FoodArea] 食物 '{foodName}' → 編號 {foodIndex}");
 
-        bool isCorrect = foodIndex == expectedMealIndex;
+        // 使用 MealTable 的匹配方法（支援 Any Burger/Sandwich/Pizza）
+        bool isCorrect = MealTable.IsMealMatch(foodName, expectedMealIndex);
+
+        // 顯示匹配結果
+        if (expectedMealIndex == MealTable.ANY_BURGER)
+        {
+            Debug.Log($"[FoodArea] 顧客點了 Any Burger，提供了 {foodName}");
+        }
+        else if (expectedMealIndex == MealTable.ANY_SANDWICH)
+        {
+            Debug.Log($"[FoodArea] 顧客點了 Any Sandwich，提供了 {foodName}");
+        }
+        else if (expectedMealIndex == MealTable.ANY_PIZZA)
+        {
+            Debug.Log($"[FoodArea] 顧客點了 Any Pizza，提供了 {foodName}");
+        }
 
         Debug.Log(isCorrect ? "✔ Food is correctly served!" : "✘ Food is incorrectly served!");
 

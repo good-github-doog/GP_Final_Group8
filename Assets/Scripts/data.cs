@@ -46,6 +46,7 @@ public static class data
     public static int killCountYesterday = 0;
     public static int clearstage = 1;
     public static int nowstage = 1;
+    public static int isPanicMode = 0; // 0 = normal, 1 = panic (killing event occurred)
 
     public static void reset()
     {

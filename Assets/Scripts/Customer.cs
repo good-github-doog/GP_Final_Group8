@@ -199,6 +199,25 @@ public class Customer : MonoBehaviour
 
     void Update()
     {
+        // Check if panic mode is active and customer hasn't arrived at seat yet
+        // If customer is outside (not yet seated), remove immediately
+        if (data.isPanicMode == 1 && !hasArrived && !isLeaving)
+        {
+            Debug.Log("[Customer] Panic mode detected! Customer outside restaurant, removing immediately.");
+
+            // Release the assigned spot
+            if (assignedSpot != null)
+            {
+                assignedSpot.ReleaseSpot();
+                assignedSpot = null;
+                CustomerManager.Instance.NotifyCustomerLeft();
+            }
+
+            // Remove immediately (no need to walk to leave point)
+            CustomerManager.Instance.RemoveCustomer(this);
+            return;
+        }
+
         DetectAndResolveStuck();
 
         // 檢查等待計時器
@@ -242,8 +261,9 @@ public class Customer : MonoBehaviour
 
         if (isFollowingWaypoints)
         {
-            // 放寬判斷條件
-            bool shouldProceed = !agent.pathPending &&
+            // 放寬判斷條件 - 添加 agent 有效性檢查
+            bool shouldProceed = agent != null && agent.enabled && agent.isOnNavMesh &&
+                               !agent.pathPending &&
                                agent.remainingDistance <= agent.stoppingDistance + 0.5f;
 
             if (shouldProceed)
@@ -263,8 +283,9 @@ public class Customer : MonoBehaviour
 
         if (!isLeaving && !hasArrived && targetSpot != null && !isFollowingWaypoints)
         {
-            // 簡化到達判斷條件
-            if (!agent.pathPending && agent.remainingDistance <= agent.stoppingDistance + 0.2f)
+            // 簡化到達判斷條件 - 添加 agent 有效性檢查
+            if (agent != null && agent.enabled && agent.isOnNavMesh &&
+                !agent.pathPending && agent.remainingDistance <= agent.stoppingDistance + 0.2f)
             {
                 OnReachedSpot();
             }
@@ -272,8 +293,9 @@ public class Customer : MonoBehaviour
 
         if (isLeaving && !isFollowingWaypoints)
         {
-            // 簡化離開判斷條件
-            if (!agent.pathPending && agent.remainingDistance <= leaveDistanceThreshold)
+            // 簡化離開判斷條件 - 添加 agent 有效性檢查
+            if (agent != null && agent.enabled && agent.isOnNavMesh &&
+                !agent.pathPending && agent.remainingDistance <= leaveDistanceThreshold)
             {
                 CustomerManager.Instance.RemoveCustomer(this);
             }

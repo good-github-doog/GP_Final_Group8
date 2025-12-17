@@ -32,7 +32,10 @@ public class CustomerManager : MonoBehaviour
     public float panicPointOffset = 2f;
 
     private Dictionary<Transform, int> panicPointUsageCount = new Dictionary<Transform, int>();
-    private int currentPanicCustomerCount = 0;
+
+    // Panic timer for force cleanup
+    private float panicStartTime = 0f;
+    private const float panicForceCleanupTime = 10f;
 
     // ==================== INPUT CONFIGURATION ====================
     [Header("Input Configuration")]
@@ -51,6 +54,7 @@ public class CustomerManager : MonoBehaviour
     {
         HandlePlayerInput();
         HandleCustomerSpawning();
+        HandlePanicCleanup();
     }
 
     // ==================== INPUT HANDLING ====================
@@ -171,6 +175,10 @@ public class CustomerManager : MonoBehaviour
             yield break;
         }
 
+        // Set panic mode when killing occurs
+        data.isPanicMode = 1;
+        Debug.Log("[CustomerManager] Panic mode activated!");
+
         TriggerPanicForOtherCustomers(spotIndex);
 
         // 閃爍5秒
@@ -262,6 +270,9 @@ public class CustomerManager : MonoBehaviour
         int panicCount = 0;
         float delayIncrement = 0.5f;
 
+        // Start panic timer for force cleanup
+        panicStartTime = Time.time;
+
         for (int i = 0; i < customerSpots.Count; i++)
         {
             if (i != excludeSpotIndex && customerSpots[i].IsOccupied && customerSpots[i].CurrentCustomer != null)
@@ -273,15 +284,14 @@ public class CustomerManager : MonoBehaviour
             }
         }
 
-        currentPanicCustomerCount += panicCount;
-        Debug.Log($"[CustomerManager] Customer killed. {panicCount} other customers triggered to panic.");
+        Debug.Log($"[CustomerManager] Customer killed. {panicCount} other customers triggered to panic. Timer started.");
     }
 
     // ==================== SPAWN SYSTEM ====================
     private void HandleCustomerSpawning()
     {
         if (isAllSpotsFull) return;
-        if (currentPanicCustomerCount > 0) return;
+        if (data.isPanicMode == 1) return; // Don't spawn during panic mode
 
         spawnTimer += Time.deltaTime;
         if (spawnTimer >= spawnInterval)
@@ -363,16 +373,16 @@ public class CustomerManager : MonoBehaviour
     {
         if (customer != null)
         {
-            if (customer.IsPanicking())
-            {
-                currentPanicCustomerCount--;
-                currentPanicCustomerCount = Mathf.Max(0, currentPanicCustomerCount);
-            }
-
             Destroy(customer.gameObject);
         }
 
         isAllSpotsFull = false;
+
+        // Check if panic mode is active and no customers remain
+        if (data.isPanicMode == 1)
+        {
+            CheckAndDeactivatePanicMode();
+        }
     }
 
     public void NotifyCustomerLeft()
@@ -402,8 +412,6 @@ public class CustomerManager : MonoBehaviour
         {
             yield break;
         }
-
-        customer.SetPanicking(true);
 
         UnityEngine.AI.NavMeshAgent agent = customer.GetComponent<UnityEngine.AI.NavMeshAgent>();
         if (agent == null)
@@ -460,6 +468,8 @@ public class CustomerManager : MonoBehaviour
                 yield return new WaitUntil(() =>
                     customer == null ||
                     agent == null ||
+                    !agent.enabled ||
+                    !agent.isOnNavMesh ||
                     (!agent.pathPending && agent.remainingDistance <= agent.stoppingDistance + 0.5f)
                 );
 
@@ -563,5 +573,56 @@ public class CustomerManager : MonoBehaviour
             originalPosition.y,
             originalPosition.z + randomZ
         );
+    }
+
+    // ==================== PANIC CLEANUP SYSTEM ====================
+    private void HandlePanicCleanup()
+    {
+        // Check if panic mode is active and force cleanup timer has expired
+        if (data.isPanicMode == 1 && Time.time - panicStartTime >= panicForceCleanupTime)
+        {
+            Debug.Log("[CustomerManager] Panic cleanup timer expired! Force removing all customers.");
+            ForceRemoveAllCustomers();
+        }
+    }
+
+    private void CheckAndDeactivatePanicMode()
+    {
+        // Count remaining customers in the scene
+        Customer[] remainingCustomers = FindObjectsByType<Customer>(FindObjectsSortMode.None);
+
+        if (remainingCustomers.Length == 0)
+        {
+            data.isPanicMode = 0;
+            Debug.Log("[CustomerManager] All customers left. Panic mode deactivated!");
+        }
+    }
+
+    private void ForceRemoveAllCustomers()
+    {
+        Customer[] allCustomers = FindObjectsByType<Customer>(FindObjectsSortMode.None);
+
+        Debug.Log($"[CustomerManager] Force removing {allCustomers.Length} stuck customers.");
+
+        foreach (Customer customer in allCustomers)
+        {
+            if (customer != null)
+            {
+                Destroy(customer.gameObject);
+            }
+        }
+
+        // Reset all spots
+        foreach (CustomerSpot spot in customerSpots)
+        {
+            if (spot.IsOccupied)
+            {
+                spot.ReleaseSpot();
+            }
+        }
+
+        isAllSpotsFull = false;
+        data.isPanicMode = 0;
+        Debug.Log("[CustomerManager] All customers force removed. Panic mode deactivated!");
     }
 }

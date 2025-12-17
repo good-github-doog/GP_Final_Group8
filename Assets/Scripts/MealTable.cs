@@ -3,6 +3,11 @@ using UnityEngine;
 
 public static class MealTable
 {
+    // 特殊類型號碼（用於 "Any Burger", "Any Sandwich", "Any Pizza"）
+    public const int ANY_BURGER = -1;
+    public const int ANY_SANDWICH = -2;
+    public const int ANY_PIZZA = -3;
+
     public static Dictionary<string, int> MealMap = new Dictionary<string, int>()
     {
         {"beefburger", 0}, {"porkburger", 1}, {"salmonburger", 2}, {"shrimpburger", 3}, {"lobsterburger", 4}, {"steakburger", 5},
@@ -23,21 +28,56 @@ public static class MealTable
         {6, "beef sand..."}, {7, "sand with pig"}, {8, "fish sand ?"}, {9, "sand...but shrimp"}, {10, "higher level of shrimp sand.."}, {11, "i want steak...but still sand"},
         {12, "salad with no doctor"}, {13, "green salad"}, {14, "toto salad"}, {15, "yello ..lad"},
         {16, "juice ??"}, {17, "juice??"},
-        
+
         {18, "classic marg.."}, {19, "exotic one.."}, {20, "seeeaaa foooood~~"},
         {21, "something special..."},
 
         {22, "lobimp ?"}, {23, "some soup.."}, {24, "steak...with sauce"},
-        {25, "Chaos~!>?~!<"}
+        {25, "Chaos~!>?~!<"},
+
+        // Any 類型訂單
+        {ANY_BURGER, "Any burger...surprise me!"},
+        {ANY_SANDWICH, "Any sandwich is fine~"},
+        {ANY_PIZZA, "Give me any pizza!"}
     };
 
     private static Dictionary<string, GameObject> foodprefebs = new Dictionary<string, GameObject>();
     public static GameObject GetFood(string path)
     {
         if (foodprefebs.TryGetValue(path, out GameObject pf)) return pf;
-        
+
         pf = Resources.Load<GameObject>(path);
         if (pf != null) foodprefebs[path] = pf;
         return pf;
+    }
+
+    // 檢查餐點是否符合期望的類型（支援 Any Burger/Sandwich/Pizza）
+    public static bool IsMealMatch(string foodName, int expectedMealIndex)
+    {
+        // 直接匹配
+        if (MealMap.TryGetValue(foodName, out int foodIndex) && foodIndex == expectedMealIndex)
+        {
+            return true;
+        }
+
+        // 檢查 "Any Burger"
+        if (expectedMealIndex == ANY_BURGER && foodName.EndsWith("burger"))
+        {
+            return MealMap.ContainsKey(foodName);
+        }
+
+        // 檢查 "Any Sandwich"
+        if (expectedMealIndex == ANY_SANDWICH && foodName.EndsWith("sandwich"))
+        {
+            return MealMap.ContainsKey(foodName);
+        }
+
+        // 檢查 "Any Pizza"
+        if (expectedMealIndex == ANY_PIZZA && foodName.EndsWith("pizza"))
+        {
+            return MealMap.ContainsKey(foodName);
+        }
+
+        return false;
     }
 }
