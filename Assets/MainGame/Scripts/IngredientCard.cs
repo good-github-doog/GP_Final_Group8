@@ -33,6 +33,11 @@ public class IngredientCard : MonoBehaviour, IBeginDragHandler, IDragHandler, IE
     public void OnBeginDrag(PointerEventData eventData)
     {
         canvasGroup.blocksRaycasts = false;
+        // 如果原本在合成區，先從清單中移除
+        if (transform.parent != null && transform.parent.TryGetComponent(out CombineArea combineArea) && droppedInCombine)
+        {
+            combineArea.RemoveIngredient(ingredientName, ingredinetType);
+        }
         droppedInCombine = false;
     }
     public void ForceBeginDrag()

@@ -2107,7 +2107,8 @@ MonoBehaviour:
   customerPrefabs:
   - {fileID: 1783674938678670017, guid: 08f41db095c5ba04ab830a0c799469e3, type: 3}
   - {fileID: 8483565010245126895, guid: f103c3b6b2074a749a74e54116f35c1f, type: 3}
-  - {fileID: 6691817358236258769, guid: b34b04ed1b195014c89ae336db3af1e7, type: 3}
+  - {fileID: 8483565010245126895, guid: 8250ec12c4c8fad499d19e930a85d1c0, type: 3}
+  - {fileID: 8483565010245126895, guid: ec37384dd6207d24489a21f0f41dd1b4, type: 3}
   spawnPoint: {fileID: 7385376780395900304}
   customerSpots:
   - {fileID: 8969404948209930314}

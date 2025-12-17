@@ -72,6 +72,7 @@ public class shopmanager : MonoBehaviour
                 break;
         }
         Debug.Log("Loading scene: " + sceneName);
+        data.BeginNewDay();
         SceneManager.LoadScene(sceneName);
     }
 
@@ -143,6 +144,7 @@ public class shopmanager : MonoBehaviour
         if (data.money < totalprise) return;
         data.money -= totalprise;
         show.text = "" + data.money;
+        data.costIngredients += data.nowprise;   // 🔸記錄材料花費
 
         data.ingreds_data isexist = data.inbag.Find(x => x.name == nowbuyingitem);
         if (isexist != null)

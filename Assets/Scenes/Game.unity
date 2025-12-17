@@ -1306,7 +1306,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2bd4c4327016504cb4a9f00d1b92ca4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CombineManager
-  combineArea: {fileID: 0}
+  combineArea: {fileID: 863031835}
   resultPrefab: {fileID: 1337376406080246977, guid: ca00d19d41eacb943a90e71eab7b7f34, type: 3}
   prefabList:
   - name: porkRice
@@ -4028,6 +4028,7 @@ MonoBehaviour:
   customerPrefabs:
   - {fileID: 1783674938678670017, guid: 08f41db095c5ba04ab830a0c799469e3, type: 3}
   - {fileID: 8483565010245126895, guid: f103c3b6b2074a749a74e54116f35c1f, type: 3}
+  - {fileID: 8483565010245126895, guid: 085d4cc387586504aa2d4f14a20065c1, type: 3}
   - {fileID: 6691817358236258769, guid: b34b04ed1b195014c89ae336db3af1e7, type: 3}
   spawnPoint: {fileID: 807128602}
   customerSpots:

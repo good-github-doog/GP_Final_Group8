@@ -156,6 +156,10 @@ public class CustomerManager : MonoBehaviour
             Debug.Log("Shake Shake Shake!");
         }
 
+        data.money -= 100;
+        data.penaltyKill += 100;   // 🔸記錄殺顧客罰款
+        if (data.money < 0) data.money = 0;
+
         // 等待粒子效果播放完成
         yield return new WaitForSeconds(1.0f);
 

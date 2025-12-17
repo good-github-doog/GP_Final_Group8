@@ -21,6 +21,12 @@ public class CombineArea : MonoBehaviour, IDropHandler
         }
     }
 
+    public void RemoveIngredient(string ingredientName, string type)
+    {
+        ingredientsInArea.Remove(ingredientName);
+        ingredstypeInArea.Remove(type);
+    }
+
     public void ClearArea()
     {
         //Debug.Log($"[ClearArea] 開始清除，當前子物件數量: {transform.childCount}");
