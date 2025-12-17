@@ -36,7 +36,9 @@ public class homemanager : MonoBehaviour
     public void nextscene()
     {
         //data.nowstage = 1;
-        SceneManager.LoadScene("Shopping");
+        //SceneManager.LoadScene("Shopping");
+        IrisTransitionCutout.Instance.LoadSceneWithIris("Shopping");
+
     }
 
     public void opensetting()
