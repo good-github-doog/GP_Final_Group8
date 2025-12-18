@@ -73,7 +73,9 @@ public class shopmanager : MonoBehaviour
         }
         Debug.Log("Loading scene: " + sceneName);
         data.BeginNewDay();
-        SceneManager.LoadScene(sceneName);
+        //SceneManager.LoadScene(sceneName);
+        IrisTransitionCutout.Instance.LoadSceneWithIris(sceneName);
+
     }
 
     public void opensetting()

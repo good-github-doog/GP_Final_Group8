@@ -60,12 +60,16 @@ public class GameManager : MonoBehaviour
 
         if (timer <= 0f)
         {
-            SceneManager.LoadScene("Counting");
+            //SceneManager.LoadScene("Counting");
+            IrisTransitionCutout.Instance.LoadSceneWithIris("Counting");
+
         }
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            SceneManager.LoadScene("Counting");
+            //SceneManager.LoadScene("Counting");
+            IrisTransitionCutout.Instance.LoadSceneWithIris("Counting");
+
         }
     }
 

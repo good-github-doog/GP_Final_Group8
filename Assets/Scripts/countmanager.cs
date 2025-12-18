@@ -25,7 +25,8 @@ public class countmanager : MonoBehaviour
     public void nextscene(string sc)
     {
         data.daynumber += 1;
-        SceneManager.LoadScene(sc);
+        //SceneManager.LoadScene(sc);
+        IrisTransitionCutout.Instance.LoadSceneWithIris(sc);
     }
 
     public void opensetting()
