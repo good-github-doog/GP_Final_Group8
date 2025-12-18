@@ -47,37 +47,62 @@ public static class data
 
     // ▶ 今日收支細項
     public static int costIngredients = 0; // 買材料花費
-    public static int incomeServe     = 0; // 正確送餐收入
-    public static int penaltyWrong    = 0; // 送錯 / 其他失誤扣錢
-    public static int penaltyKill     = 0; // 殺顧客扣錢
-    public static int penaltyOther    = 0; // 其他想加的懲罰
+    public static int incomeServe = 0; // 正確送餐收入
+    public static int penaltyWrong = 0; // 送錯 / 其他失誤扣錢
+    public static int penaltyKill = 0; // 殺顧客扣錢
+    public static int penaltyOther = 0; // 其他想加的懲罰
     public static float bgmvol = 1f;
     public static List<ingreds_data> inbag = new List<ingreds_data>();
     public static int killCountToday = 0;
     public static int killCountYesterday = 0;
     public static int clearstage = 1;
     public static int nowstage = 1;
+    public static int isPanicMode = 0; // 0 = normal, 1 = panic (killing event occurred)
+
+    // 地獄料理完成狀態 [Stage1, Stage2, Stage3]
+    public static bool[] hasCompletedStageHellCuisine = new bool[3] { false, false, false };
 
     // ===========================
     // ▶ 開始「新的一天」時呼叫
     // ===========================
     public static void BeginNewDay()
     {
-        dayStartMoney   = money;
+        dayStartMoney = money;
 
         costIngredients = 0;
-        incomeServe     = 0;
-        penaltyWrong    = 0;
-        penaltyKill     = 0;
-        penaltyOther    = 0;
+        incomeServe = 0;
+        penaltyWrong = 0;
+        penaltyKill = 0;
+        penaltyOther = 0;
 
         killCountYesterday = killCountToday;
-        killCountToday     = 0;
+        killCountToday = 0;
     }
 
+    // 檢查是否達到遊戲結束條件（3次擊殺）
+    public static bool IsGameOver()
+    {
+        return (killCountYesterday + killCountToday >= 3);
+    }
+
+    // 重置遊戲數據到初始狀態
     public static void reset()
     {
-        // val = 10;
+        money = 1000;
+        inbag.Clear();
+        killCountToday = 0;
+        killCountYesterday = 0;
+        daynumber = 1;
+        dayStartMoney = 1000;
+        costIngredients = 0;
+        incomeServe = 0;
+        penaltyWrong = 0;
+        penaltyKill = 0;
+        penaltyOther = 0;
+        clearstage = 1;
+        nowstage = 1;
+        isPanicMode = 0;
+        hasCompletedStageHellCuisine = new bool[3] { false, false, false };
     }
 
     public static string gettype(string tar)
@@ -109,12 +134,12 @@ public static class data
     public static Dictionary<int, List<string>> goodsmap = new Dictionary<int, List<string>>() {
         {1, stage1goods}, {2, stage2goods}, {3, stage3goods}
     };
-    
+
     private static Dictionary<string, Sprite> piccache = new Dictionary<string, Sprite>();
     public static Sprite GetSprite(string path)
     {
         if (piccache.TryGetValue(path, out Sprite sp)) return sp;
-        
+
         sp = Resources.Load<Sprite>(path);
         if (sp != null) piccache[path] = sp;
         return sp;

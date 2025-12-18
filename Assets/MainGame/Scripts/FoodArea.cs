@@ -79,7 +79,8 @@ public class FoodArea : MonoBehaviour, IDropHandler
 
         Debug.Log($"[FoodArea] 食物 '{foodName}' → 編號 {foodIndex}");
 
-        bool isCorrect = foodIndex == expectedMealIndex;
+        // 使用 MealTable 的匹配方法
+        bool isCorrect = MealTable.IsMealMatch(foodName, expectedMealIndex);
 
         Debug.Log(isCorrect ? "✔ Food is correctly served!" : "✘ Food is incorrectly served!");
 

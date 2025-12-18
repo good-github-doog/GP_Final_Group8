@@ -40,6 +40,13 @@ public class CustomerSpot : MonoBehaviour
     private int[] stmenu = {0,1,2,6,7,8,12};
     private int[] stall = {0,1,2,3,5,6,7,8,9,11,12,14,15};
     private int[] stneedkill = {4,10,13};
+
+    // Stage 2 的餐點
+    private int[] stage2Meals = {18, 19, 20};
+
+    // Stage 3 的餐點
+    private int[] stage3Meals = {23, 24};
+
     private void GenerateMealRequest()
     {
         float hellweight = 0.05f;
@@ -57,13 +64,13 @@ public class CustomerSpot : MonoBehaviour
         else if (data.nowstage == 2)
         {
             if (r < hellweight) wantedMeal = 21;
-            else wantedMeal = Random.Range(18,21);
+            else wantedMeal = stage2Meals[Random.Range(0, stage2Meals.Length)];
         }
         else if (data.nowstage == 3)
         {
             if (r < hellweight) wantedMeal = 25;
             else if (rr < needkillweight) wantedMeal = 22;
-            else wantedMeal = Random.Range(23,25);
+            else wantedMeal = stage3Meals[Random.Range(0, stage3Meals.Length)];
         }
 
         if (myFoodArea != null)

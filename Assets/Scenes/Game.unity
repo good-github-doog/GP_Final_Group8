@@ -1413,7 +1413,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4183d9008e500d544b2c95fefac68222, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::bagpool
-  ingredient_prefeb: {fileID: 0}
+  prefeb: {fileID: 0}
+  inipoolsize: 15
   pool: []
 --- !u!114 &563620792
 MonoBehaviour:
@@ -2016,7 +2017,7 @@ Transform:
   m_GameObject: {fileID: 807128601}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.01, y: 0.25, z: 10.68}
+  m_LocalPosition: {x: 0.01, y: 2, z: 10.68}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4080,7 +4081,7 @@ MonoBehaviour:
   m_OverrideTileSize: 0
   m_TileSize: 256
   m_OverrideVoxelSize: 0
-  m_VoxelSize: 0.16666667
+  m_VoxelSize: 0.23333333
   m_MinRegionArea: 2
   m_NavMeshData: {fileID: 23800000, guid: 2f915aa2c635276439447e55ab0e6eff, type: 2}
   m_BuildHeightMesh: 0

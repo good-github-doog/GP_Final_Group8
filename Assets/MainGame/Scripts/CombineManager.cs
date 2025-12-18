@@ -83,6 +83,7 @@ public class CombineManager : MonoBehaviour
         }
     }
 
+
     public void OnCombineButtonClicked()
     {
         //if (combineArea.ingredientsInArea.Count < 2) return;
@@ -97,9 +98,15 @@ public class CombineManager : MonoBehaviour
         string resultbytype = null;
 
         // 2️⃣ 檢查配方表
-        if (recipeBook.TryGetValue(comboKey, out string resultName) || recipeBook.TryGetValue(keybytype, out resultbytype))
+        string resultName = null;
+
+        if (recipeBook.TryGetValue(comboKey, out resultName) || recipeBook.TryGetValue(keybytype, out resultbytype))
         {
             if (resultName == null) resultName = resultbytype;
+        }
+
+        if (resultName != null)
+        {
             Debug.Log($"合成成功：{resultName}");
 
             if (illustdata.isunlocked[resultName] == false)
@@ -120,6 +127,26 @@ public class CombineManager : MonoBehaviour
             FoodCard card = newCard.GetComponent<FoodCard>();
             card.setup(resultName);
             card.foodName = resultName;
+
+            // 檢查是否為地獄料理並設置完成狀態
+            if (MealTable.MealMap.TryGetValue(resultName, out int mealId))
+            {
+                if (mealId == 16 || mealId == 17) // meatjuice or seafoodjuice
+                {
+                    data.hasCompletedStageHellCuisine[0] = true;
+                    Debug.Log("完成 Stage 1 地獄料理！");
+                }
+                else if (mealId == 21) // rawsealandpizza
+                {
+                    data.hasCompletedStageHellCuisine[1] = true;
+                    Debug.Log("完成 Stage 2 地獄料理！");
+                }
+                else if (mealId == 25) // chaos
+                {
+                    data.hasCompletedStageHellCuisine[2] = true;
+                    Debug.Log("完成 Stage 3 地獄料理！");
+                }
+            }
 
             // 4️⃣ 在合成區生成新卡
             // 4️⃣ 在合成區生成新卡（根據結果名稱決定用哪個 Prefab）

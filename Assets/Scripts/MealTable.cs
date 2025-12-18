@@ -23,7 +23,7 @@ public static class MealTable
         {6, "beef sand..."}, {7, "sand with pig"}, {8, "fish sand ?"}, {9, "sand...but shrimp"}, {10, "higher level of shrimp sand.."}, {11, "i want steak...but still sand"},
         {12, "salad with no doctor"}, {13, "green salad"}, {14, "toto salad"}, {15, "yello ..lad"},
         {16, "juice ??"}, {17, "juice??"},
-        
+
         {18, "classic marg.."}, {19, "exotic one.."}, {20, "seeeaaa foooood~~"},
         {21, "something special..."},
 
@@ -85,9 +85,21 @@ public static class MealTable
     public static GameObject GetFood(string path)
     {
         if (foodprefebs.TryGetValue(path, out GameObject pf)) return pf;
-        
+
         pf = Resources.Load<GameObject>(path);
         if (pf != null) foodprefebs[path] = pf;
         return pf;
+    }
+
+    // 檢查餐點是否符合期望的類型
+    public static bool IsMealMatch(string foodName, int expectedMealIndex)
+    {
+        // 直接匹配
+        if (MealMap.TryGetValue(foodName, out int foodIndex) && foodIndex == expectedMealIndex)
+        {
+            return true;
+        }
+
+        return false;
     }
 }
