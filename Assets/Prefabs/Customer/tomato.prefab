@@ -1474,7 +1474,7 @@ GameObject:
   - component: {fileID: 4921367891268245799}
   - component: {fileID: -3304298279099756081}
   m_Layer: 0
-  m_Name: tomato
+  m_Name: Tomato
   m_TagString: Customer
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1618,9 +1618,10 @@ MonoBehaviour:
   therecipe: {fileID: 8879265673347025724}
   killEffectPrefab: {fileID: 6116557191670654606, guid: 621d6fdfd10b82a49abf7b609641afd8, type: 3}
   waitTimerSlider: {fileID: 7897316980814943411}
-  customerType: 1
+  customerType: 9
   leaveDistanceThreshold: 3
-  waitTimeLimit: 20
+  minWaitTime: 15
+  maxWaitTime: 30
 --- !u!54 &4921367891268245799
 Rigidbody:
   m_ObjectHideFlags: 0

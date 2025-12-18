@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 public enum CustomerType
 {
-    Cow, Pig, Salmon
+    Apple, Cow, CowL3, Kiwi, Lettuce, Lobster, Pig, PigL3, Pineapple, Tomato
 }
 
 public class Customer : MonoBehaviour

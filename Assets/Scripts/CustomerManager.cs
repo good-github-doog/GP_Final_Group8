@@ -230,14 +230,35 @@ public class CustomerManager : MonoBehaviour
 
         switch (customerType)
         {
+            case CustomerType.Apple:
+                ingredientName = "apple";
+                break;
             case CustomerType.Cow:
                 ingredientName = "beef";
+                break;
+            case CustomerType.CowL3:
+                ingredientName = "beef";
+                break;
+            case CustomerType.Kiwi:
+                ingredientName = "kiwi";
+                break;
+            case CustomerType.Lettuce:
+                ingredientName = "lettuce";
+                break;
+            case CustomerType.Lobster:
+                ingredientName = "lobster";
                 break;
             case CustomerType.Pig:
                 ingredientName = "pork";
                 break;
-            case CustomerType.Salmon:
-                ingredientName = "salmon";
+            case CustomerType.PigL3:
+                ingredientName = "pork";
+                break;
+            case CustomerType.Pineapple:
+                ingredientName = "pineapple";
+                break;
+            case CustomerType.Tomato:
+                ingredientName = "tomato";
                 break;
         }
 
@@ -246,19 +267,26 @@ public class CustomerManager : MonoBehaviour
         var existingIngredient = data.inbag.Find(x => x.name == ingredientName);
         //print(existingIngredient);
 
+        // 根據顧客類型決定獲得的食材數量
+        int quantityToAdd = 3; // 預設+3
+        if (customerType == CustomerType.PigL3 || customerType == CustomerType.CowL3)
+        {
+            quantityToAdd = 5; // PigL3和CowL3 +5
+        }
+
         if (existingIngredient != null)
         {
-            existingIngredient.quantity += 1;
+            existingIngredient.quantity += quantityToAdd;
         }
         else
         {
-            data.ingreds_data newIngredient = new data.ingreds_data(ingredientName, 1);
+            data.ingreds_data newIngredient = new data.ingreds_data(ingredientName, quantityToAdd);
             data.inbag.Add(newIngredient);
         }
 
         RefreshInventoryUI();
 
-        Debug.Log($"[CustomerManager] Reward given: {ingredientName} x1");
+        Debug.Log($"[CustomerManager] Reward given: {ingredientName} x{quantityToAdd}");
     }
 
     private void RefreshInventoryUI()

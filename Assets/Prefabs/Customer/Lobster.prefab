@@ -1434,9 +1434,10 @@ MonoBehaviour:
   therecipe: {fileID: 2439809071216294896}
   killEffectPrefab: {fileID: 6116557191670654606, guid: 621d6fdfd10b82a49abf7b609641afd8, type: 3}
   waitTimerSlider: {fileID: 1129530798489699045}
-  customerType: 2
+  customerType: 5
   leaveDistanceThreshold: 3
-  waitTimeLimit: 20
+  minWaitTime: 15
+  maxWaitTime: 30
 --- !u!54 &6630507034025429977
 Rigidbody:
   m_ObjectHideFlags: 0
