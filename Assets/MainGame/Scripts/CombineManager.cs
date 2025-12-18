@@ -45,7 +45,7 @@ public class CombineManager : MonoBehaviour
         {"butter+lobster+oven+pepper+pineapple+shrimp", "grilllobimp"},
         {"butter+lettuce+mixer+pepper+tomato", "gumbo"},
         {"oven+beef", "steak"}, {"mixer+mushroom+pepper", "doublesauce"}, {"doublesauce+steak", "doublesaucesteak"},
-        {"dough+fruit+meat+mixer+vegetable", "chaos"}, {"dough+fruit+mixer+seafood+vegetable", "chaos"} // hell
+        {"butter+dough+fruit+meat+mixer+vegetable", "chaos"}, {"butter+dough+fruit+mixer+seafood+vegetable", "chaos"} // hell
 
     };
 
@@ -93,6 +93,12 @@ public class CombineManager : MonoBehaviour
         {
             if (resultName == null) resultName = resultbytype;
             Debug.Log($"合成成功：{resultName}");
+
+            if (illustdata.isunlocked[resultName] == false)
+            {
+                illustdata.isunlocked[resultName] = true;
+                Debug.Log($"解鎖新料理：{resultName}");
+            }
 
             // 3️⃣ 清除舊食材
             foreach (Transform child in combineArea.transform)

@@ -14,6 +14,7 @@ public class shopmanager : MonoBehaviour
     public AudioSource bgm;
     public GameObject setpanel;
     public GameObject buypanel;
+    public GameObject illustpanel;
     public TextMeshProUGUI itemNameText;
     public bagpool pool;
     public bagpool poolforgoods;
@@ -31,6 +32,8 @@ public class shopmanager : MonoBehaviour
         bgm.volume = data.bgmvol;
         slider.onValueChanged.AddListener(setvolume);
 
+        Settoolitem("mixer");
+        if (data.nowstage >= 2 || data.clearstage >= 2) Settoolitem("oven");
         foreach (var remains in data.inbag)
         {
             if (remains.quantity == 0) continue;
@@ -139,6 +142,16 @@ public class shopmanager : MonoBehaviour
         data.bgmvol = value;
     }
 
+    public void openillust()
+    {
+        illustpanel.SetActive(true);
+    }
+
+    public void closeillust()
+    {
+        illustpanel.SetActive(false);
+    }
+
     public void AddItem()
     {
         if (data.money < totalprise) return;
@@ -160,6 +173,22 @@ public class shopmanager : MonoBehaviour
 
             GameObject uiObj = pool.GetObject();
             uiObj.GetComponent<ingredient>().setingredient(nowbuyingitem, amount);
+        }
+    }
+
+    private void Settoolitem(string toolname)
+    {
+        data.ingreds_data isexist = data.inbag.Find(x => x.name == toolname);
+        if (isexist != null)
+        {
+            isexist.quantity = maxbuyamount;
+            GameObject numup = pool.pool.Find(obj => obj.GetComponent<ingredient>().thename == toolname);
+            if (numup != null)
+                numup.GetComponent<ingredient>().updatenum(isexist.quantity);
+        }
+        else
+        {
+            data.inbag.Add(new data.ingreds_data(toolname, maxbuyamount));
         }
     }
 }

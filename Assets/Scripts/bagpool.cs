@@ -4,8 +4,8 @@ using System.Collections.Generic;
 public class bagpool : MonoBehaviour
 {
 
-    public GameObject ingredient_prefeb;
-    private int inipoolsize = 15;
+    public GameObject prefeb;
+    public int inipoolsize = 15;
     public List<GameObject> pool = new List<GameObject>();
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -21,10 +21,10 @@ public class bagpool : MonoBehaviour
 
     void Awake()
     {
-        if (ingredient_prefeb == null) return;
+        if (prefeb == null) return;
         for (int i = 0; i < inipoolsize; i++)
         {
-            GameObject obj = Instantiate(ingredient_prefeb, transform);
+            GameObject obj = Instantiate(prefeb, transform);
             obj.SetActive(false);
             pool.Add(obj);
         }
@@ -40,9 +40,8 @@ public class bagpool : MonoBehaviour
                 return obj;
             }
         }
-        GameObject newObj = Instantiate(ingredient_prefeb, transform);
+        GameObject newObj = Instantiate(prefeb, transform);
         pool.Add(newObj);
-        //newObj.thename = item;
         return newObj;
     }
 
