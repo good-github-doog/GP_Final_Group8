@@ -2425,7 +2425,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4183d9008e500d544b2c95fefac68222, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::bagpool
-  ingredient_prefeb: {fileID: 3942702037874918674, guid: 54e7a03a58a1a8d469ecb6b143c94f52, type: 3}
+  prefeb: {fileID: 0}
+  inipoolsize: 15
   pool: []
 --- !u!114 &1645290761
 MonoBehaviour:
@@ -3798,6 +3799,7 @@ GameObject:
   - component: {fileID: 5538356380189997797}
   - component: {fileID: 5814417760359149353}
   - component: {fileID: 4171747988585974014}
+  - component: {fileID: 5814417760359149354}
   m_Layer: 7
   m_Name: Cabinet
   m_TagString: Untagged
@@ -5135,6 +5137,27 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -1053093794917909690, guid: 0ecbfcb6140f4b34486ecce9150c76d6, type: 3}
+--- !u!65 &5814417760359149354
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2042320072067594623}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 2.8042648, y: 0.6779105, z: 0.32621226}
+  m_Center: {x: 0.000000005155855, y: 0.3389547, z: -0.018625744}
 --- !u!1 &5866662587138393514
 GameObject:
   m_ObjectHideFlags: 0
