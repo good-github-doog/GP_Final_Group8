@@ -8,6 +8,11 @@ public class CombineManager : MonoBehaviour
     //public GameObject cardPrefab;
     public GameObject resultPrefab;
 
+    [Header("Recipe UI")]
+    public Transform recipeListParent;   // ScrollView/Content
+    public GameObject recipeItemPrefab;  // 你的食譜 prefab（有 RecipeItemUI + Text）
+
+
     [System.Serializable]
     public class IngredientPrefab
     {
@@ -55,6 +60,9 @@ public class CombineManager : MonoBehaviour
         prefabDict = new Dictionary<string, GameObject>();
         foreach (var item in prefabList)
             prefabDict[item.name] = item.prefab;
+        
+        BuildRecipeUIForStage(data.nowstage);
+
     }
 
     void SpawnNewCard(string name)
@@ -140,5 +148,66 @@ public class CombineManager : MonoBehaviour
             combineArea.ClearArea();
         }
     }
+
+    void BuildRecipeUIForStage(int stage)
+    {
+        // 先清掉舊的 UI（換關卡時也能重建）
+        if (recipeListParent != null)
+        {
+            for (int i = recipeListParent.childCount - 1; i >= 0; i--)
+                Destroy(recipeListParent.GetChild(i).gameObject);
+        }
+
+        // 取得本關料理清單（用 resultName 去收集）
+        List<string> recipes = GetRecipesByStage(stage);
+
+        // 生成 UI
+        foreach (var r in recipes)
+        {
+            GameObject go = Instantiate(recipeItemPrefab, recipeListParent);
+            var ui = go.GetComponent<RecipeItemUI>();
+            ui.SetName(r);
+        }
+    }
+
+    // 你可以依照你 recipeBook 的註解「1/2/3」來決定分關
+    List<string> GetRecipesByStage(int stage)
+    {
+        // 這裡我用「手動分組」最直覺也最穩：把每關有哪些結果寫成 set
+        // 你如果想完全自動（從 recipeBook 解析），也可以，我下一則就能給你。
+
+        HashSet<string> stage1 = new HashSet<string>
+        {
+            "beefburger","porkburger","steakburger","shrimpburger","salmonburger","lobsterburger",
+            "beefsandwich","porksandwich","steaksandwich","shrimpsandwich","salmonsandwich","lobstersandwich",
+            "applesalad","kiwisalad","tomatosalad","pineapplesalad",
+            "meatjuice","seafoodjuice"
+        };
+
+        HashSet<string> stage2 = new HashSet<string>
+        {
+            "margheritapizza","hawaiipizza","seafoodpizza","rawsealandpizza"
+        };
+
+        HashSet<string> stage3 = new HashSet<string>
+        {
+            "grilllobimp","gumbo","steak","doublesauce","doublesaucesteak","chaos"
+        };
+
+        var results = new HashSet<string>();
+        foreach (var kv in recipeBook)
+        {
+            string result = kv.Value;
+            if (stage == 1 && stage1.Contains(result)) results.Add(result);
+            if (stage == 2 && stage2.Contains(result)) results.Add(result);
+            if (stage == 3 && stage3.Contains(result)) results.Add(result);
+        }
+
+        // 排序讓 UI 穩定
+        List<string> list = new List<string>(results);
+        list.Sort();
+        return list;
+    }
+
 
 }

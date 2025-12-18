@@ -239,6 +239,7 @@ public class CustomerManager : MonoBehaviour
         if (string.IsNullOrEmpty(ingredientName)) return;
 
         var existingIngredient = data.inbag.Find(x => x.name == ingredientName);
+        //print(existingIngredient);
 
         if (existingIngredient != null)
         {
