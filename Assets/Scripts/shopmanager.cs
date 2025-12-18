@@ -78,7 +78,6 @@ public class shopmanager : MonoBehaviour
         data.BeginNewDay();
         //SceneManager.LoadScene(sceneName);
         IrisTransitionCutout.Instance.LoadSceneWithIris(sceneName);
-
     }
 
     public void opensetting()
