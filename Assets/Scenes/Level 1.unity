@@ -5464,10 +5464,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: RecipeForLevel1
       objectReference: {fileID: 0}
-    - target: {fileID: 2709525439948727805, guid: c6e94e58ec4094c4f92b0c4e8ac3a31c, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 4782432644064587856, guid: c6e94e58ec4094c4f92b0c4e8ac3a31c, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
