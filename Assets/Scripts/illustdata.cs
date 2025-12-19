@@ -19,6 +19,16 @@ public static class illustdata
         {"hell", new List<string>(){"meatjuice", "seafoodjuice", "rawsealandpizza", "chaos"}}
     };
 
+    public static Dictionary<string, string> typedesc = new Dictionary<string, string>()
+    {
+        {"burger", "Level 1"},
+        {"sandwich", "Level 1"},
+        {"salad", "Level 1"},
+        {"pizza", "Level 2"},
+        {"highlevel", "Level 3"},
+        {"hell", "something crazy"}
+    };
+
     public static Dictionary<string, bool> isunlocked = new Dictionary<string, bool>()
     {
         {"beefburger", false}, {"porkburger", false}, {"steakburger", false}, {"shrimpburger", false}, {"salmonburger", false}, {"lobsterburger", false},
