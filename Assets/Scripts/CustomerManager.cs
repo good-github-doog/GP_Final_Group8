@@ -20,8 +20,8 @@ public class CustomerManager : MonoBehaviour
     // ==================== MOVEMENT CONFIGURATION ====================
     [Header("Movement Configuration")]
     public Transform leavePoint;
-    public Transform doorOuterPoint;  // Waypoint when entering
-    public Transform doorInnerPoint;  // Waypoint when leaving
+    public List<Transform> doorInnerPoints = new List<Transform>();  // Waypoints when entering (In step 1, In step 2, ...)
+    public List<Transform> doorOuterPoints = new List<Transform>();  // Waypoints when leaving (Out step 1, Out step 2, ...)
 
     // ==================== PANIC SYSTEM CONFIGURATION ====================
     [Header("Panic System Configuration")]
@@ -356,9 +356,16 @@ public class CustomerManager : MonoBehaviour
         GameObject customerObject = Instantiate(selectedPrefab, spawnPoint.position, Quaternion.identity);
         Customer customer = customerObject.GetComponent<Customer>();
 
-        if (doorOuterPoint != null)
+        if (doorInnerPoints != null && doorInnerPoints.Count > 0)
         {
-            List<Vector3> waypoints = new List<Vector3> { doorOuterPoint.position };
+            List<Vector3> waypoints = new List<Vector3>();
+            foreach (Transform point in doorInnerPoints)
+            {
+                if (point != null)
+                {
+                    waypoints.Add(point.position);
+                }
+            }
             customer.SetDestinationWithWaypoints(targetSpot, waypoints);
         }
         else
@@ -388,9 +395,16 @@ public class CustomerManager : MonoBehaviour
             return;
         }
 
-        if (doorInnerPoint != null)
+        if (doorOuterPoints != null && doorOuterPoints.Count > 0)
         {
-            List<Vector3> waypoints = new List<Vector3> { doorInnerPoint.position };
+            List<Vector3> waypoints = new List<Vector3>();
+            foreach (Transform point in doorOuterPoints)
+            {
+                if (point != null)
+                {
+                    waypoints.Add(point.position);
+                }
+            }
             customer.SetDestinationToLeavePointWithWaypoints(leavePoint.position, waypoints);
         }
         else
