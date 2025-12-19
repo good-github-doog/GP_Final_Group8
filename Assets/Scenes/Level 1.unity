@@ -2287,6 +2287,14 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 327621567240335335, guid: d44417cbe1f9a754ea8336c09e7f49db, type: 3}
+      propertyPath: desiredPosition.x
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 327621567240335335, guid: d44417cbe1f9a754ea8336c09e7f49db, type: 3}
+      propertyPath: desiredPosition.z
+      value: -16
+      objectReference: {fileID: 0}
     - target: {fileID: 449463304488642930, guid: d44417cbe1f9a754ea8336c09e7f49db, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -2410,6 +2418,14 @@ PrefabInstance:
     - target: {fileID: 6851443736473939339, guid: d44417cbe1f9a754ea8336c09e7f49db, type: 3}
       propertyPath: m_Name
       value: money
+      objectReference: {fileID: 0}
+    - target: {fileID: 7494823407145885186, guid: d44417cbe1f9a754ea8336c09e7f49db, type: 3}
+      propertyPath: desiredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7494823407145885186, guid: d44417cbe1f9a754ea8336c09e7f49db, type: 3}
+      propertyPath: desiredPosition.z
+      value: -16
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -5447,6 +5463,10 @@ PrefabInstance:
     - target: {fileID: 2709525439948727805, guid: c6e94e58ec4094c4f92b0c4e8ac3a31c, type: 3}
       propertyPath: m_Name
       value: RecipeForLevel1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2709525439948727805, guid: c6e94e58ec4094c4f92b0c4e8ac3a31c, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4782432644064587856, guid: c6e94e58ec4094c4f92b0c4e8ac3a31c, type: 3}
       propertyPath: m_Pivot.x

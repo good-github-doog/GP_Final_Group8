@@ -4,6 +4,8 @@ using TMPro;
 public class illustmanager : MonoBehaviour
 {
     public TextMeshProUGUI nowillustype;
+    public TextMeshProUGUI title;
+    public TextMeshProUGUI desc;
     public bagpool thepool;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -16,6 +18,12 @@ public class illustmanager : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public void updatethedesc(string ss)
+    {
+        title.text = "type : " + data.gettype(ss);
+        desc.text = ingreddiscription.getinfo(ss);
     }
 
     public void changeillustype(bool lorr)
@@ -35,10 +43,11 @@ public class illustmanager : MonoBehaviour
             child.SetActive(false);
         }
         string typekey = illustdata.illustype[illustdata.nowtype];
+        title.text = illustdata.typedesc[typekey];
         foreach (string illustname in illustdata.illustlist[typekey])
         {
             GameObject obj = thepool.GetObject();
-            obj.GetComponent<illustcard>().setillust(illustname);
+            obj.GetComponent<illustcard>().setillust(illustname, this);
         }
     }
 }

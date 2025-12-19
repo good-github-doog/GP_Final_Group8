@@ -417,7 +417,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74576a3a55dfccd40894f59d5692e8c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FoodArea
-  desiredPosition: {x: -3.2, y: 2, z: -1.8}
+  desiredPosition: {x: 2.7, y: 1, z: 0}
   prefabList:
   - name: porkRice
     prefab: {fileID: 1084129990771008315, guid: 601ce2bb23e70b54fb593cb706b59d6a, type: 3}
@@ -514,7 +514,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74576a3a55dfccd40894f59d5692e8c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FoodArea
-  desiredPosition: {x: -4.7, y: 2, z: -1.8}
+  desiredPosition: {x: 0.3, y: 1, z: 0}
   prefabList:
   - name: porkRice
     prefab: {fileID: 1084129990771008315, guid: 601ce2bb23e70b54fb593cb706b59d6a, type: 3}
@@ -1265,7 +1265,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74576a3a55dfccd40894f59d5692e8c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FoodArea
-  desiredPosition: {x: -0.4, y: 2, z: -1.8}
+  desiredPosition: {x: 7.5, y: 1, z: 0}
   prefabList:
   - name: porkRice
     prefab: {fileID: 1084129990771008315, guid: 601ce2bb23e70b54fb593cb706b59d6a, type: 3}
@@ -1415,7 +1415,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74576a3a55dfccd40894f59d5692e8c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FoodArea
-  desiredPosition: {x: -0.4, y: 2, z: -1.8}
+  desiredPosition: {x: 10.1, y: 1, z: 0}
   prefabList:
   - name: porkRice
     prefab: {fileID: 1084129990771008315, guid: 601ce2bb23e70b54fb593cb706b59d6a, type: 3}
@@ -2335,7 +2335,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74576a3a55dfccd40894f59d5692e8c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FoodArea
-  desiredPosition: {x: -1.88, y: 2, z: -1.8}
+  desiredPosition: {x: 5.1, y: 1, z: 0}
   prefabList:
   - name: porkRice
     prefab: {fileID: 1084129990771008315, guid: 601ce2bb23e70b54fb593cb706b59d6a, type: 3}
