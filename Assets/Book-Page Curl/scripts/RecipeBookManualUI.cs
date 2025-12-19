@@ -6,20 +6,36 @@ using System.Collections;
 public class RecipeBookManualUI : MonoBehaviour
 {
     [Header("Detail (After Click)")]
-    public GameObject detailRoot;      // 詳情模式總容器（可選，但推薦拖）
-    public Image leftResultImage;      // 左頁大圖
-    public Button backButton;          // 返回按鈕（要拖）
+    public GameObject detailRoot;
+    public Image leftResultImage;
+    public Button backButton;
 
     [Header("Fade (List Mode)")]
-    public CanvasGroup listGroup;      // 放料理卡片按鈕+Close 的那坨
+    public CanvasGroup listGroup;
     public float fadeDuration = 0.35f;
+
+    [Header("Locked Visual")]
+    public Sprite lockedBigSprite;         // 共用的 ?
+    public GameObject lockedRightPage;     // fallback（可不用拉）
+    [Header("Debug")]
+    public bool enableDebugHotkey = true;
+    public KeyCode unlockAllKey = KeyCode.F1;
+
+// 你可以選擇：只解鎖 hell(???) 或全部料理
+public bool unlockOnlyHell = true;
 
     [Serializable]
     public class Entry
     {
         public string recipeName;
+
+        [Header("Unlocked")]
         public Sprite resultSprite;
-        public GameObject rightPage;   // 右頁對應的配方 panel（你已經手排好的）
+        public GameObject rightPage;
+
+        [Header("Locked (only for ??? recipes)")]
+        public Sprite lockedBigSpriteOverride; // 每個 ??? 可不同(可不填)
+        public GameObject lockedRightPage;     // 每個 ??? 自己的提示頁
     }
 
     [Header("Manual Mapping")]
@@ -29,7 +45,6 @@ public class RecipeBookManualUI : MonoBehaviour
 
     void Start()
     {
-        // 返回按鈕事件（不想寫在 Inspector 也沒關係）
         if (backButton != null)
         {
             backButton.onClick.RemoveAllListeners();
@@ -39,27 +54,75 @@ public class RecipeBookManualUI : MonoBehaviour
         ResetView();
     }
 
-    // =========================
-    // List Mode（初始/返回後）
-    // =========================
+    void Update()
+    {
+        if (!enableDebugHotkey) return;
+
+        if (Input.GetKeyDown(unlockAllKey))
+        {
+            DebugUnlockAll();
+        }
+    }
+
+    [ContextMenu("DEBUG/Unlock All Recipes")]
+    public void DebugUnlockAll()
+    {
+        if (illustdata.isunlocked == null) return;
+
+        if (unlockOnlyHell)
+        {
+            if (illustdata.illustlist.TryGetValue("hell", out var hellList))
+            {
+                foreach (var name in hellList)
+                {
+                    if (illustdata.isunlocked.ContainsKey(name))
+                        illustdata.isunlocked[name] = true;
+                }
+            }
+        }
+        else
+        {
+            // 全部料理都解鎖
+            var keys = new System.Collections.Generic.List<string>(illustdata.isunlocked.Keys);
+            foreach (var k in keys)
+                illustdata.isunlocked[k] = true;
+        }
+
+        Debug.Log($"[DEBUG] Unlocked {(unlockOnlyHell ? "hell" : "ALL")} recipes!");
+
+        // 如果你有用 LockedRecipeCard 管理 ??? 卡片顯示，順便刷新
+        LockedRecipeCard.RefreshAll();
+    }
+
+    // ✅ 關掉所有右頁（包含 unlocked/locked）
+    void HideAllRightPages()
+    {
+        if (entries == null) return;
+
+        foreach (var e in entries)
+        {
+            if (e == null) continue;
+
+            if (e.rightPage != null)
+                e.rightPage.SetActive(false);
+
+            if (e.lockedRightPage != null)
+                e.lockedRightPage.SetActive(false);
+        }
+
+        if (lockedRightPage != null)
+            lockedRightPage.SetActive(false);
+    }
+
     public void ResetView()
     {
-        // 關掉詳情整坨（大圖/材料/返回）
         if (detailRoot != null) detailRoot.SetActive(false);
 
-        // 左頁大圖藏起來（保險）
         if (leftResultImage != null)
             leftResultImage.gameObject.SetActive(false);
 
-        // 右頁材料全部關
-        if (entries != null)
-        {
-            foreach (var e in entries)
-                if (e != null && e.rightPage != null)
-                    e.rightPage.SetActive(false);
-        }
+        HideAllRightPages();
 
-        // 列表顯示 + 可互動
         if (listGroup != null)
         {
             listGroup.gameObject.SetActive(true);
@@ -71,72 +134,93 @@ public class RecipeBookManualUI : MonoBehaviour
 
     public void BackToList()
     {
-        // 關掉詳情
         if (detailRoot != null) detailRoot.SetActive(false);
 
-        // 右頁材料全關
-        if (entries != null)
-        {
-            foreach (var e in entries)
-                if (e != null && e.rightPage != null)
-                    e.rightPage.SetActive(false);
-        }
+        HideAllRightPages();
 
-        // 左頁圖藏
         if (leftResultImage != null)
             leftResultImage.gameObject.SetActive(false);
 
-        // 列表淡入回來
-        FadeList(show: true);
+        FadeList(true);
     }
 
-    // =========================
-    // Detail Mode（點料理後）
-    // =========================
     public void Show(string recipeName)
     {
-        // 找到對應 entry
+        // 找 entry
         Entry target = null;
-        foreach (var e in entries)
+        if (entries != null)
         {
-            if (e == null) continue;
-            if (e.recipeName == recipeName) { target = e; break; }
+            foreach (var e in entries)
+            {
+                if (e == null) continue;
+                if (e.recipeName == recipeName)
+                {
+                    target = e;
+                    break;
+                }
+            }
         }
+
         if (target == null)
         {
             Debug.LogWarning("Recipe not mapped: " + recipeName);
             return;
         }
 
-        // 右頁材料先全關，再開目標
-        foreach (var e in entries)
-            if (e != null && e.rightPage != null)
-                e.rightPage.SetActive(false);
+        // ✅ 判斷是不是 hell 類（???）
+        bool isHell = illustdata.illustlist.TryGetValue("hell", out var hellList)
+                   && hellList.Contains(recipeName);
 
-        if (target.rightPage != null)
-            target.rightPage.SetActive(true);
+        // ✅ 只有 hell 才看 isunlocked；其他都視為 unlocked
+        bool unlocked = true;
+        if (isHell)
+        {
+            // 用 TryGetValue 更安全（避免 key 不存在直接炸）
+            unlocked = illustdata.isunlocked.TryGetValue(recipeName, out bool ok) && ok;
+        }
 
-        // 左頁大圖顯示
+        // ✅ 先清場：關掉所有右頁（包含 locked）
+        HideAllRightPages();
+
+        // 左頁圖
         if (leftResultImage != null)
         {
             leftResultImage.gameObject.SetActive(true);
-            leftResultImage.sprite = target.resultSprite;
+
+            if (unlocked)
+            {
+                leftResultImage.sprite = target.resultSprite;
+            }
+            else
+            {
+                // ✅ 未解鎖：先用 entry override，沒有才用共用 ?
+                var s = target.lockedBigSpriteOverride != null ? target.lockedBigSpriteOverride : lockedBigSprite;
+                leftResultImage.sprite = s;
+            }
+
             leftResultImage.preserveAspect = true;
         }
 
-        // 打開詳情容器（包含返回按鈕/大圖/右頁文字）
+        // 右頁
+        if (unlocked)
+        {
+            if (target.rightPage != null)
+                target.rightPage.SetActive(true);
+        }
+        else
+        {
+            if (target.lockedRightPage != null)
+                target.lockedRightPage.SetActive(true);
+            else if (lockedRightPage != null)
+                lockedRightPage.SetActive(true);
+        }
+
         if (detailRoot != null)
             detailRoot.SetActive(true);
-        Debug.Log("DetailRoot active = " + detailRoot.activeSelf);
 
-
-        // 列表淡出 + 不能按
-        FadeList(show: false);
+        FadeList(false);
     }
 
-    // =========================
-    // Fade helper
-    // =========================
     void FadeList(bool show)
     {
         if (listGroup == null) return;
@@ -147,7 +231,6 @@ public class RecipeBookManualUI : MonoBehaviour
 
     IEnumerator FadeCanvasGroup(CanvasGroup g, float target, float dur, bool disableWhenZero)
     {
-        // 互動開關
         if (target <= 0f)
         {
             g.interactable = false;

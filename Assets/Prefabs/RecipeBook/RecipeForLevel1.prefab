@@ -1047,61 +1047,102 @@ MonoBehaviour:
   backButton: {fileID: 8945165034194055822}
   listGroup: {fileID: 1777776484215790011}
   fadeDuration: 0.35
+  lockedBigSprite: {fileID: 0}
+  lockedRightPage: {fileID: 0}
+  enableDebugHotkey: 1
+  unlockAllKey: 282
+  unlockOnlyHell: 1
   entries:
   - recipeName: beefburger
     resultSprite: {fileID: 21300000, guid: 74df7028c29865f49a9ad7fbc78024fa, type: 3}
     rightPage: {fileID: 414702861609857382}
+    lockedBigSpriteOverride: {fileID: 0}
+    lockedRightPage: {fileID: 0}
   - recipeName: porkburger
     resultSprite: {fileID: 21300000, guid: 20b4736b4ed17c24bb49addcd7f2dc14, type: 3}
     rightPage: {fileID: 7672579340544211576}
+    lockedBigSpriteOverride: {fileID: 0}
+    lockedRightPage: {fileID: 0}
   - recipeName: steakburger
     resultSprite: {fileID: 21300000, guid: 3bd02b318648ce545a6848b99d047a35, type: 3}
     rightPage: {fileID: 5199893731184599022}
+    lockedBigSpriteOverride: {fileID: 0}
+    lockedRightPage: {fileID: 0}
   - recipeName: shrimpburger
     resultSprite: {fileID: 21300000, guid: 25a7bb6e057d2144380484ca763e8c01, type: 3}
     rightPage: {fileID: 7757064265231003794}
+    lockedBigSpriteOverride: {fileID: 0}
+    lockedRightPage: {fileID: 0}
   - recipeName: salmonburger
     resultSprite: {fileID: 21300000, guid: 6f694c2b035b4d54b9350be8ee4a8f57, type: 3}
     rightPage: {fileID: 6397158565959666}
+    lockedBigSpriteOverride: {fileID: 0}
+    lockedRightPage: {fileID: 0}
   - recipeName: lobsterburger
     resultSprite: {fileID: 21300000, guid: 708f261f94e5def48bec0be65c4436e2, type: 3}
     rightPage: {fileID: 4121721957345872347}
+    lockedBigSpriteOverride: {fileID: 0}
+    lockedRightPage: {fileID: 0}
   - recipeName: beefsandwich
     resultSprite: {fileID: 21300000, guid: e1d99e2623a2d734cb19108ad96a6c29, type: 3}
     rightPage: {fileID: 1920259811583221751}
+    lockedBigSpriteOverride: {fileID: 0}
+    lockedRightPage: {fileID: 0}
   - recipeName: porksandwich
     resultSprite: {fileID: 21300000, guid: 3a597b8dc1f693e499cd361681bc7643, type: 3}
     rightPage: {fileID: 3955475178067539824}
+    lockedBigSpriteOverride: {fileID: 0}
+    lockedRightPage: {fileID: 0}
   - recipeName: steaksandwich
     resultSprite: {fileID: 21300000, guid: f2044bd9d01bf784589803df700a9215, type: 3}
     rightPage: {fileID: 4662380275092449216}
+    lockedBigSpriteOverride: {fileID: 0}
+    lockedRightPage: {fileID: 0}
   - recipeName: shrimpsandwich
     resultSprite: {fileID: 21300000, guid: 52accd6521fd5de4fa6a92881772ada8, type: 3}
     rightPage: {fileID: 4501060970500310589}
+    lockedBigSpriteOverride: {fileID: 0}
+    lockedRightPage: {fileID: 0}
   - recipeName: salmonsandwich
     resultSprite: {fileID: 21300000, guid: a2ec5e8672d7da741a126d4488cafa32, type: 3}
     rightPage: {fileID: 1800525187553176270}
+    lockedBigSpriteOverride: {fileID: 0}
+    lockedRightPage: {fileID: 0}
   - recipeName: lobstersandwich
     resultSprite: {fileID: 21300000, guid: 46366191eccb8b0418dad8f6404ffe7e, type: 3}
     rightPage: {fileID: 8417313188817402671}
+    lockedBigSpriteOverride: {fileID: 0}
+    lockedRightPage: {fileID: 0}
   - recipeName: applesalad
     resultSprite: {fileID: 21300000, guid: 45a7f506e50f0dc44ac7b06d7784b415, type: 3}
     rightPage: {fileID: 7517660557142963269}
+    lockedBigSpriteOverride: {fileID: 0}
+    lockedRightPage: {fileID: 0}
   - recipeName: kiwisalad
     resultSprite: {fileID: 21300000, guid: 8ce98f15e0058dc4abcf653565b675bd, type: 3}
     rightPage: {fileID: 302676732335619502}
+    lockedBigSpriteOverride: {fileID: 0}
+    lockedRightPage: {fileID: 0}
   - recipeName: tomatosalad
     resultSprite: {fileID: 21300000, guid: 052b9acf888714a47a71b4591744284c, type: 3}
     rightPage: {fileID: 2361839777711482865}
+    lockedBigSpriteOverride: {fileID: 0}
+    lockedRightPage: {fileID: 0}
   - recipeName: pineapplesalad
     resultSprite: {fileID: 21300000, guid: fd026f1027540634d84dcdab1471496d, type: 3}
     rightPage: {fileID: 1187754122050850830}
+    lockedBigSpriteOverride: {fileID: 0}
+    lockedRightPage: {fileID: 0}
   - recipeName: meatjuice
     resultSprite: {fileID: 21300000, guid: ab04a25d84a250847aeb675aa9698b33, type: 3}
     rightPage: {fileID: 2595193447012287500}
+    lockedBigSpriteOverride: {fileID: 0}
+    lockedRightPage: {fileID: 0}
   - recipeName: seafoodjuice
     resultSprite: {fileID: 21300000, guid: 7ee5d32963791e2409d70eab42cc4eee, type: 3}
     rightPage: {fileID: 7967574382126982593}
+    lockedBigSpriteOverride: {fileID: 0}
+    lockedRightPage: {fileID: 0}
 --- !u!1 &1002496411738635219
 GameObject:
   m_ObjectHideFlags: 0

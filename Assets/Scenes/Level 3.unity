@@ -1592,6 +1592,10 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2437440094427490966, guid: d44417cbe1f9a754ea8336c09e7f49db, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3023277474198879880, guid: d44417cbe1f9a754ea8336c09e7f49db, type: 3}
       propertyPath: m_SizeDelta.x
       value: 0
@@ -4606,75 +4610,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 591816653}
     - target: {fileID: 1342259024083156303, guid: 5c96e3fd603ec4f4a980fb986157dc78, type: 3}
-      propertyPath: 'pageTexts.Array.data[7]'
+      propertyPath: 'pageTexts.Array.data[6]'
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 1342259024083156303, guid: 5c96e3fd603ec4f4a980fb986157dc78, type: 3}
-      propertyPath: 'pageTexts.Array.data[8]'
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 1342259024083156303, guid: 5c96e3fd603ec4f4a980fb986157dc78, type: 3}
-      propertyPath: 'pageTexts.Array.data[11]'
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 1342259024083156303, guid: 5c96e3fd603ec4f4a980fb986157dc78, type: 3}
-      propertyPath: 'pageTexts.Array.data[12]'
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 1342259024083156303, guid: 5c96e3fd603ec4f4a980fb986157dc78, type: 3}
-      propertyPath: 'pageTexts.Array.data[13]'
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 1342259024083156303, guid: 5c96e3fd603ec4f4a980fb986157dc78, type: 3}
-      propertyPath: 'pageTexts.Array.data[14]'
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 1342259024083156303, guid: 5c96e3fd603ec4f4a980fb986157dc78, type: 3}
-      propertyPath: 'pageTexts.Array.data[15]'
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 1342259024083156303, guid: 5c96e3fd603ec4f4a980fb986157dc78, type: 3}
-      propertyPath: 'pageTexts.Array.data[16]'
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 1342259024083156303, guid: 5c96e3fd603ec4f4a980fb986157dc78, type: 3}
-      propertyPath: 'pageTexts.Array.data[17]'
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 1342259024083156303, guid: 5c96e3fd603ec4f4a980fb986157dc78, type: 3}
-      propertyPath: 'recipeButtons.Array.data[7]'
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 1342259024083156303, guid: 5c96e3fd603ec4f4a980fb986157dc78, type: 3}
-      propertyPath: 'recipeButtons.Array.data[8]'
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 1342259024083156303, guid: 5c96e3fd603ec4f4a980fb986157dc78, type: 3}
-      propertyPath: 'recipeButtons.Array.data[11]'
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 1342259024083156303, guid: 5c96e3fd603ec4f4a980fb986157dc78, type: 3}
-      propertyPath: 'recipeButtons.Array.data[12]'
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 1342259024083156303, guid: 5c96e3fd603ec4f4a980fb986157dc78, type: 3}
-      propertyPath: 'recipeButtons.Array.data[13]'
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 1342259024083156303, guid: 5c96e3fd603ec4f4a980fb986157dc78, type: 3}
-      propertyPath: 'recipeButtons.Array.data[14]'
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 1342259024083156303, guid: 5c96e3fd603ec4f4a980fb986157dc78, type: 3}
-      propertyPath: 'recipeButtons.Array.data[15]'
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 1342259024083156303, guid: 5c96e3fd603ec4f4a980fb986157dc78, type: 3}
-      propertyPath: 'recipeButtons.Array.data[16]'
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 1342259024083156303, guid: 5c96e3fd603ec4f4a980fb986157dc78, type: 3}
-      propertyPath: 'recipeButtons.Array.data[17]'
+      propertyPath: 'recipeButtons.Array.data[6]'
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 5730050054116300165, guid: 5c96e3fd603ec4f4a980fb986157dc78, type: 3}
