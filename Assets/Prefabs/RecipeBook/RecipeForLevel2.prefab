@@ -305,6 +305,7 @@ RectTransform:
   - {fileID: 4882838416923823241}
   - {fileID: 4586340652433526389}
   - {fileID: 2039208192596858737}
+  - {fileID: 3705639079418830265}
   - {fileID: 304149176444584205}
   - {fileID: 7452748650827743676}
   m_Father: {fileID: 576303360614454812}
@@ -379,20 +380,20 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Raw ??? Pizza:
+  m_text: 'Raw Sealand Pizza:
 
-    dough
+    Dough
 
-    ???
+    Any kind of Seafood
 
-    ???
+    Any kind of
+    meat
 
 
 
     $600
 
-    Hint: Maybe
-    you don''t need to put that in the oven'
+    Hint: Maybe you don''t need to put that in the oven'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 96bcce8dd019968439a6d6809f5138fd, type: 2}
   m_sharedMaterial: {fileID: -3170211148109904121, guid: 96bcce8dd019968439a6d6809f5138fd, type: 2}
@@ -3863,6 +3864,7 @@ GameObject:
   - component: {fileID: 7786300924835807683}
   - component: {fileID: 6744119911459767918}
   - component: {fileID: 4780807705795603094}
+  - component: {fileID: 8603052361013740299}
   m_Layer: 5
   m_Name: Test (3)
   m_TagString: Untagged
@@ -3986,6 +3988,27 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::RecipeSelectButton
   recipeName: rawsealandpizza
   bookUI: {fileID: 5178418416859091047}
+--- !u!114 &8603052361013740299
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8313468995821740689}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 465eef489640c8c46afca26e02f983df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LockedRecipeCard
+  recipeName: rawsealandpizza
+  button: {fileID: 6744119911459767918}
+  icon: {fileID: 7786300924835807683}
+  label: {fileID: 6052933868513173356}
+  bookUI: {fileID: 5178418416859091047}
+  lockedSprite: {fileID: 21300000, guid: 53a11499a74a1b0439ad6a65a6ea5f06, type: 3}
+  lockedText: raw ??? pizza
+  unlockedDisplayName: raw sealand pizza
+  unlockedSpriteOverride: {fileID: 21300000, guid: 42efa8e7ca154d24fbe857147d7f195a, type: 3}
 --- !u!1 &8335986746612353077
 GameObject:
   m_ObjectHideFlags: 0
@@ -4075,6 +4098,155 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_ShowMaskGraphic: 0
+--- !u!1 &8829860496546636073
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3705639079418830265}
+  - component: {fileID: 4005646181411120584}
+  - component: {fileID: 8198511179669033134}
+  m_Layer: 5
+  m_Name: LockContent
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!224 &3705639079418830265
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8829860496546636073}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 599479949210175138}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 300, y: 250}
+  m_SizeDelta: {x: 500, y: 50}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &4005646181411120584
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8829860496546636073}
+  m_CullTransparentMesh: 1
+--- !u!114 &8198511179669033134
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8829860496546636073}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_text: 'Raw ??? Pizza:
+
+    dough
+
+    ???
+
+    ???
+
+
+
+    $600
+
+    Hint: Maybe
+    you don''t need to put that in the oven'
+  m_isRightToLeft: 0
+  m_fontAsset: {fileID: 11400000, guid: 96bcce8dd019968439a6d6809f5138fd, type: 2}
+  m_sharedMaterial: {fileID: -3170211148109904121, guid: 96bcce8dd019968439a6d6809f5138fd, type: 2}
+  m_fontSharedMaterials: []
+  m_fontMaterial: {fileID: 0}
+  m_fontMaterials: []
+  m_fontColor32:
+    serializedVersion: 2
+    rgba: 4278190080
+  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
+  m_enableVertexGradient: 0
+  m_colorMode: 3
+  m_fontColorGradient:
+    topLeft: {r: 1, g: 1, b: 1, a: 1}
+    topRight: {r: 1, g: 1, b: 1, a: 1}
+    bottomLeft: {r: 1, g: 1, b: 1, a: 1}
+    bottomRight: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColorGradientPreset: {fileID: 0}
+  m_spriteAsset: {fileID: 0}
+  m_tintAllSprites: 0
+  m_StyleSheet: {fileID: 0}
+  m_TextStyleHashCode: -1183493901
+  m_overrideHtmlColors: 0
+  m_faceColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontSize: 36
+  m_fontSizeBase: 36
+  m_fontWeight: 400
+  m_enableAutoSizing: 0
+  m_fontSizeMin: 18
+  m_fontSizeMax: 72
+  m_fontStyle: 0
+  m_HorizontalAlignment: 1
+  m_VerticalAlignment: 256
+  m_textAlignment: 65535
+  m_characterSpacing: 0
+  m_wordSpacing: 0
+  m_lineSpacing: 0
+  m_lineSpacingMax: 0
+  m_paragraphSpacing: 0
+  m_charWidthMaxAdj: 0
+  m_TextWrappingMode: 1
+  m_wordWrappingRatios: 0.4
+  m_overflowMode: 0
+  m_linkedTextComponent: {fileID: 0}
+  parentLinkedComponent: {fileID: 0}
+  m_enableKerning: 0
+  m_ActiveFontFeatures: 6e72656b
+  m_enableExtraPadding: 0
+  checkPaddingRequired: 0
+  m_isRichText: 1
+  m_EmojiFallbackSupport: 1
+  m_parseCtrlCharacters: 1
+  m_isOrthographic: 1
+  m_isCullingEnabled: 0
+  m_horizontalMapping: 0
+  m_verticalMapping: 0
+  m_uvLineOffset: 0
+  m_geometrySortingOrder: 0
+  m_IsTextObjectScaleStatic: 0
+  m_VertexBufferAutoSizeReduction: 0
+  m_useMaxVisibleDescender: 1
+  m_pageToDisplay: 1
+  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_isUsingLegacyAnimationComponent: 0
+  m_isVolumetricText: 0
+  m_hasFontAssetChanged: 0
+  m_baseMaterial: {fileID: 0}
+  m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!1 &9036220251964318830
 GameObject:
   m_ObjectHideFlags: 0
@@ -4264,22 +4436,37 @@ MonoBehaviour:
   backButton: {fileID: 2179020755937986922}
   listGroup: {fileID: 4899662284028015775}
   fadeDuration: 0.35
+  lockedBigSprite: {fileID: 0}
+  lockedRightPage: {fileID: 0}
+  enableDebugHotkey: 1
+  unlockAllKey: 282
+  unlockOnlyHell: 1
   entries:
   - recipeName: margheritapizza
     resultSprite: {fileID: 21300000, guid: 26ee48e6242b2a64da1617d279459146, type: 3}
     rightPage: {fileID: 7818642823813225170}
+    lockedBigSpriteOverride: {fileID: 0}
+    lockedRightPage: {fileID: 0}
   - recipeName: hawaiipizza
     resultSprite: {fileID: 21300000, guid: 80361cf62e4462a4b8ade77435e9934f, type: 3}
     rightPage: {fileID: 1180332239448951430}
+    lockedBigSpriteOverride: {fileID: 0}
+    lockedRightPage: {fileID: 0}
   - recipeName: seafoodpizza
     resultSprite: {fileID: 21300000, guid: 710e98c7492558745b4e9c3a172b52d4, type: 3}
     rightPage: {fileID: 6690231505076532156}
+    lockedBigSpriteOverride: {fileID: 0}
+    lockedRightPage: {fileID: 0}
   - recipeName: rawsealandpizza
     resultSprite: {fileID: 21300000, guid: 42efa8e7ca154d24fbe857147d7f195a, type: 3}
     rightPage: {fileID: 205266329230155438}
+    lockedBigSpriteOverride: {fileID: 21300000, guid: 53a11499a74a1b0439ad6a65a6ea5f06, type: 3}
+    lockedRightPage: {fileID: 8829860496546636073}
   - recipeName: oven
     resultSprite: {fileID: 21300000, guid: 13c1cd27102f2034c916d0d608f8260a, type: 3}
     rightPage: {fileID: 5950461521809164702}
+    lockedBigSpriteOverride: {fileID: 0}
+    lockedRightPage: {fileID: 0}
 --- !u!1 &9071865245836295213
 GameObject:
   m_ObjectHideFlags: 0
