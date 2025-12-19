@@ -61,7 +61,7 @@ public static class MealTable
         {20, 170}, // seafoodpizza
         {21, 600}, // rawsealandpizza
 
-        {22, 130}, // grilllobimp
+        {22, 600}, // grilllobimp
         {23, 150},  // gumbo
         {24, 180}, // doublesaucesteak
 

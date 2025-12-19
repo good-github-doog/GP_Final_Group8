@@ -2021,7 +2021,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: ab04a25d84a250847aeb675aa9698b33, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 53a11499a74a1b0439ad6a65a6ea5f06, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -3889,7 +3889,7 @@ MonoBehaviour:
     $600
 
     Hint: Perhaps you
-    can put ???, ??? and ???together with the mixer?'
+    can put ???, ??? and ??? together with the mixer?'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 96bcce8dd019968439a6d6809f5138fd, type: 2}
   m_sharedMaterial: {fileID: -3170211148109904121, guid: 96bcce8dd019968439a6d6809f5138fd, type: 2}
@@ -4136,7 +4136,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 7ee5d32963791e2409d70eab42cc4eee, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 53a11499a74a1b0439ad6a65a6ea5f06, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -8438,7 +8438,7 @@ MonoBehaviour:
     $600
 
     Hint: Perhaps you
-    can put ???, ??? and ???together with the mixer?'
+    can put ???, ??? and ??? together with the mixer?'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 96bcce8dd019968439a6d6809f5138fd, type: 2}
   m_sharedMaterial: {fileID: -3170211148109904121, guid: 96bcce8dd019968439a6d6809f5138fd, type: 2}
