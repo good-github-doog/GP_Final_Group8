@@ -2916,7 +2916,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: meat juice
+  m_text: ??? juice
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 96bcce8dd019968439a6d6809f5138fd, type: 2}
   m_sharedMaterial: {fileID: -3170211148109904121, guid: 96bcce8dd019968439a6d6809f5138fd, type: 2}
@@ -3876,7 +3876,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: '???:
+  m_text: '???juice:
+
+    ???
 
     ???
 
@@ -3886,8 +3888,8 @@ MonoBehaviour:
 
     $600
 
-    Hint: Perhaps you can put ???
-    and ??? together?'
+    Hint: Perhaps you
+    can put ???, ??? and ???together with the mixer?'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 96bcce8dd019968439a6d6809f5138fd, type: 2}
   m_sharedMaterial: {fileID: -3170211148109904121, guid: 96bcce8dd019968439a6d6809f5138fd, type: 2}
@@ -6494,7 +6496,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: seafood juice
+  m_text: ??? juice
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 96bcce8dd019968439a6d6809f5138fd, type: 2}
   m_sharedMaterial: {fileID: -3170211148109904121, guid: 96bcce8dd019968439a6d6809f5138fd, type: 2}
@@ -8423,7 +8425,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: '???:
+  m_text: '???juice:
+
+    ???
 
     ???
 
@@ -8433,8 +8437,8 @@ MonoBehaviour:
 
     $600
 
-    Hint: Perhaps you can put ???
-    and ??? together?'
+    Hint: Perhaps you
+    can put ???, ??? and ???together with the mixer?'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 96bcce8dd019968439a6d6809f5138fd, type: 2}
   m_sharedMaterial: {fileID: -3170211148109904121, guid: 96bcce8dd019968439a6d6809f5138fd, type: 2}

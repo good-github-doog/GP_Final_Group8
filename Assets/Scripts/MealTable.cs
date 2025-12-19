@@ -38,28 +38,28 @@ public static class MealTable
         {1, 165},   // porkburger
         {2, 180},   // salmonburger
         {3, 180},   // shrimpburger
-        {4, 120},  // lobsterburger // no lobster yet
+        {4, 600},  // lobsterburger
         {5, 200},  // steakburger
 
         {6, 170},   // beefsandwich
         {7, 150},   // porksandwich
         {8, 160},   // salmonsandwich
         {9, 160},   // shrimpsandwich
-        {10, 110}, // lobstersandwich // no lobster yet
+        {10, 600}, // lobstersandwich
         {11, 170}, // steaksandwich
 
         {12, 50},  // applesalad
-        {13, 55},  // kiwisalad // no kiwi yet
+        {13, 200},  // kiwisalad
         {14, 60},  // tomatosalad
         {15, 50},  // pineapplesalad
 
-        {16, 150},  // meatjuice
-        {17, 150},  // seafoodjuice
+        {16, 600},  // meatjuice
+        {17, 600},  // seafoodjuice
 
         {18, 130},  // margheritapizza
         {19, 160}, // hawaiipizza
         {20, 170}, // seafoodpizza
-        {21, 140}, // rawsealandpizza // not sure yet
+        {21, 600}, // rawsealandpizza
 
         {22, 130}, // grilllobimp
         {23, 150},  // gumbo
