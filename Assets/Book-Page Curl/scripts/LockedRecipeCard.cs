@@ -11,6 +11,20 @@ public class LockedRecipeCard : MonoBehaviour
         foreach (var c in all) if (c != null) c.Refresh();
     }
 
+    public static void RefreshOne(string recipeName)
+    {
+        foreach (var c in all)
+        {
+            if (c == null) continue;
+            if (c.recipeName == recipeName)
+            {
+                c.Refresh();
+                return; // 找到就停
+            }
+        }
+    }
+    
+
     [Header("Identity")]
     public string recipeName;            // 例如 "meatjuice" / "seafoodjuice"
 

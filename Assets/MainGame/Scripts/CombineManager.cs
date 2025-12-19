@@ -111,6 +111,30 @@ public class CombineManager : MonoBehaviour
                 Debug.Log($"解鎖新料理：{resultName}");
             }
 
+            //只針對 ???（hell 類）做解鎖
+            bool isMystery = illustdata.illustlist.TryGetValue("hell", out var hellList)
+                            && hellList.Contains(resultName);
+
+            if (isMystery)
+            {
+                // 保險：避免 key 不存在爆炸
+                if (illustdata.isunlocked.TryGetValue(resultName, out bool unlocked))
+                {
+                    if (!unlocked)
+                    {
+                        illustdata.isunlocked[resultName] = true;
+                        Debug.Log($"[Unlock] 解鎖 ??? 料理：{resultName}");
+                    }
+                }
+                else
+                {
+                    // 你的 isunlocked 字典目前有把所有料理都放進去，理論上不會走到這裡
+                    illustdata.isunlocked[resultName] = true;
+                    Debug.LogWarning($"[Unlock] isunlocked 沒有 key，已補上並解鎖：{resultName}");
+                }
+            }
+
+
             // 3️⃣ 清除舊食材
             foreach (Transform child in combineArea.transform)
             {
