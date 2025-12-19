@@ -1,4 +1,4 @@
- using UnityEngine;
+using UnityEngine;
 using UnityEngine.EventSystems;
 using System.Collections.Generic;
 
@@ -16,15 +16,13 @@ public class FoodArea : MonoBehaviour, IDropHandler
     private Dictionary<string, GameObject> prefabDict;
     private GameObject newFood = null;
 
-
-
     void Start()
     {
         prefabDict = new Dictionary<string, GameObject>();
         foreach (var item in prefabList)
             prefabDict[item.name] = item.prefab;
     }
-    public int expectedMealIndex = -1;   // CustomerSpot 會設定這個
+    public int expectedMealIndex = -1;
     private Customer currentCustomer;
     public void SetCustomer(Customer customer, int expectedMealIndex)
     {
@@ -33,8 +31,7 @@ public class FoodArea : MonoBehaviour, IDropHandler
 
         if (customer != null)
         {
-            customer.SetFoodArea(this);  // ⭐非常重要：綁定「顧客 ↔ 食物區」
-            customer.SetExpectedMeal(expectedMealIndex);   // ⭐ 傳給 Customer
+            customer.SetFoodArea(this);
         }
     }
     public void ClearCustomer()
@@ -42,73 +39,74 @@ public class FoodArea : MonoBehaviour, IDropHandler
         currentCustomer = null;
         expectedMealIndex = -1;
     }
+
+    public string GetExpectedMealText()
+    {
+        MealTable.OrderText.TryGetValue(expectedMealIndex, out string ordering);
+        return ordering;
+    }
     public void OnDrop(PointerEventData eventData)
     {
         FoodCard card = eventData.pointerDrag.GetComponent<FoodCard>();
         if (card == null) return;
-/*
-        if (!prefabDict.TryGetValue(card.foodName, out GameObject prefabToUse))
-        {
-            Debug.LogError($"找不到對應的食物 Prefab：{card.foodName}");
-            return;
-        }
-*/
+
         GameObject prefabToUse = null;
         prefabToUse = MealTable.GetFood("foodprefebs/" + card.foodName);
-        if (prefabToUse == null){
-            Debug.LogError($"找不到對應的食物 Prefab：{card.foodName}");
-            return;
-        }
+        if (prefabToUse == null) return;
 
         Quaternion desiredRotation = Quaternion.identity;
         newFood = Instantiate(prefabToUse, desiredPosition, desiredRotation);
-        Debug.Log($"[FoodArea] 放入上菜區：{card.foodName}");
 
-
-
-
-        // 拿到食物的名稱後刪除卡片
         string foodName = card.foodName;
         Destroy(card.gameObject);
 
         if (!MealTable.MealMap.TryGetValue(foodName, out int foodIndex))
         {
-            Debug.Log($"[FoodArea] 食物名稱 {foodName} 不在 MealTable 中！");
             return;
         }
 
-        Debug.Log($"[FoodArea] 食物 '{foodName}' → 編號 {foodIndex}");
+        // 直接比較餐點編號
+        bool isCorrect = foodIndex == expectedMealIndex;
 
-        // 使用 MealTable 的匹配方法
-        bool isCorrect = MealTable.IsMealMatch(foodName, expectedMealIndex);
+        // 處理價格邏輯
+        if (isCorrect)
+        {
+            int price = MealTable.GetPrice(expectedMealIndex);
+            data.money += price;
+            data.incomeServe += price;
+        }
+        else
+        {
+            data.money -= 100;
+            data.penaltyWrong += 100;
+            if (data.money < 0) data.money = 0;
 
-        Debug.Log(isCorrect ? "✔ Food is correctly served!" : "✘ Food is incorrectly served!");
+            // 觸發相機震動
+            if (CameraShake.Instance != null)
+            {
+                CameraShake.Instance.ShakeOnce(0.2f, 0.2f);
+            }
+        }
+
+        // 更新金錢顯示
+        GameManager gm = FindAnyObjectByType<GameManager>();
+        if (gm != null && gm.moneyText != null)
+        {
+            gm.moneyText.text = "$ " + data.money;
+        }
 
         if (currentCustomer != null)
         {
             currentCustomer.OnFoodServed(isCorrect);
         }
-        else
-        {
-            Debug.LogWarning("[FoodArea] 沒有正在服務的客人！");
-        }
     }
 
     public void ClearFoodOnTable()
     {
-        Debug.Log("[FoodArea] ClearFoodOnTable 被呼叫");
-
         if (newFood != null)
         {
-            Debug.Log($"[FoodArea] 銷毀 {newFood.name}");
             Destroy(newFood);
             newFood = null;
         }
-        else
-        {
-            Debug.Log("[FoodArea] 桌上沒有食物可清除");
-        }
     }
-
-
 }

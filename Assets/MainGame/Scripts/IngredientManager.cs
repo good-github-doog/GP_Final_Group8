@@ -55,17 +55,15 @@ public class IngredientManager : MonoBehaviour
                 // 設定 Slot 的初始數據
                 slot.ingredientName = ingredData.name;
                 slot.count = ingredData.quantity;
-                
+
                 activeSlots.Add(slot);
-                
-                Debug.Log($"生成食材槽：{ingredData.name}，數量：{ingredData.quantity}");
+
+                // Debug.Log($"生成食材槽：{ingredData.name}，數量：{ingredData.quantity}");
             }
         }
     }
 
-    /// <summary>
     /// 將當前 Slot 的數量更新回 data.inbag
-    /// </summary>
     private void SaveSlotsToData()
     {
         foreach (var slot in activeSlots)
@@ -74,18 +72,15 @@ public class IngredientManager : MonoBehaviour
 
             // 在 data.inbag 中找到對應的食材
             var ingredData = data.inbag.Find(x => x.name == slot.ingredientName);
-            
+
             if (ingredData != null)
             {
                 ingredData.quantity = slot.count;
-                Debug.Log($"保存食材數據：{slot.ingredientName}，數量：{slot.count}");
+                // Debug.Log($"保存食材數據：{slot.ingredientName}，數量：{slot.count}");
             }
         }
     }
 
-    /// <summary>
-    /// 手動保存（可在場景切換前調用）
-    /// </summary>
     public void ManualSave()
     {
         SaveSlotsToData();
@@ -96,5 +91,5 @@ public class IngredientManager : MonoBehaviour
         //SaveSlotsToData();
         LoadSlotsFromData();
     }
-    
+
 }

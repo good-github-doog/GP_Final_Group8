@@ -90,16 +90,4 @@ public static class MealTable
         if (pf != null) foodprefebs[path] = pf;
         return pf;
     }
-
-    // 檢查餐點是否符合期望的類型
-    public static bool IsMealMatch(string foodName, int expectedMealIndex)
-    {
-        // 直接匹配
-        if (MealMap.TryGetValue(foodName, out int foodIndex) && foodIndex == expectedMealIndex)
-        {
-            return true;
-        }
-
-        return false;
-    }
 }

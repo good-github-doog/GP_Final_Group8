@@ -1446,7 +1446,10 @@ MonoBehaviour:
 
 
 
-    $50'
+    $50
+
+    Hint: Perhaps
+    you can do something to those pineapple customers?'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 96bcce8dd019968439a6d6809f5138fd, type: 2}
   m_sharedMaterial: {fileID: -3170211148109904121, guid: 96bcce8dd019968439a6d6809f5138fd, type: 2}
@@ -3196,7 +3199,10 @@ MonoBehaviour:
 
 
 
-    $60'
+    $60
+
+    Hint: Perhaps you
+    can do something to those tomato customers?'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 96bcce8dd019968439a6d6809f5138fd, type: 2}
   m_sharedMaterial: {fileID: -3170211148109904121, guid: 96bcce8dd019968439a6d6809f5138fd, type: 2}

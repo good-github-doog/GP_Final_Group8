@@ -16,9 +16,8 @@ public class Customer : MonoBehaviour
     private CustomerSpot targetSpot;
     private bool hasArrived = false;
 
-    public GameObject burgerRecipeUI;
-    public GameObject salmonRecipeUI;
     public TextMeshProUGUI therecipe;
+    public GameObject order;
     public GameObject killEffectPrefab;
 
     [Header("Timer UI")]
@@ -28,8 +27,6 @@ public class Customer : MonoBehaviour
 
     [Header("Customer Type")]
     public CustomerType customerType = CustomerType.Cow;
-
-    private int expectedMealIndex = -1;
 
     private Queue<Vector3> waypointQueue = new Queue<Vector3>();
     private Vector3 finalDestination;
@@ -58,11 +55,6 @@ public class Customer : MonoBehaviour
     public void SetFoodArea(FoodArea area)
     {
         myFoodArea = area;
-    }
-
-    public void SetExpectedMeal(int mealIndex)
-    {
-        expectedMealIndex = mealIndex;
     }
 
     public CustomerType GetCustomerType()
@@ -105,14 +97,10 @@ public class Customer : MonoBehaviour
             sliderFillImage = waitTimerSlider.fillRect?.GetComponent<Image>();
         }
 
-        // 初始化 Recipe UI 為隱藏狀態
-        if (burgerRecipeUI != null)
+        // 初始化訂單 Canvas 為隱藏狀態
+        if (order != null)
         {
-            burgerRecipeUI.SetActive(false);
-        }
-        if (salmonRecipeUI != null)
-        {
-            salmonRecipeUI.SetActive(false);
+            order.SetActive(false);
         }
     }
     private void DetectAndResolveStuck()
@@ -289,6 +277,7 @@ public class Customer : MonoBehaviour
             if (agent != null && agent.enabled && agent.isOnNavMesh &&
                 !agent.pathPending && agent.remainingDistance <= agent.stoppingDistance + 0.2f)
             {
+                // Debug.Log($"[Customer] 到達條件滿足！remainingDistance: {agent.remainingDistance:F2}, stoppingDistance: {agent.stoppingDistance:F2}");
                 OnReachedSpot();
             }
         }
@@ -312,40 +301,49 @@ public class Customer : MonoBehaviour
         agent.isStopped = true;
         agent.velocity = Vector3.zero;
 
-        Debug.Log($"[Customer] 已到達座位: {targetSpot.name}");
-        targetSpot.OnCustomerArrived();
-        ShowCorrectRecipe();
+        Debug.Log($"[Customer] OnReachedSpot 被呼叫！");
+        Debug.Log($"[Customer] targetSpot 是否為 null: {targetSpot == null}");
 
-        // 隨機生成等待時間（15-30秒）
-        waitTimeLimit = Random.Range(minWaitTime, maxWaitTime);
-        Debug.Log($"[Customer] 等待時間設定為: {waitTimeLimit:F1} 秒");
-
-        // 開始等待計時
-        isWaiting = true;
-        waitTimer = 0f;
-
-        // 顯示並初始化計時器 Slider
-        if (waitTimerSlider != null)
+        if (targetSpot != null)
         {
-            waitTimerSlider.gameObject.SetActive(true);
-            waitTimerSlider.value = 1f;
+            Debug.Log($"[Customer] 已到達座位: {targetSpot.name}");
+            Debug.Log($"[Customer] 準備呼叫 targetSpot.OnCustomerArrived()");
+            targetSpot.OnCustomerArrived();
 
-            // 初始化顏色為綠色
-            if (sliderFillImage != null)
+            // 從 FoodArea 獲取訂單文字並顯示訂單 Canvas
+            if (myFoodArea != null)
             {
-                sliderFillImage.color = Color.green;
+                string ordering = myFoodArea.GetExpectedMealText();
+                therecipe.text = ordering;
+
+                // 顯示訂單 Canvas
+                if (order != null)
+                {
+                    order.SetActive(true);
+                }
+            }
+
+            // 隨機生成等待時間（15-30秒）
+            waitTimeLimit = Random.Range(minWaitTime, maxWaitTime);
+            Debug.Log($"[Customer] 等待時間設定為: {waitTimeLimit:F1} 秒");
+
+            // 開始等待計時
+            isWaiting = true;
+            waitTimer = 0f;
+
+            // 顯示並初始化計時器 Slider
+            if (waitTimerSlider != null)
+            {
+                waitTimerSlider.gameObject.SetActive(true);
+                waitTimerSlider.value = 1f;
+
+                // 初始化顏色為綠色
+                if (sliderFillImage != null)
+                {
+                    sliderFillImage.color = Color.green;
+                }
             }
         }
-    }
-
-    private void ShowCorrectRecipe()
-    {
-        if (burgerRecipeUI != null) burgerRecipeUI.SetActive(false);
-        if (salmonRecipeUI != null) salmonRecipeUI.SetActive(false);
-
-        MealTable.OrderText.TryGetValue(expectedMealIndex, out string ordering);
-        therecipe.text = ordering;
-        if (burgerRecipeUI != null) burgerRecipeUI.SetActive(true);
     }
 
     public void OnFoodServed(bool isCorrect)
@@ -359,34 +357,14 @@ public class Customer : MonoBehaviour
             waitTimerSlider.gameObject.SetActive(false);
         }
 
-        if (burgerRecipeUI != null) burgerRecipeUI.SetActive(false);
-        if (salmonRecipeUI != null) salmonRecipeUI.SetActive(false);
-
-        if (isCorrect)
+        // 隱藏訂單 Canvas
+        if (order != null)
         {
-            int price = MealTable.GetPrice(expectedMealIndex);
-            data.money += price;
-            data.incomeServe += price;   // 🔸記錄服務收入
-            print("[Customer] 顧客收到正確餐點，獲得收入: " + price);
-        }
-        else
-        {
-            data.money -= 100;
-            data.penaltyWrong += 100;   // 🔸記錄送錯餐罰款
-            if (data.money < 0) data.money = 0;
-            print("[Customer] 顧客收到錯誤餐點，扣除罰款: 100");
-            if (CameraShake.Instance != null)
-            {
-                CameraShake.Instance.ShakeOnce(0.2f, 0.2f);
-                Debug.Log("Shake Shake Shake!");
-            }
+            order.SetActive(false);
         }
 
-        GameManager gm = FindAnyObjectByType<GameManager>();
-        if (gm != null && gm.moneyText != null)
-        {
-            gm.moneyText.text = "$ " + data.money;
-        }
+        // 價格邏輯已在 FoodArea 處理，這裡只負責離開
+        Debug.Log($"[Customer] 收到餐點，結果: {(isCorrect ? "正確" : "錯誤")}");
 
         StartCoroutine(LeaveAfterDelay());
     }
@@ -405,9 +383,11 @@ public class Customer : MonoBehaviour
             waitTimerSlider.gameObject.SetActive(false);
         }
 
-        // 隱藏 UI
-        if (burgerRecipeUI != null) burgerRecipeUI.SetActive(false);
-        if (salmonRecipeUI != null) salmonRecipeUI.SetActive(false);
+        // 隱藏訂單 Canvas
+        if (order != null)
+        {
+            order.SetActive(false);
+        }
 
         // 清理 food area
         if (myFoodArea != null)

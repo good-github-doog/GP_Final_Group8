@@ -23,8 +23,20 @@ public class CustomerSpot : MonoBehaviour
 
     public void OnCustomerArrived()
     {
+        Debug.Log($"[CustomerSpot] OnCustomerArrived 被呼叫 - currentCustomer: {currentCustomer?.name}");
+        Debug.Log($"[CustomerSpot] myFoodArea 是否為 null: {myFoodArea == null}");
+
         GenerateMealRequest();
-        myFoodArea.SetCustomer(currentCustomer, wantedMeal);
+
+        if (myFoodArea != null)
+        {
+            Debug.Log($"[CustomerSpot] 準備呼叫 myFoodArea.SetCustomer, wantedMeal: {wantedMeal}");
+            myFoodArea.SetCustomer(currentCustomer, wantedMeal);
+        }
+        else
+        {
+            Debug.LogError("[CustomerSpot] myFoodArea 是 null！無法設定客人！");
+        }
     }
 
     public void ReleaseSpot()

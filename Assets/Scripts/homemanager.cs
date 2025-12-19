@@ -12,6 +12,10 @@ public class homemanager : MonoBehaviour
     public GameObject lockPanel;  // 關卡鎖定提示面板
     public TextMeshProUGUI lockMessage;  // 提示訊息文字
     public Button okButton;  // 關閉彈窗按鈕
+
+    [Header("Stage Billboards")]
+    public GameObject stage2Billboard;  // 第二關的告示牌
+    public GameObject stage3Billboard;  // 第三關的告示牌
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -19,6 +23,9 @@ public class homemanager : MonoBehaviour
         slider.value = data.bgmvol;
         bgm.volume = data.bgmvol;
         slider.onValueChanged.AddListener(setvolume);
+
+        // 根據關卡解鎖狀態設置 Billboard
+        UpdateBillboards();
     }
 
     // Update is called once per frame
@@ -87,6 +94,23 @@ public class homemanager : MonoBehaviour
         data.bgmvol = value;
     }
 
+    private void UpdateBillboards()
+    {
+        // 如果第二關已解鎖（完成第一關地獄料理），隱藏第二關的 Billboard
+        if (data.hasCompletedStageHellCuisine[0] && stage2Billboard != null)
+        {
+            stage2Billboard.SetActive(false);
+            Debug.Log("[HomeManager] Stage 2 unlocked, hiding billboard");
+        }
+
+        // 如果第三關已解鎖（完成第二關地獄料理），隱藏第三關的 Billboard
+        if (data.hasCompletedStageHellCuisine[1] && stage3Billboard != null)
+        {
+            stage3Billboard.SetActive(false);
+            Debug.Log("[HomeManager] Stage 3 unlocked, hiding billboard");
+        }
+    }
+
     // ==================== SHORTCUTS ====================
     private void HandleShortcuts()
     {
@@ -133,5 +157,8 @@ public class homemanager : MonoBehaviour
         }
 
         Debug.Log("[CHEAT MODE] Added 10 of each ingredient!");
+
+        // 更新 Billboard 狀態
+        UpdateBillboards();
     }
 }
