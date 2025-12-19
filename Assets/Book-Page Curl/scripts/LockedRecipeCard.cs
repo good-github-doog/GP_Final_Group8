@@ -27,6 +27,9 @@ public class LockedRecipeCard : MonoBehaviour
     [Header("Unlocked display (optional)")]
     public string unlockedDisplayName;
 
+    [Header("Unlocked Sprite Override (Manual)")]
+    public Sprite unlockedSpriteOverride; // 只給 ??? 用，解鎖後用這張圖
+
     void OnEnable()
     {
         if (!all.Contains(this)) all.Add(this);
@@ -49,7 +52,25 @@ public class LockedRecipeCard : MonoBehaviour
 
         // ⭐ 圖片只改顯示，不影響功能
         if (icon != null)
-            icon.sprite = unlocked ? data.GetSprite(recipeName) : lockedSprite;
+        {
+            if (!unlocked)
+            {
+                icon.sprite = lockedSprite;
+            }
+            else
+            {
+                Sprite s = unlockedSpriteOverride != null ? unlockedSpriteOverride : data.GetSprite(recipeName);
+
+                // 保底：如果 GetSprite 沒拿到，就不要變白，先用 lockedSprite 頂著
+                icon.sprite = (s != null) ? s : lockedSprite;
+            }
+
+            // 保底：避免 alpha 被你淡入淡出改到 0
+            var c = icon.color;
+            c.a = 1f;
+            icon.color = c;
+        }
+
 
         // ⭐ 文字只改顯示
         if (label != null)
