@@ -39,7 +39,7 @@ public class CountingReportManager : MonoBehaviour
             incomeValue = data.incomeServe;
 
             // 懲罰：用今天殺的顧客數 * 每人扣的錢
-            penaltyValue = data.killCountToday * penaltyPerKill;
+            penaltyValue = data.penaltyWrong + data.penaltyKill + data.penaltyOther;
 
             // 如果你目前沒有 todayIncome，也可以先手動在 Inspector 填 incomeValue 測試
         }
@@ -88,6 +88,7 @@ public class CountingReportManager : MonoBehaviour
         print(incomeValue);
         // 懲罰高度
         float penaltyH = maxBarHeight * (penaltyValue / max);
+        print(penaltyValue);
 
         if (incomeBar != null)
         {
