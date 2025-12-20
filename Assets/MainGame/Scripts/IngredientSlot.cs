@@ -15,12 +15,17 @@ public class IngredientSlot : MonoBehaviour, IPointerDownHandler
     public CanvasGroup canvasGroup; // 用來控制透明度或互動性
 
     private RectTransform parentCanvas;
+    private ScrollRect parentScrollRect;
 
     private void Start()
     {
         if (parentCanvas == null)
         {
             parentCanvas = GetComponentInParent<Canvas>().GetComponent<RectTransform>();
+        }
+        if (parentScrollRect == null)
+        {
+            parentScrollRect = GetComponentInParent<ScrollRect>();
         }
         UpdateUI();
     }
@@ -45,20 +50,31 @@ public class IngredientSlot : MonoBehaviour, IPointerDownHandler
         Debug.Log($"點擊了食材槽：{ingredientName}，剩餘數量：{count}");
         if (count > 0)
         {
-            CreateNewCard();
+            CreateNewCard(eventData);
             count--;
             UpdateUI();
         }
     }
 
-    private void CreateNewCard()
+    private void CreateNewCard(PointerEventData eventData)
     {
         if (ingredientCardPrefab == null) return;
+
+        if (parentCanvas == null)
+        {
+            parentCanvas = GetComponentInParent<Canvas>().GetComponent<RectTransform>();
+        }
+        if (parentScrollRect == null)
+        {
+            parentScrollRect = GetComponentInParent<ScrollRect>();
+        }
 
         GameObject newCard = Instantiate(ingredientCardPrefab, parentCanvas.transform);
         IngredientCard card = newCard.GetComponent<IngredientCard>();
         card.Setup(this, ingredientName);
-        card.transform.position = Mouse.current.position.ReadValue();
+        card.SetParentScrollRect(parentScrollRect);
+        card.transform.position = eventData.position;
+        card.StartAutoDrag();
     }
 
     public void ReturnCard()
