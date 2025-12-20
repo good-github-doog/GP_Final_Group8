@@ -54,7 +54,12 @@ public class CombineManager : MonoBehaviour
 
         // other
         {"burgerbun", "bun"}, {"sandwich", "sand"}, {"burgerbun+sandwich", "sabu"}, {"dough+oven", "bread"},
-        {"apple", "apple"}, {"kiwi", "kiwi"}, {"tomato", "tomato"}, {"pineapple", "pineapple"}
+        {"apple", "apple"}, {"kiwi", "kiwi"}, {"tomato", "tomato"}, {"pineapple", "pineapple"},
+        {"burgerbun+cheese+lettuce", "nmeatburger"},
+        {"beef+burgerbun+cheese", "nletbeefbur"}, {"burgerbun+cheese+pork", "nletporkbur"}, {"burgerbun+cheese+steak", "nletsteakbur"},
+        {"burgerbun+cheese+shrimp", "nletshrimpbur"}, {"burgerbun+cheese+salmon", "nletsalmonbur"}, {"burgerbun+cheese+lobster", "nletlobsterbur"},
+        {"beef+burgerbun+lettuce", "nchebeefbur"}, {"burgerbun+lettuce+pork", "ncheporkbur"}, {"burgerbun+lettuce+steak", "nchesteakbur"},
+        {"burgerbun+lettuce+shrimp", "ncheshrimpbur"}, {"burgerbun+lettuce+salmon", "nchesalmonbur"}, {"burgerbun+lettuce+lobster", "nchelobsterbur"}
 
     };
 

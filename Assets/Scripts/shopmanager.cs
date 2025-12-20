@@ -41,7 +41,7 @@ public class shopmanager : MonoBehaviour
         if (data.nowstage >= 2 || data.clearstage >= 2) Settoolitem("oven");
         foreach (var remains in data.inbag)
         {
-            if (remains.quantity == 0) continue;
+            if (remains.quantity <= 0) continue;
             GameObject uiObj = pool.GetObject();
             uiObj.GetComponent<ingredient>().setingredient(remains.name, remains.quantity);
         }
@@ -225,10 +225,19 @@ public class shopmanager : MonoBehaviour
         data.ingreds_data isexist = data.inbag.Find(x => x.name == nowbuyingitem);
         if (isexist != null)
         {
-            isexist.quantity += amount;
-            GameObject numup = pool.pool.Find(obj => obj.GetComponent<ingredient>().thename == nowbuyingitem);
-            if (numup != null)
-                numup.GetComponent<ingredient>().updatenum(isexist.quantity);
+            if (isexist.quantity > 0)
+            {
+                isexist.quantity += amount;
+                GameObject numup = pool.pool.Find(obj => obj.GetComponent<ingredient>().thename == nowbuyingitem);
+                if (numup != null)
+                    numup.GetComponent<ingredient>().updatenum(isexist.quantity);
+            }
+            else 
+            {
+                isexist.quantity = amount;
+                GameObject uiObj = pool.GetObject();
+                uiObj.GetComponent<ingredient>().setingredient(nowbuyingitem, isexist.quantity);
+            }
         }
         else
         {

@@ -7,7 +7,7 @@ public static class illustdata
     public static Dictionary<int, string> illustype = new Dictionary<int, string>()
     {
         {0, "burger"}, {1, "sandwich"}, {2, "salad"}, {3, "pizza"}, {4, "highlevel"},
-        {5, "2nd made ingred"}, {6, "wheatbread"}, {7, "fruit"}, {8, "hell"}
+        {5, "2nd made ingred"}, {6, "wheatbread"}, {7, "fruit"}, {8, "3madeburger"}, {9, "hell"}
     };
 
     public static Dictionary<string, List<string>> illustlist = new Dictionary<string, List<string>>()
@@ -20,6 +20,9 @@ public static class illustdata
         {"highlevel", new List<string>(){"doublesaucesteak", "gumbo", "grilllobimp"}},
         {"wheatbread", new List<string>(){"bun", "sand", "sabu", "bread"}},
         {"fruit", new List<string>(){"apple", "kiwi", "tomato", "pineapple"}},
+        {"3madeburger", new List<string>(){"nmeatburger", "nletbeefbur", "nletporkbur", "nletsteakbur",
+            "nletshrimpbur", "nletsalmonbur", "nletlobsterbur", "nchebeefbur", "ncheporkbur", "nchesteakbur",
+            "ncheshrimpbur", "nchesalmonbur", "nchelobsterbur"}},
         {"hell", new List<string>(){"meatjuice", "seafoodjuice", "rawsealandpizza", "chaos"}}
     };
 
@@ -33,6 +36,7 @@ public static class illustdata
         {"highlevel", "Level 3"},
         {"wheatbread", "bread"},
         {"fruit", "fruit"},
+        {"3madeburger", "bur w/o 1"},
         {"hell", "crazy"},
         
         {"beefburger", "burger"}, {"porkburger", "burger"}, {"steakburger", "burger"}, {"shrimpburger", "burger"}, {"salmonburger", "burger"}, {"lobsterburger", "burger"},
@@ -43,6 +47,10 @@ public static class illustdata
         {"doublesaucesteak", "highlevel"}, {"gumbo", "highlevel"}, {"grilllobimp", "highlevel"},
         {"bun", "bread"}, {"sand", "bread"}, {"sabu", "bread"}, {"bread", "bread"},
         {"apple", "fruit"}, {"kiwi", "fruit"}, {"tomato", "fruit"}, {"pineapple", "fruit"},
+        {"nmeatburger", "3madeburger"}, {"nletbeefbur", "3madeburger"}, {"nletporkbur", "3madeburger"}, {"nletsteakbur", "3madeburger"},
+        {"nletshrimpbur", "3madeburger"}, {"nletsalmonbur", "3madeburger"}, {"nletlobsterbur", "3madeburger"}, {"nchebeefbur", "3madeburger"},
+        {"ncheporkbur", "3madeburger"}, {"nchesteakbur", "3madeburger"}, {"ncheshrimpbur", "3madeburger"},
+        {"nchesalmonbur", "3madeburger"}, {"nchelobsterbur", "3madeburger"},
         {"meatjuice", "hell"}, {"seafoodjuice", "hell"}, {"rawsealandpizza", "hell"}, {"chaos", "hell"}
     };
 
@@ -56,6 +64,7 @@ public static class illustdata
         {"highlevel", "is the difficult one to make"},
         {"wheatbread", "just the bread or bun"},
         {"fruit", "just the raw fruit"},
+        {"3madeburger", "burger with out one ingred"},
         {"hell", "can you unlock all of them ?"},
 
         {"beefburger", "name : beefburger\nA delicious beef burger with fresh ingredients."},
@@ -97,6 +106,20 @@ public static class illustdata
         {"tomato", "name : tomato\nA ripe and flavorful tomato."},
         {"pineapple", "name : pineapple\nA sweet and tangy pineapple."},
 
+        {"nmeatburger", "name : nmeatburger\nA burger made without meat."},
+        {"nletbeefbur", "name : nletbeefbur\nA beef burger without lettuce."},
+        {"nletporkbur", "name : nletporkbur\nA pork burger without lettuce."},
+        {"nletsteakbur", "name : nletsteakbur\nA steak burger without lettuce."},
+        {"nletshrimpbur", "name : nletshrimpbur\nA shrimp burger without lettuce."},
+        {"nletsalmonbur", "name : nletsalmonbur\nA salmon burger without lettuce."},
+        {"nletlobsterbur", "name : nletlobsterbur\nA lobster burger without lettuce."},
+        {"nchebeefbur", "name : nchebeefbur\nA beef burger without cheese."},
+        {"ncheporkbur", "name : ncheporkbur\nA pork burger without cheese."},
+        {"nchesteakbur", "name : nchesteakbur\nA steak burger without cheese."},
+        {"ncheshrimpbur", "name : ncheshrimpbur\nA shrimp burger without cheese."},
+        {"nchesalmonbur", "name : nchesalmonbur\nA salmon burger without cheese."},
+        {"nchelobsterbur", "name : nchelobsterbur\nA lobster burger without cheese."},
+
         {"meatjuice", "name : meatjuice\nA unique juice blend of fruits and meats."},
         {"seafoodjuice", "name : seafoodjuice\nA refreshing juice mix of fruits and seafood."},
         {"rawsealandpizza", "name : rawsealandpizza\nA raw pizza combining meat and seafood flavors."},
@@ -113,6 +136,10 @@ public static class illustdata
         {"doublesaucesteak", false}, {"gumbo", false}, {"grilllobimp", false},
         {"bun", false}, {"sand", false}, {"sabu", false}, {"bread", false},
         {"apple", false}, {"kiwi", false}, {"tomato", false}, {"pineapple", false},
+        {"nmeatburger", false}, {"nletbeefbur", false}, {"nletporkbur", false}, {"nletsteakbur", false},
+        {"nletshrimpbur", false}, {"nletsalmonbur", false}, {"nletlobsterbur", false}, {"nchebeefbur", false},
+        {"ncheporkbur", false}, {"nchesteakbur", false}, {"ncheshrimpbur", false},
+        {"nchesalmonbur", false}, {"nchelobsterbur", false},
         {"meatjuice", false}, {"seafoodjuice", false}, {"rawsealandpizza", false}, {"chaos", false}
     };
 
@@ -156,6 +183,20 @@ public static class illustdata
         {"kiwi", new List<string>(){"kiwi"}},
         {"tomato", new List<string>(){"tomato"}},
         {"pineapple", new List<string>(){"pineapple"}},
+
+        {"nmeatburger", new List<string>(){"burgerbun", "cheese", "lettuce"}},
+        {"nletbeefbur", new List<string>(){"beef", "burgerbun", "cheese"}},
+        {"nletporkbur", new List<string>(){"pork", "burgerbun", "cheese"}},
+        {"nletsteakbur", new List<string>(){"steak", "burgerbun", "cheese"}},
+        {"nletshrimpbur", new List<string>(){"shrimp", "burgerbun", "cheese"}},
+        {"nletsalmonbur", new List<string>(){"salmon", "burgerbun", "cheese"}},
+        {"nletlobsterbur", new List<string>(){"lobster", "burgerbun", "cheese"}},
+        {"nchebeefbur", new List<string>(){"beef", "burgerbun", "lettuce"}},
+        {"ncheporkbur", new List<string>(){"pork", "burgerbun", "lettuce"}},
+        {"nchesteakbur", new List<string>(){"steak", "burgerbun", "lettuce"}},
+        {"ncheshrimpbur", new List<string>(){"shrimp", "burgerbun", "lettuce"}},
+        {"nchesalmonbur", new List<string>(){"salmon", "burgerbun", "lettuce"}},
+        {"nchelobsterbur", new List<string>(){"lobster", "burgerbun", "lettuce"}},
 
         {"meatjuice", new List<string>(){"fruit", "fruit", "meat", "mixer"}},
         {"seafoodjuice", new List<string>(){"fruit", "fruit", "mixer", "seafood"}},
