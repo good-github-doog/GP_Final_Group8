@@ -597,6 +597,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: UnityEngine.AudioSource, UnityEngine
+        m_MethodName: PlayOneShot
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 8300000, guid: 2eef1bb2a32242e4bba53fea1bbb94c6, type: 3}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.AudioClip, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &615376115233395483
 GameObject:
   m_ObjectHideFlags: 0
@@ -759,7 +771,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &576303360614454812
 RectTransform:
   m_ObjectHideFlags: 0
@@ -989,7 +1001,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Hawaii Pizza:\nCheese \nDough\nMushroom\nPineapple\n\n\n$160\nHint: Combine
+  m_text: "Hawaii Pizza:\nCheese \nDough\nMushroom\nPineapple\n\n\n$330\nHint: Combine
     the four ingredients with the oven to make a pizza."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 96bcce8dd019968439a6d6809f5138fd, type: 2}
@@ -2275,6 +2287,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: UnityEngine.AudioSource, UnityEngine
+        m_MethodName: PlayOneShot
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 8300000, guid: 2eef1bb2a32242e4bba53fea1bbb94c6, type: 3}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.AudioClip, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &5440174332802911479
 GameObject:
   m_ObjectHideFlags: 0
@@ -3235,7 +3259,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Seafood Pizza:\nCheese \nDough\nShrimp\n\n\n$170\nHint: Combine the three
+  m_text: "Seafood Pizza:\nCheese \nDough\nShrimp\n\n\n$350\nHint: Combine the three
     ingredients with the oven to make a pizza."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 96bcce8dd019968439a6d6809f5138fd, type: 2}
@@ -3779,7 +3803,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "margheritapizza:\nCheese \nDough\nTomato\n\n\n$130\nHint: Combine the
+  m_text: "margheritapizza:\nCheese \nDough\nTomato\n\n\n$300\nHint: Combine the
     three ingredients with the oven to make a pizza."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 96bcce8dd019968439a6d6809f5138fd, type: 2}
