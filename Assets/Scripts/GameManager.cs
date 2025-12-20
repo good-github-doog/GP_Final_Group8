@@ -13,14 +13,16 @@ public class GameManager : MonoBehaviour
         "open the settings",
         "ingredients",
         "combine",
-        "serve"
+        "serve",
+        "kill"
     };
     private List<string> theguidedescs = new List<string>() {
         "the money\nremaining time",
         " ", " ",
         "in this area, are the ingredients you have\nyou can tap and drag to the combine area",
         "press the cook button to combine the ingredients in the area, to make the dish",
-        "drag the made dish to the serve area to serve the customer"
+        "drag the made dish to the serve area to serve the customer",
+        "press 1~5 to kill, and gain some ingred, but too often will have panalty"
     };
 
     private float timer = 120f;

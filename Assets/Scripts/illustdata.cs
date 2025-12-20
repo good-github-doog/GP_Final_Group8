@@ -7,7 +7,7 @@ public static class illustdata
     public static Dictionary<int, string> illustype = new Dictionary<int, string>()
     {
         {0, "burger"}, {1, "sandwich"}, {2, "salad"}, {3, "pizza"}, {4, "highlevel"},
-        {5, "2nd made ingred"}, {6, "wheatbread"}, {7, "fruit"}, {8, "3madeburger"}, {9, "hell"}
+        {5, "2nd made ingred"}, {6, "wheatbread"}, {7, "fruit"}, {8, "3madeburger"}, {9, "bigpoop"}, {10, "hell"}
     };
 
     public static Dictionary<string, List<string>> illustlist = new Dictionary<string, List<string>>()
@@ -23,6 +23,7 @@ public static class illustdata
         {"3madeburger", new List<string>(){"nmeatburger", "nletbeefbur", "nletporkbur", "nletsteakbur",
             "nletshrimpbur", "nletsalmonbur", "nletlobsterbur", "nchebeefbur", "ncheporkbur", "nchesteakbur",
             "ncheshrimpbur", "nchesalmonbur", "nchelobsterbur"}},
+        {"bigpoop", new List<string>(){"poop"}},
         {"hell", new List<string>(){"meatjuice", "seafoodjuice", "rawsealandpizza", "chaos"}}
     };
 
@@ -37,6 +38,7 @@ public static class illustdata
         {"wheatbread", "bread"},
         {"fruit", "fruit"},
         {"3madeburger", "bur w/o 1"},
+        {"bigpoop", "poop"},
         {"hell", "crazy"},
         
         {"beefburger", "burger"}, {"porkburger", "burger"}, {"steakburger", "burger"}, {"shrimpburger", "burger"}, {"salmonburger", "burger"}, {"lobsterburger", "burger"},
@@ -51,6 +53,7 @@ public static class illustdata
         {"nletshrimpbur", "3madeburger"}, {"nletsalmonbur", "3madeburger"}, {"nletlobsterbur", "3madeburger"}, {"nchebeefbur", "3madeburger"},
         {"ncheporkbur", "3madeburger"}, {"nchesteakbur", "3madeburger"}, {"ncheshrimpbur", "3madeburger"},
         {"nchesalmonbur", "3madeburger"}, {"nchelobsterbur", "3madeburger"},
+        {"poop", "poop"},
         {"meatjuice", "hell"}, {"seafoodjuice", "hell"}, {"rawsealandpizza", "hell"}, {"chaos", "hell"}
     };
 
@@ -65,6 +68,7 @@ public static class illustdata
         {"wheatbread", "just the bread or bun"},
         {"fruit", "just the raw fruit"},
         {"3madeburger", "burger with out one ingred"},
+        {"bigpoop", "poop..."},
         {"hell", "can you unlock all of them ?"},
 
         {"beefburger", "name : beefburger\nA delicious beef burger with fresh ingredients."},
@@ -120,6 +124,8 @@ public static class illustdata
         {"nchesalmonbur", "name : nchesalmonbur\nA salmon burger without cheese."},
         {"nchelobsterbur", "name : nchelobsterbur\nA lobster burger without cheese."},
 
+        {"poop", "poooop\npooop\npoop\npop\npp"},
+
         {"meatjuice", "name : meatjuice\nA unique juice blend of fruits and meats."},
         {"seafoodjuice", "name : seafoodjuice\nA refreshing juice mix of fruits and seafood."},
         {"rawsealandpizza", "name : rawsealandpizza\nA raw pizza combining meat and seafood flavors."},
@@ -140,6 +146,7 @@ public static class illustdata
         {"nletshrimpbur", false}, {"nletsalmonbur", false}, {"nletlobsterbur", false}, {"nchebeefbur", false},
         {"ncheporkbur", false}, {"nchesteakbur", false}, {"ncheshrimpbur", false},
         {"nchesalmonbur", false}, {"nchelobsterbur", false},
+        {"poop", false},
         {"meatjuice", false}, {"seafoodjuice", false}, {"rawsealandpizza", false}, {"chaos", false}
     };
 
@@ -197,6 +204,8 @@ public static class illustdata
         {"ncheshrimpbur", new List<string>(){"shrimp", "burgerbun", "lettuce"}},
         {"nchesalmonbur", new List<string>(){"salmon", "burgerbun", "lettuce"}},
         {"nchelobsterbur", new List<string>(){"lobster", "burgerbun", "lettuce"}},
+
+        {"poop", new List<string>(){}},
 
         {"meatjuice", new List<string>(){"fruit", "fruit", "meat", "mixer"}},
         {"seafoodjuice", new List<string>(){"fruit", "fruit", "mixer", "seafood"}},

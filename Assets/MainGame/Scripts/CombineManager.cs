@@ -110,8 +110,8 @@ public class CombineManager : MonoBehaviour
             if (resultName == null) resultName = resultbytype;
         }
 
-        if (resultName != null)
-        {
+        if (resultName == null) resultName = "poop";
+        
             Debug.Log($"合成成功：{resultName}");
 
             if (illustdata.isunlocked[resultName] == false)
@@ -188,11 +188,12 @@ public class CombineManager : MonoBehaviour
                     Debug.Log("完成 Stage 3 地獄料理！");
                 }
             }
-        }
+        
+        /*
         else
         {
             Debug.Log("沒有這個配方！");
             combineArea.ClearArea();
-        }
+        }*/
     }
 }

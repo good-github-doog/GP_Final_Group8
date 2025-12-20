@@ -5,11 +5,16 @@ using System.Threading.Tasks;
 using TMPro;
 using UnityEngine.SceneManagement;
 using System;
+using UnityEngine.UI;
+using System.Collections.Generic;
 
 public class UserLoginManager : MonoBehaviour
 {
     public TMP_InputField usernameInput;
     public TMP_InputField passwordInput;
+    public Slider slider;
+    public AudioSource bgm;
+    public GameObject setpanel;
     [SerializeField] private string homeSceneName = "Home";
     private bool hasLoadedHome = false;
 
@@ -17,6 +22,10 @@ public class UserLoginManager : MonoBehaviour
     {
         await UnityServices.InitializeAsync();
         Debug.Log("服務初始化完成");
+
+        slider.value = data.bgmvol;
+        bgm.volume = data.bgmvol;
+        slider.onValueChanged.AddListener(setvolume);
         
         // (選用功能) 檢查是否已經有登入過的快取
         if (AuthenticationService.Instance.IsSignedIn)
@@ -100,5 +109,23 @@ public class UserLoginManager : MonoBehaviour
 
         hasLoadedHome = true;
         SceneManager.LoadScene(homeSceneName);
+    }
+
+    public void setvolume(float value)
+    {
+        bgm.volume = value;
+        data.bgmvol = value;
+    }
+
+    public void opensetting()
+    {
+        setpanel.SetActive(true);
+        Time.timeScale = 0f;
+    }
+
+    public void closesetting()
+    {
+        setpanel.SetActive(false);
+        Time.timeScale = 1f;
     }
 }
