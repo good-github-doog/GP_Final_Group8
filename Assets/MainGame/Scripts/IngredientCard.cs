@@ -11,6 +11,7 @@ public class IngredientCard : MonoBehaviour, IBeginDragHandler, IDragHandler, IE
     private IngredientSlot sourceSlot; // 來源卡，用於退回數量
     public bool droppedInCombine = false;
     private bool autoDragging = false;
+    private ScrollRect parentScrollRect;
 
     public string ingredientName;
     public string ingredinetType;
@@ -34,6 +35,7 @@ public class IngredientCard : MonoBehaviour, IBeginDragHandler, IDragHandler, IE
     public void OnBeginDrag(PointerEventData eventData)
     {
         canvasGroup.blocksRaycasts = false;
+        if (parentScrollRect != null) parentScrollRect.enabled = false;
         autoDragging = false; // 若玩家後續手動拖曳，關閉自動拖曳狀態
         // 如果原本在合成區，先從清單中移除
         if (transform.parent != null && transform.parent.TryGetComponent(out CombineArea combineArea) && droppedInCombine)
@@ -62,6 +64,7 @@ public class IngredientCard : MonoBehaviour, IBeginDragHandler, IDragHandler, IE
     public void OnEndDrag(PointerEventData eventData)
     {
         canvasGroup.blocksRaycasts = true;
+        if (parentScrollRect != null) parentScrollRect.enabled = true;
 
         // 如果沒有被成功放到合成區，銷毀並退還數量
         if (!droppedInCombine)
@@ -85,6 +88,7 @@ public class IngredientCard : MonoBehaviour, IBeginDragHandler, IDragHandler, IE
         {
             canvasGroup.blocksRaycasts = false;
         }
+        if (parentScrollRect != null) parentScrollRect.enabled = false;
     }
 
     private void Update()
@@ -117,5 +121,11 @@ public class IngredientCard : MonoBehaviour, IBeginDragHandler, IDragHandler, IE
 
             OnEndDrag(eventData);
         }
+    }
+
+    public void SetParentScrollRect(ScrollRect scrollRect)
+    {
+        parentScrollRect = scrollRect;
+        if (parentScrollRect != null) parentScrollRect.enabled = false;
     }
 }
