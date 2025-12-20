@@ -28,6 +28,7 @@ public class CloudSaveManager : MonoBehaviour
         public int money;
         public List<IngredientEntry> inbag;
         public bool[] hasCompletedStageHellCuisine;
+        public bool[] hintUnlockedByStage;
         public List<string> unlockedIllusts;
     }
 
@@ -48,6 +49,7 @@ public class CloudSaveManager : MonoBehaviour
         {
             money = data.money,
             hasCompletedStageHellCuisine = data.hasCompletedStageHellCuisine,
+            hintUnlockedByStage = data.hintUnlockedByStage,
             inbag = new List<IngredientEntry>(),
             unlockedIllusts = new List<string>()
         };
@@ -104,6 +106,7 @@ public class CloudSaveManager : MonoBehaviour
 
             data.money = saveData.money;
             data.hasCompletedStageHellCuisine = saveData.hasCompletedStageHellCuisine ?? new bool[3] { false, false, false };
+            data.hintUnlockedByStage = saveData.hintUnlockedByStage ?? new bool[3] { false, false, false };
 
             data.inbag.Clear();
             if (saveData.inbag != null)
