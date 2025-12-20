@@ -43,6 +43,11 @@ public class CustomerManager : MonoBehaviour
     public KeyCode spotBKey = KeyCode.Alpha2;
     public KeyCode spotCKey = KeyCode.Alpha3;
     public KeyCode spotDKey = KeyCode.Alpha4;
+    public KeyCode spotEKey = KeyCode.Alpha5;
+
+    [Header("Kill Cooldown")]
+    public float killCooldownTime = 20f;  // 冷卻時間（秒）
+    private float lastKillTime = -999f;  // 上次殺顧客的時間（初始值設為很久以前）
 
     // ==================== UNITY LIFECYCLE ====================
     private void Awake()
@@ -79,11 +84,24 @@ public class CustomerManager : MonoBehaviour
         {
             KillCustomerAtSpot(3);
         }
+
+        if (Input.GetKeyDown(spotEKey) && customerSpots.Count > 4)
+        {
+            KillCustomerAtSpot(4);
+        }
     }
 
     // ==================== CUSTOMER INTERACTION ====================
     private void KillCustomerAtSpot(int spotIndex)
     {
+        // 檢查冷卻時間
+        if (Time.time - lastKillTime < killCooldownTime)
+        {
+            float remainingTime = killCooldownTime - (Time.time - lastKillTime);
+            Debug.Log($"[CustomerManager] Kill on cooldown! Please wait {remainingTime:F1} seconds.");
+            return;
+        }
+
         CustomerSpot spot = customerSpots[spotIndex];
 
         if (spot.IsOccupied && spot.CurrentCustomer != null)
@@ -95,6 +113,9 @@ public class CustomerManager : MonoBehaviour
 
     private System.Collections.IEnumerator KillCustomer(Customer customer, int spotIndex)
     {
+        // 設置冷卻時間
+        lastKillTime = Time.time;
+
         CustomerType customerType = customer.GetCustomerType();
 
         Debug.Log($"[CustomerManager] Customer killed by player. Type: {customerType}");
@@ -438,6 +459,12 @@ public class CustomerManager : MonoBehaviour
     private System.Collections.IEnumerator StartPanicSequenceWithDelay(Customer customer, float delay)
     {
         yield return new WaitForSeconds(delay);
+
+        // 檢查 customer 是否還存在（可能已經被殺死）
+        if (customer == null)
+        {
+            yield break;
+        }
 
         // Set navigation priority based on delay
         UnityEngine.AI.NavMeshAgent agent = customer.GetComponent<UnityEngine.AI.NavMeshAgent>();

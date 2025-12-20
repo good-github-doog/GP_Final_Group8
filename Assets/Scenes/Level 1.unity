@@ -822,11 +822,7 @@ MonoBehaviour:
   doorOuterPoints:
   - {fileID: 1496650665}
   - {fileID: 825266551}
-  panicPoints:
-  - {fileID: 2577485000290644003}
-  - {fileID: 8384986380595996847}
-  - {fileID: 346396015915571886}
-  - {fileID: 5558516788248245998}
+  panicPoints: []
   minPanicStops: 2
   maxPanicStops: 4
   panicMoveSpeed: 5
@@ -835,6 +831,7 @@ MonoBehaviour:
   spotBKey: 50
   spotCKey: 51
   spotDKey: 52
+  killCooldownTime: 20
 --- !u!4 &1339529658
 Transform:
   m_ObjectHideFlags: 0
