@@ -72,7 +72,7 @@ public static class data
     public static int clearstage = 2;
     public static int nowstage = 1;
     public static int isPanicMode = 0; // 0 = normal, 1 = panic (killing event occurred)
-    public static int hintPrice = 100;
+    public static int hintPrice = 4000;
     // 每關是否已買過 Hint（Stage 1~3）
     // index: 0->stage1, 1->stage2, 2->stage3
     public static bool[] hintUnlockedByStage = new bool[3] { false, false, false };

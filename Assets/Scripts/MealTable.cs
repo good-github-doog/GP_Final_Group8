@@ -19,16 +19,43 @@ public static class MealTable
 
     public static Dictionary<int, string> OrderText = new Dictionary<int, string>()
     {
-        {0, "beef burger..."}, {1, "burger with pig"}, {2, "fish burger ?"}, {3, "burger...but shrimp"}, {4, "higher level of shrimp burger.."}, {5, "i want steak...but still burger"},
-        {6, "beef sand..."}, {7, "sand with pig"}, {8, "fish sand ?"}, {9, "sand...but shrimp"}, {10, "higher level of shrimp sand.."}, {11, "i want steak...but still sand"},
-        {12, "salad with no doctor"}, {13, "green salad"}, {14, "toto salad"}, {15, "yello ..lad"},
-        {16, "juice ??"}, {17, "juice??"},
+        // Burgers
+        {0, "I'll have a beef burger"},
+        {1, "Give me a pork burger"},
+        {2, "One salmon burger, please"},
+        {3, "I want a shrimp burger"},
+        {4, "A lobster burger for me"},
+        {5, "I'd like a steak burger"},
+        
+        // Sandwiches
+        {6, "Beef sandwich, thanks"},
+        {7, "Can I get a pork sandwich?"},
+        {8, "Salmon sandwich sounds good"},
+        {9, "Shrimp sandwich, please"},
+        {10, "I'll take the lobster sandwich"},
+        {11, "One steak sandwich"},
+        
+        // Salads
+        {12, "An apple salad would be nice"},
+        {13, "Kiwi salad for me"},
+        {14, "I want a tomato salad"},
+        {15, "Pineapple salad, please"},
+        
+        // Juices
+        {16, "Can I have some juice?"},
+        {17, "Can I have some juice?"},
 
-        {18, "classic marg.."}, {19, "exotic one.."}, {20, "seeeaaa foooood~~"},
-        {21, "something special..."},
+        // Pizzas
+        {18, "Classic margherita pizza"},
+        {19, "I'll try the Hawaii pizza"},
+        {20, "Seafood pizza sounds delicious"},
+        {21, "What's this chef special?"},
 
-        {22, "lobimp ?"}, {23, "some soup.."}, {24, "steak...with sauce"},
-        {25, "Chaos~!>?~!<"}
+        // Special dishes
+        {22, "Grilled lobimp? What's that?"},
+        {23, "I'll have the gumbo"},
+        {24, "Double sauce steak, please"},
+        {25, "Surprise me!"}
     };
 
     // 🔹 每一道料理的售價（自己改成你要的數字）

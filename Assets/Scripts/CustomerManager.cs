@@ -192,7 +192,7 @@ public class CustomerManager : MonoBehaviour
         if (data.IsGameOver())
         {
             Debug.Log("[CustomerManager] 3 kills reached! Resetting game data and switching to Home scene...");
-            data.BeginNewDay();
+            data.reset();
             SceneManager.LoadScene("Home");
             yield break;
         }

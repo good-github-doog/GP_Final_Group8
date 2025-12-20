@@ -27,6 +27,12 @@ public class shopmanager : MonoBehaviour
     private int amount = 1;
     private int totalprise = 0;
     private int maxbuyamount = 99;
+
+    [Header("Hint UI (Confirm / Bought)")]
+    public GameObject hintConfirmRoot;   // Yes/No 那坨
+    public GameObject hintBoughtRoot;    // 已購買圖片那坨
+    public Button hintYesButton;         // 可選：要鎖互動
+    public Button hintNoButton;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -41,7 +47,7 @@ public class shopmanager : MonoBehaviour
         if (data.nowstage >= 2 || data.clearstage >= 2) Settoolitem("oven");
         foreach (var remains in data.inbag)
         {
-            if (remains.quantity == 0) continue;
+            if (remains.quantity <= 0) continue;
             GameObject uiObj = pool.GetObject();
             uiObj.GetComponent<ingredient>().setingredient(remains.name, remains.quantity);
         }
@@ -111,6 +117,26 @@ public class shopmanager : MonoBehaviour
     public void openhint()
     {
         hintpanel.SetActive(true);
+        bool bought;
+        switch (data.nowstage)
+        {
+            case 1:
+                bought = data.hintUnlockedByStage[0];
+                break;
+            case 2:
+                bought = data.hintUnlockedByStage[1];
+                break;
+            case 3:
+                bought = data.hintUnlockedByStage[2];
+                break;
+            default:
+                bought = false;
+                break;
+        }
+        if (hintConfirmRoot != null) hintConfirmRoot.SetActive(!bought);
+        if (hintBoughtRoot != null) hintBoughtRoot.SetActive(bought);
+        if (hintYesButton != null) hintYesButton.interactable = !bought;
+        if (hintNoButton != null)  hintNoButton.interactable  = !bought;
     }
 
     public void closehint()
@@ -136,23 +162,34 @@ public class shopmanager : MonoBehaviour
     {
         // 解鎖「當前關卡」的 hint
         
-        switch (data.nowstage)
+        if (data.money >= data.hintPrice)
         {
-            case 1:
-                data.hintUnlockedByStage[0] = true;
-                break;
-            case 2:
-                data.hintUnlockedByStage[1] = true;
-                break;
-            case 3:
-                data.hintUnlockedByStage[2] = true;
-                break;
+            switch (data.nowstage)
+            {
+                case 1:
+                    data.hintUnlockedByStage[0] = true;
+                    break;
+                case 2:
+                    data.hintUnlockedByStage[0] = true;
+                    break;
+                case 3:
+                    data.hintUnlockedByStage[0] = true;
+                    break;
+            }
+            data.money -= data.hintPrice;
+            show.text = "" + data.money;
+            if (hintConfirmRoot != null) hintConfirmRoot.SetActive(false);
+            if (hintBoughtRoot != null) hintBoughtRoot.SetActive(true);
+            if (hintYesButton != null) hintYesButton.interactable = false;
+            if (hintNoButton != null)  hintNoButton.interactable  = false;
+            Debug.Log($"[Hint] Stage {data.nowstage} hint unlocked. Price = {data.hintPrice} (not charged yet)");
+
         }
+        else return;
+        
+        
 
-        Debug.Log($"[Hint] Stage {data.nowstage} hint unlocked. Price = {data.hintPrice} (not charged yet)");
-
-        // 先關掉購買介面
-        closehint();
+        
 
         if (effect != null && clicksound != null) effect.PlayOneShot(clicksound);
     }
@@ -225,10 +262,19 @@ public class shopmanager : MonoBehaviour
         data.ingreds_data isexist = data.inbag.Find(x => x.name == nowbuyingitem);
         if (isexist != null)
         {
-            isexist.quantity += amount;
-            GameObject numup = pool.pool.Find(obj => obj.GetComponent<ingredient>().thename == nowbuyingitem);
-            if (numup != null)
-                numup.GetComponent<ingredient>().updatenum(isexist.quantity);
+            if (isexist.quantity > 0)
+            {
+                isexist.quantity += amount;
+                GameObject numup = pool.pool.Find(obj => obj.GetComponent<ingredient>().thename == nowbuyingitem);
+                if (numup != null)
+                    numup.GetComponent<ingredient>().updatenum(isexist.quantity);
+            }
+            else 
+            {
+                isexist.quantity = amount;
+                GameObject uiObj = pool.GetObject();
+                uiObj.GetComponent<ingredient>().setingredient(nowbuyingitem, isexist.quantity);
+            }
         }
         else
         {

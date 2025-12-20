@@ -64,7 +64,7 @@ public class IngredientManager : MonoBehaviour
     }
 
     /// 將當前 Slot 的數量更新回 data.inbag
-    private void SaveSlotsToData()
+    public void SaveSlotsToData()
     {
         foreach (var slot in activeSlots)
         {
