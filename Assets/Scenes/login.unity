@@ -2931,6 +2931,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::UserLoginManager
   usernameInput: {fileID: 56812778}
   passwordInput: {fileID: 599721065}
+  homeSceneName: Home
 --- !u!4 &1406757948
 Transform:
   m_ObjectHideFlags: 0

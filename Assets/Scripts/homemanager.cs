@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
 using UnityEngine.UI;
+using System.Collections.Generic;
 
 public class homemanager : MonoBehaviour
 {
@@ -96,18 +97,34 @@ public class homemanager : MonoBehaviour
 
     private void UpdateBillboards()
     {
-        // 如果第二關已解鎖（完成第一關地獄料理），隱藏第二關的 Billboard
-        if (data.hasCompletedStageHellCuisine[0] && stage2Billboard != null)
+        // Stage 2 Billboard 邏輯
+        if (stage2Billboard != null)
         {
-            stage2Billboard.SetActive(false);
-            Debug.Log("[HomeManager] Stage 2 unlocked, hiding billboard");
+            if (data.hasCompletedStageHellCuisine[0])
+            {
+                stage2Billboard.SetActive(false);
+                Debug.Log("[HomeManager] Stage 2 unlocked, hiding billboard");
+            }
+            else
+            {
+                stage2Billboard.SetActive(true);
+                Debug.Log("[HomeManager] Stage 2 locked, showing billboard");
+            }
         }
 
-        // 如果第三關已解鎖（完成第二關地獄料理），隱藏第三關的 Billboard
-        if (data.hasCompletedStageHellCuisine[1] && stage3Billboard != null)
+        // Stage 3 Billboard 邏輯
+        if (stage3Billboard != null)
         {
-            stage3Billboard.SetActive(false);
-            Debug.Log("[HomeManager] Stage 3 unlocked, hiding billboard");
+            if (data.hasCompletedStageHellCuisine[1])
+            {
+                stage3Billboard.SetActive(false);
+                Debug.Log("[HomeManager] Stage 3 unlocked, hiding billboard");
+            }
+            else
+            {
+                stage3Billboard.SetActive(true);
+                Debug.Log("[HomeManager] Stage 3 locked, showing billboard");
+            }
         }
     }
 
@@ -118,6 +135,12 @@ public class homemanager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.C))
         {
             ActivateCheatMode();
+        }
+
+        // R: Reset all data
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            ResetAllData();
         }
     }
 
@@ -160,5 +183,27 @@ public class homemanager : MonoBehaviour
 
         // 更新 Billboard 狀態
         UpdateBillboards();
+    }
+
+    private void ResetAllData()
+    {
+        Debug.Log("[RESET] Resetting all data...");
+
+        // 重置遊戲數據
+        data.reset();
+        Debug.Log("[RESET] Game data reset complete!");
+
+        // 重置所有圖鑑解鎖狀態
+        var keys = new List<string>(illustdata.isunlocked.Keys);
+        foreach (string key in keys)
+        {
+            illustdata.isunlocked[key] = false;
+        }
+        Debug.Log("[RESET] Illustration data reset complete!");
+
+        // 更新 Billboard 狀態
+        UpdateBillboards();
+
+        Debug.Log("[RESET] All data has been reset!");
     }
 }

@@ -237,6 +237,17 @@ public class GameManager : MonoBehaviour
         }
 
         Debug.Log("[CHEAT MODE] Added 10 of each ingredient!");
+
+        IngredientManager ingredientManager = FindAnyObjectByType<IngredientManager>();
+        if (ingredientManager != null)
+        {
+            ingredientManager.RefreshSlots();
+            Debug.Log("[CHEAT MODE] Ingredient list UI refreshed!");
+        }
+        else
+        {
+            Debug.LogWarning("[CHEAT MODE] IngredientManager not found, UI not refreshed");
+        }
     }
 
     public void opensetting()
