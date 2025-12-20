@@ -64,6 +64,17 @@ public class shopmanager : MonoBehaviour
 
     public void nextscene()
     {
+        var saveManager = CloudSaveManager.Instance ?? FindAnyObjectByType<CloudSaveManager>();
+        if (saveManager != null)
+        {
+            _ = saveManager.SaveAsync();
+            Debug.Log("[CloudSave] Save triggered when leaving shop");
+        }
+        else
+        {
+            Debug.LogWarning("[CloudSave] No CloudSaveManager found when leaving shop");
+        }
+
         // Choose scene based on the current stage.
         string sceneName = "Game";
         switch (data.nowstage)

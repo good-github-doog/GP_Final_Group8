@@ -19,6 +19,7 @@ public class GameManager : MonoBehaviour
     public int recipeStartPage = 4;
     public bool FirstTimeInGame = true;
     public bool isRecipeOpen = false;
+    private bool saveTriggeredOnTimeout = false;
 
     void Start()
     {
@@ -58,11 +59,10 @@ public class GameManager : MonoBehaviour
             moneyText.text = "$ " + data.money;   // <-- 持續顯示金錢
         }
 
-        if (timer <= 0f)
+        if (timer <= 0f && !saveTriggeredOnTimeout)
         {
-            //SceneManager.LoadScene("Counting");
-            IrisTransitionCutout.Instance.LoadSceneWithIris("Counting");
-
+            saveTriggeredOnTimeout = true;
+            SaveAndEndDay();
         }
 
         HandleShortcuts();
@@ -149,6 +149,22 @@ public class GameManager : MonoBehaviour
     private void SkipDay()
     {
         Debug.Log("[GameManager] Skipping day...");
+        IrisTransitionCutout.Instance.LoadSceneWithIris("Counting");
+    }
+
+    private void SaveAndEndDay()
+    {
+        var saveManager = CloudSaveManager.Instance ?? FindAnyObjectByType<CloudSaveManager>();
+        if (saveManager != null)
+        {
+            _ = saveManager.SaveAsync();
+            Debug.Log("[CloudSave] Save triggered when timer ended");
+        }
+        else
+        {
+            Debug.LogWarning("[CloudSave] No CloudSaveManager found when timer ended");
+        }
+
         IrisTransitionCutout.Instance.LoadSceneWithIris("Counting");
     }
 
