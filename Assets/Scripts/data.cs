@@ -55,7 +55,7 @@ public static class data
     public static List<ingreds_data> inbag = new List<ingreds_data>();
     public static int killCountToday = 0;
     public static int killCountYesterday = 0;
-    public static int clearstage = 1;
+    public static int clearstage = 2;
     public static int nowstage = 1;
     public static int isPanicMode = 0; // 0 = normal, 1 = panic (killing event occurred)
 

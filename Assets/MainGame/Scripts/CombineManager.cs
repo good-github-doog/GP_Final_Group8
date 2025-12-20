@@ -49,7 +49,7 @@ public class CombineManager : MonoBehaviour
         // 3
         {"butter+lobster+oven+pepper+pineapple+shrimp", "grilllobimp"},
         {"butter+lettuce+mixer+pepper+tomato", "gumbo"},
-        {"oven+beef", "steak"}, {"mixer+mushroom+pepper", "doublesauce"}, {"doublesauce+steak", "doublesaucesteak"},
+        {"beef+oven", "steak"}, {"mixer+mushroom+pepper", "doublesauce"}, {"doublesauce+steak", "doublesaucesteak"},
         {"butter+dough+fruit+meat+mixer+vegetable", "chaos"}, {"butter+dough+fruit+mixer+seafood+vegetable", "chaos"} // hell
 
     };
@@ -142,6 +142,18 @@ public class CombineManager : MonoBehaviour
             }
             combineArea.ingredientsInArea.Clear();
             combineArea.ingredstypeInArea.Clear();
+
+            if (resultName == "steak" || resultName == "doublesauce")
+            {
+                var exsit = data.inbag.Find(x => x.name == resultName);
+                if (exsit != null) exsit.quantity += 1;
+                else data.inbag.Add(new data.ingreds_data(resultName, 1));
+
+                IngredientManager ingredientManager = FindFirstObjectByType<IngredientManager>();
+                ingredientManager?.RefreshSlots();
+
+                return;
+            }
 
             GameObject newCard = Instantiate(resultPrefab, combineArea.transform);
             FoodCard card = newCard.GetComponent<FoodCard>();

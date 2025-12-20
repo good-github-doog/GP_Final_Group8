@@ -26,6 +26,12 @@ public class illustmanager : MonoBehaviour
         desc.text = ingreddiscription.getinfo(ss);
     }
 
+    public void updatethedescwithdonefood(string ss)
+    {
+        title.text = "type : " + illustdata.typedesc[ss];
+        desc.text = illustdata.detailoftype[ss];
+    }
+
     public void changeillustype(bool lorr)
     {
         illustdata.nowtype += lorr ? -1 : 1;
@@ -43,7 +49,7 @@ public class illustmanager : MonoBehaviour
             child.SetActive(false);
         }
         string typekey = illustdata.illustype[illustdata.nowtype];
-        title.text = illustdata.typedesc[typekey];
+        updatethedescwithdonefood(typekey);
         foreach (string illustname in illustdata.illustlist[typekey])
         {
             GameObject obj = thepool.GetObject();

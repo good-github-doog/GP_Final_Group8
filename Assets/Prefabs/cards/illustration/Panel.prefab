@@ -365,7 +365,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c5694a940dd23c4c9c7008e3ed497c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::illustcard
-  thefoodimg: {fileID: 8870282859712214649}
+  thefood: {fileID: 4464501819059256909}
   container: {fileID: 4417440177989752221}
   ingredientprefab: {fileID: 3942702037874918674, guid: 799715833a8a8004db0d9de69ebf3cd4, type: 3}
 --- !u!1 &3005217034846898772

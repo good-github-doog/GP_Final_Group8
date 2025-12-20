@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 880092225005435226}
   - component: {fileID: 6245139281796328985}
   m_Layer: 0
-  m_Name: soup
+  m_Name: gumbo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

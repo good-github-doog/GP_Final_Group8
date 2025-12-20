@@ -3,7 +3,7 @@ using UnityEngine.UI;
 
 public class illustcard : MonoBehaviour
 {
-    public Image thefoodimg;
+    public GameObject thefood;
     public Transform container;
     public GameObject ingredientprefab;
 
@@ -24,8 +24,15 @@ public class illustcard : MonoBehaviour
     {
         mgr = m;
 
-        if (illustdata.isunlocked[illustname]) thefoodimg.sprite = data.GetSprite("donefoods/" + illustname);
-        else thefoodimg.sprite = data.GetSprite("none");
+        if (illustdata.isunlocked[illustname])
+        {
+            thefood.GetComponent<Image>().sprite = data.GetSprite("donefoods/" + illustname);
+            Button bb = thefood.GetComponent<Button>();
+            bb.onClick.RemoveAllListeners();
+            bb.onClick.AddListener(() => mgr.updatethedescwithdonefood(illustname));
+        }
+        else thefood.GetComponent<Image>().sprite = data.GetSprite("none");
+        
 
         foreach (Transform child in container)
         {
