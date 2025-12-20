@@ -65,7 +65,7 @@ public class GameManager : MonoBehaviour
 
         if (moneyText != null)
         {
-            moneyText.text = "$ " + data.money;  // <-- 開始時顯示
+            moneyText.text = " "+ data.money;  // <-- 開始時顯示
         }
 
         if (recipePanel != null)
@@ -91,7 +91,7 @@ public class GameManager : MonoBehaviour
 
         if (moneyText != null)
         {
-            moneyText.text = "$ " + data.money;   // <-- 持續顯示金錢
+            moneyText.text = " " +data.money;   // <-- 持續顯示金錢
         }
 
         if (timer <= 0f && !saveTriggeredOnTimeout)
