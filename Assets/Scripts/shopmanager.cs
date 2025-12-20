@@ -12,9 +12,12 @@ public class shopmanager : MonoBehaviour
     public TMP_InputField nowamount;
     public Slider slider;
     public AudioSource bgm;
+    public AudioSource effect;
+    public AudioClip clicksound;
     public GameObject setpanel;
     public GameObject buypanel;
     public GameObject illustpanel;
+    public GameObject hintpanel;
     public TextMeshProUGUI itemNameText;
     public bagpool pool;
     public bagpool poolforgoods;
@@ -49,6 +52,7 @@ public class shopmanager : MonoBehaviour
             Button btn = obj.GetComponent<Button>();
             btn.onClick.RemoveAllListeners();
             btn.onClick.AddListener(() => openbuy(good));
+            btn.onClick.AddListener(() => effect.PlayOneShot(clicksound));
         }
     }
 
@@ -90,6 +94,16 @@ public class shopmanager : MonoBehaviour
     {
         setpanel.SetActive(false);
         Time.timeScale = 1f;
+    }
+
+    public void openhint()
+    {
+        hintpanel.SetActive(true);
+    }
+
+    public void closehint()
+    {
+        hintpanel.SetActive(false);
     }
 
     public void openbuy(string itname)

@@ -50,7 +50,11 @@ public class CombineManager : MonoBehaviour
         {"butter+lobster+oven+pepper+pineapple+shrimp", "grilllobimp"},
         {"butter+lettuce+mixer+pepper+tomato", "gumbo"},
         {"beef+oven", "steak"}, {"mixer+mushroom+pepper", "doublesauce"}, {"doublesauce+steak", "doublesaucesteak"},
-        {"butter+dough+fruit+meat+mixer+vegetable", "chaos"}, {"butter+dough+fruit+mixer+seafood+vegetable", "chaos"} // hell
+        {"butter+dough+fruit+meat+mixer+vegetable", "chaos"}, {"butter+dough+fruit+mixer+seafood+vegetable", "chaos"}, // hell
+
+        // other
+        {"burgerbun", "bun"}, {"sandwich", "sand"}, {"burgerbun+sandwich", "sabu"}, {"dough+oven", "bread"},
+        {"apple", "apple"}, {"kiwi", "kiwi"}, {"tomato", "tomato"}, {"pineapple", "pineapple"}
 
     };
 

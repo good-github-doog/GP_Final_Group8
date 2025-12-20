@@ -62,7 +62,7 @@ public class FoodArea : MonoBehaviour, IDropHandler
 
         if (!MealTable.MealMap.TryGetValue(foodName, out int foodIndex))
         {
-            return;
+            foodIndex = -10;
         }
 
         // 直接比較餐點編號

@@ -6,7 +6,8 @@ public static class illustdata
     public static int nowtype = 0;
     public static Dictionary<int, string> illustype = new Dictionary<int, string>()
     {
-        {0, "burger"}, {1, "sandwich"}, {2, "salad"}, {3, "pizza"}, {4, "highlevel"}, {5, "2nd made ingred"}, {6, "hell"}
+        {0, "burger"}, {1, "sandwich"}, {2, "salad"}, {3, "pizza"}, {4, "highlevel"},
+        {5, "2nd made ingred"}, {6, "wheatbread"}, {7, "fruit"}, {8, "hell"}
     };
 
     public static Dictionary<string, List<string>> illustlist = new Dictionary<string, List<string>>()
@@ -17,6 +18,8 @@ public static class illustdata
         {"pizza", new List<string>(){"margheritapizza", "hawaiipizza", "seafoodpizza"}},
         {"2nd made ingred", new List<string>(){"steak", "doublesauce"}},
         {"highlevel", new List<string>(){"doublesaucesteak", "gumbo", "grilllobimp"}},
+        {"wheatbread", new List<string>(){"bun", "sand", "sabu", "bread"}},
+        {"fruit", new List<string>(){"apple", "kiwi", "tomato", "pineapple"}},
         {"hell", new List<string>(){"meatjuice", "seafoodjuice", "rawsealandpizza", "chaos"}}
     };
 
@@ -35,6 +38,8 @@ public static class illustdata
         {"margheritapizza", "pizza"}, {"hawaiipizza", "pizza"}, {"seafoodpizza", "pizza"},
         {"steak", "2nd made ingred"}, {"doublesauce", "2nd made ingred"},
         {"doublesaucesteak", "highlevel"}, {"gumbo", "highlevel"}, {"grilllobimp", "highlevel"},
+        {"bun", "bread"}, {"sand", "bread"}, {"sabu", "bread"}, {"bread", "bread"},
+        {"apple", "fruit"}, {"kiwi", "fruit"}, {"tomato", "fruit"}, {"pineapple", "fruit"},
         {"meatjuice", "hell"}, {"seafoodjuice", "hell"}, {"rawsealandpizza", "hell"}, {"chaos", "hell"}
     };
 
@@ -45,6 +50,8 @@ public static class illustdata
         {"salad", "the salad ig green..."},
         {"pizza", "easy to make but..."},
         {"highlevel", "is the difficult one to make"},
+        {"wheatbread", "just the bread or bun"},
+        {"fruit", "just the raw fruit"},
         {"hell", "can you unlock all of them ?"},
 
         {"beefburger", "name : beefburger\nA delicious beef burger with fresh ingredients."},
@@ -76,6 +83,16 @@ public static class illustdata
         {"gumbo", "name : gumbo\nA flavorful gumbo with butter, vegetables, and spices."},
         {"grilllobimp", "name : grilllobimp\nGrilled lobster and shrimp in a buttery sauce."},
 
+        {"bun", "name : bun\nonly the bread of burger"},
+        {"sand", "name : sand\nA slice of bread for making sandwiches."},
+        {"sabu", "name : sabu\nThe pieces of two bread"},
+        {"bread", "name : bread\nA baked dough"},
+
+        {"apple", "name : apple\nA fresh and juicy apple."},
+        {"kiwi", "name : kiwi\nA tropical kiwi fruit."},
+        {"tomato", "name : tomato\nA ripe and flavorful tomato."},
+        {"pineapple", "name : pineapple\nA sweet and tangy pineapple."},
+
         {"meatjuice", "name : meatjuice\nA unique juice blend of fruits and meats."},
         {"seafoodjuice", "name : seafoodjuice\nA refreshing juice mix of fruits and seafood."},
         {"rawsealandpizza", "name : rawsealandpizza\nA raw pizza combining meat and seafood flavors."},
@@ -90,6 +107,8 @@ public static class illustdata
         {"margheritapizza", false}, {"hawaiipizza", false}, {"seafoodpizza", false},
         {"steak", false}, {"doublesauce", false},
         {"doublesaucesteak", false}, {"gumbo", false}, {"grilllobimp", false},
+        {"bun", false}, {"sand", false}, {"sabu", false}, {"bread", false},
+        {"apple", false}, {"kiwi", false}, {"tomato", false}, {"pineapple", false},
         {"meatjuice", false}, {"seafoodjuice", false}, {"rawsealandpizza", false}, {"chaos", false}
     };
 
@@ -123,6 +142,16 @@ public static class illustdata
         {"doublesaucesteak", new List<string>(){"doublesauce", "steak"}},
         {"gumbo", new List<string>(){"butter", "lettuce", "mixer", "pepper", "tomato"}},
         {"grilllobimp", new List<string>(){"butter", "lobster", "oven", "pepper", "pineapple", "shrimp"}},
+
+        {"bun", new List<string>(){"burgerbun"}},
+        {"sand", new List<string>(){"sandwich"}},
+        {"sabu", new List<string>(){"burgerbun", "sandwich"}},
+        {"bread", new List<string>(){"dough", "oven"}},
+
+        {"apple", new List<string>(){"apple"}},
+        {"kiwi", new List<string>(){"kiwi"}},
+        {"tomato", new List<string>(){"tomato"}},
+        {"pineapple", new List<string>(){"pineapple"}},
 
         {"meatjuice", new List<string>(){"fruit", "fruit", "meat", "mixer"}},
         {"seafoodjuice", new List<string>(){"fruit", "fruit", "mixer", "seafood"}},
