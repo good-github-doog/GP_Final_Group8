@@ -29,7 +29,10 @@ public static class illustdata
         {"sandwich", "Level 1"},
         {"salad", "Level 1"},
         {"pizza", "Level 2"},
+        {"2nd made ingred", "Level 3"},
         {"highlevel", "Level 3"},
+        {"wheatbread", "bread"},
+        {"fruit", "fruit"},
         {"hell", "crazy"},
         
         {"beefburger", "burger"}, {"porkburger", "burger"}, {"steakburger", "burger"}, {"shrimpburger", "burger"}, {"salmonburger", "burger"}, {"lobsterburger", "burger"},
@@ -49,6 +52,7 @@ public static class illustdata
         {"sandwich", "made by three ingredients, kinds number is same as burger"},
         {"salad", "the salad ig green..."},
         {"pizza", "easy to make but..."},
+        {"2nd made ingred", "need oven or mixer to make them"},
         {"highlevel", "is the difficult one to make"},
         {"wheatbread", "just the bread or bun"},
         {"fruit", "just the raw fruit"},

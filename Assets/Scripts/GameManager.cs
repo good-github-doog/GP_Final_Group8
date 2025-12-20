@@ -3,12 +3,38 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using TMPro;
 using System.Collections;
+using System.Collections.Generic;
 
 public class GameManager : MonoBehaviour
 {
+    private List<string> thegudietitles = new List<string>() {
+        "basic ui",
+        "open the recipe book",
+        "open the settings",
+        "ingredients",
+        "combine",
+        "serve"
+    };
+    private List<string> theguidedescs = new List<string>() {
+        "the money\nremaining time",
+        " ", " ",
+        "in this area, are the ingredients you have\nyou can tap and drag to the combine area",
+        "press the cook button to combine the ingredients in the area, to make the dish",
+        "drag the made dish to the serve area to serve the customer"
+    };
+
     private float timer = 120f;
     public TextMeshProUGUI timerText;
     public TextMeshProUGUI moneyText;
+    public TextMeshProUGUI guidetitle;
+    public TextMeshProUGUI guidedesc;
+    public Slider slider;
+    public AudioSource bgm;
+    public GameObject setpanel;
+    public GameObject guidepanel;
+    public Image theimg;
+    public List<Sprite> guideimgs;
+    public int nowguideimg = 0;
 
     [Header("Recipe")]
     public GameObject recipePanel;
@@ -23,6 +49,13 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
+        slider.value = data.bgmvol;
+        bgm.volume = data.bgmvol;
+        slider.onValueChanged.AddListener(setvolume);
+        theimg.sprite = guideimgs[nowguideimg];
+        guidetitle.text = thegudietitles[nowguideimg];
+        guidedesc.text = theguidedescs[nowguideimg];
+
         // Reset kill counter at the start of each day
         data.killCountYesterday = data.killCountToday;
         data.killCountToday = 0;
@@ -204,5 +237,43 @@ public class GameManager : MonoBehaviour
         }
 
         Debug.Log("[CHEAT MODE] Added 10 of each ingredient!");
+    }
+
+    public void opensetting()
+    {
+        setpanel.SetActive(true);
+        Time.timeScale = 0f;
+    }
+
+    public void closesetting()
+    {
+        setpanel.SetActive(false);
+        Time.timeScale = 1f;
+    }
+
+    public void openguide()
+    {
+        guidepanel.SetActive(true);
+    }
+
+    public void closeguide()
+    {
+        guidepanel.SetActive(false);
+    }
+
+    public void changeimg(bool lorr)
+    {
+        nowguideimg += lorr ? -1 : 1;
+        if (nowguideimg < 0) nowguideimg = guideimgs.Count - 1;
+        else if (nowguideimg >= guideimgs.Count) nowguideimg = 0;
+        theimg.sprite = guideimgs[nowguideimg];
+        guidetitle.text = thegudietitles[nowguideimg];
+        guidedesc.text = theguidedescs[nowguideimg];
+    }
+
+    public void setvolume(float value)
+    {
+        bgm.volume = value;
+        data.bgmvol = value;
     }
 }
