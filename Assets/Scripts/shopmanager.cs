@@ -67,7 +67,59 @@ public class shopmanager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.C))
+        {
+            ActivateCheatMode();
+        }
+    }
 
+    private void ActivateCheatMode()
+    {
+        Debug.Log("[CHEAT MODE] Activated! Unlocking all stages and adding ingredients...");
+
+        // 解鎖所有關卡
+        // data.clearstage = 3;
+        // data.hasCompletedStageHellCuisine[0] = true;
+        // data.hasCompletedStageHellCuisine[1] = true;
+        // data.hasCompletedStageHellCuisine[2] = true;
+        // Debug.Log("[CHEAT MODE] All stages unlocked!");
+
+        // 給予所有種類的食材各10個
+        string[] allIngredients = {
+            "burgerbun", "sandwich", "mushroom", "cheese",
+            "salmon", "lettuce", "beef", "pork",
+            "apple", "kiwi", "dough", "shrimp",
+            "tomato", "pineapple", "butter", "pepper",
+            "lobster", "steak", "doublesauce"
+        };
+
+        foreach (string ingredientName in allIngredients)
+        {
+            var existingIngredient = data.inbag.Find(x => x.name == ingredientName);
+
+            if (existingIngredient != null)
+            {
+                existingIngredient.quantity += 10;
+            }
+            else
+            {
+                data.ingreds_data newIngredient = new data.ingreds_data(ingredientName, 10);
+                data.inbag.Add(newIngredient);
+            }
+        }
+
+        Debug.Log("[CHEAT MODE] Added 10 of each ingredient!");
+
+        IngredientManager ingredientManager = FindAnyObjectByType<IngredientManager>();
+        if (ingredientManager != null)
+        {
+            ingredientManager.RefreshSlots();
+            Debug.Log("[CHEAT MODE] Ingredient list UI refreshed!");
+        }
+        else
+        {
+            Debug.LogWarning("[CHEAT MODE] IngredientManager not found, UI not refreshed");
+        }
     }
 
     public void nextscene()
