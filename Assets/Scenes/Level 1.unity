@@ -231,7 +231,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.000030517578, y: -0.000015258789}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &70132691
@@ -2445,6 +2445,20 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 153371077286279985, guid: d44417cbe1f9a754ea8336c09e7f49db, type: 3}
+      propertyPath: m_text
+      value: 'Pork Sandwich:
+
+        Sandwich
+
+        Pork
+
+        Mushroom
+
+
+
+        $280'
+      objectReference: {fileID: 0}
     - target: {fileID: 200275413527431614, guid: d44417cbe1f9a754ea8336c09e7f49db, type: 3}
       propertyPath: m_Name
       value: Canvas
@@ -2497,6 +2511,52 @@ PrefabInstance:
       propertyPath: unlockedSpriteOverride
       value: 
       objectReference: {fileID: 21300000, guid: ab04a25d84a250847aeb675aa9698b33, type: 3}
+    - target: {fileID: 1361397883089554815, guid: d44417cbe1f9a754ea8336c09e7f49db, type: 3}
+      propertyPath: m_text
+      value: 'Beef Burger:
+
+        Burger bun
+
+        Beef
+
+        Lettuce
+
+        Cheese
+
+
+
+        $350'
+      objectReference: {fileID: 0}
+    - target: {fileID: 1754561665679755533, guid: d44417cbe1f9a754ea8336c09e7f49db, type: 3}
+      propertyPath: m_text
+      value: 'Salmon Sandwich:
+
+        Sandwich
+
+        Salmon
+
+        Mushroom
+
+
+
+        $300'
+      objectReference: {fileID: 0}
+    - target: {fileID: 1758538492416782969, guid: d44417cbe1f9a754ea8336c09e7f49db, type: 3}
+      propertyPath: m_text
+      value: 'Salmon Burger:
+
+        Burger bun
+
+        Salmon
+
+        Lettuce
+
+        Cheese
+
+
+
+        $330'
+      objectReference: {fileID: 0}
     - target: {fileID: 2167804746417704173, guid: d44417cbe1f9a754ea8336c09e7f49db, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -2513,9 +2573,51 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3020447587635103719, guid: d44417cbe1f9a754ea8336c09e7f49db, type: 3}
+      propertyPath: m_text
+      value: 'Shrimp Sandwich:
+
+        Sandwich
+
+        Shrimp
+
+        Mushroom
+
+
+
+        $300'
+      objectReference: {fileID: 0}
     - target: {fileID: 3023277474198879880, guid: d44417cbe1f9a754ea8336c09e7f49db, type: 3}
       propertyPath: m_SizeDelta.x
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3193074112264565691, guid: d44417cbe1f9a754ea8336c09e7f49db, type: 3}
+      propertyPath: m_text
+      value: 'Shrimp Burger:
+
+        Burger bun
+
+        Shrimp
+
+        Lettuce
+
+        Cheese
+
+
+
+        $330'
+      objectReference: {fileID: 0}
+    - target: {fileID: 3478218638763269430, guid: d44417cbe1f9a754ea8336c09e7f49db, type: 3}
+      propertyPath: m_text
+      value: 'Apple Salad:
+
+        Apple
+
+        Lettuce
+
+
+
+        $200'
       objectReference: {fileID: 0}
     - target: {fileID: 3716487933704678743, guid: d44417cbe1f9a754ea8336c09e7f49db, type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -2600,6 +2702,36 @@ PrefabInstance:
     - target: {fileID: 3848271083120644903, guid: d44417cbe1f9a754ea8336c09e7f49db, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4498929179718538772, guid: d44417cbe1f9a754ea8336c09e7f49db, type: 3}
+      propertyPath: m_text
+      value: 'Tomato Salad:
+
+        Tomato
+
+        Lettuce
+
+
+
+        $200
+
+        Hint:
+        Perhaps you can do something to those tomato customers?'
+      objectReference: {fileID: 0}
+    - target: {fileID: 5075652780875488027, guid: d44417cbe1f9a754ea8336c09e7f49db, type: 3}
+      propertyPath: m_text
+      value: 'Pineapple Salad:
+
+        Pineapple
+
+        Lettuce
+
+
+
+        $200
+
+        Hint:
+        Perhaps you can do something to those pineapple customers?'
       objectReference: {fileID: 0}
     - target: {fileID: 5159489808740119604, guid: d44417cbe1f9a754ea8336c09e7f49db, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
@@ -2725,6 +2857,21 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.AudioClip, UnityEngine
       objectReference: {fileID: 0}
+    - target: {fileID: 7865948727778012508, guid: d44417cbe1f9a754ea8336c09e7f49db, type: 3}
+      propertyPath: m_text
+      value: 'Kiwi Salad:
+
+        Kiwi
+
+        Lettuce
+
+
+
+        $300
+
+        Hint:
+        Perhaps you can do something to those kiwi customers?'
+      objectReference: {fileID: 0}
     - target: {fileID: 7958527169536913621, guid: d44417cbe1f9a754ea8336c09e7f49db, type: 3}
       propertyPath: m_PresetInfoIsWorld
       value: 0
@@ -2733,6 +2880,37 @@ PrefabInstance:
       propertyPath: gm
       value: 
       objectReference: {fileID: 591816653}
+    - target: {fileID: 8280537336125195172, guid: d44417cbe1f9a754ea8336c09e7f49db, type: 3}
+      propertyPath: m_text
+      value: 'Beef Sandwich:
+
+        Sandwich
+
+        Beef
+
+        Mushroom
+
+
+
+        $330'
+      objectReference: {fileID: 0}
+    - target: {fileID: 8288500051940473056, guid: d44417cbe1f9a754ea8336c09e7f49db, type: 3}
+      propertyPath: m_text
+      value: 'Steak Sandwich:
+
+        Sandwich
+
+        Steak
+
+        Mushroom
+
+
+
+        $350
+
+        Hint:
+        Put beef with oven to get steak.'
+      objectReference: {fileID: 0}
     - target: {fileID: 8676802498742435301, guid: d44417cbe1f9a754ea8336c09e7f49db, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
       value: 2
@@ -2764,6 +2942,41 @@ PrefabInstance:
     - target: {fileID: 8676802498742435301, guid: d44417cbe1f9a754ea8336c09e7f49db, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.AudioClip, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 8866824672456739182, guid: d44417cbe1f9a754ea8336c09e7f49db, type: 3}
+      propertyPath: m_text
+      value: 'Pork Burger:
+
+        Burger bun
+
+        Pork
+
+        Lettuce
+
+        Cheese
+
+
+
+        $300'
+      objectReference: {fileID: 0}
+    - target: {fileID: 8924123457474016937, guid: d44417cbe1f9a754ea8336c09e7f49db, type: 3}
+      propertyPath: m_text
+      value: 'Steak Burger:
+
+        Burger bun
+
+        Steak
+
+        Lettuce
+
+        Cheese
+
+
+
+        $380
+
+        Hint:
+        Put beef with oven to get steak.'
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
