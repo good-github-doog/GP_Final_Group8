@@ -58,6 +58,27 @@ public static class data
     public static int clearstage = 2;
     public static int nowstage = 1;
     public static int isPanicMode = 0; // 0 = normal, 1 = panic (killing event occurred)
+    public static int hintPrice = 100;
+    // 每關是否已買過 Hint（Stage 1~3）
+    // index: 0->stage1, 1->stage2, 2->stage3
+    public static bool[] hintUnlockedByStage = new bool[3] { false, false, false };
+
+    public static bool IsHintUnlocked(int stage)
+    {
+        int idx = stage - 1;
+        if (idx < 0 || idx >= hintUnlockedByStage.Length) return false;
+        return hintUnlockedByStage[idx];
+    }
+
+    public static void SetHintUnlocked(int stage, bool value)
+    {
+        int idx = stage - 1;
+        if (idx < 0 || idx >= hintUnlockedByStage.Length) return;
+        hintUnlockedByStage[idx] = value;
+    }
+
+
+
 
     // 地獄料理完成狀態 [Stage1, Stage2, Stage3]
     public static bool[] hasCompletedStageHellCuisine = new bool[3] { false, false, false };
@@ -103,6 +124,7 @@ public static class data
         nowstage = 1;
         isPanicMode = 0;
         hasCompletedStageHellCuisine = new bool[3] { false, false, false };
+        hintUnlockedByStage = new bool[3] { false, false, false };
     }
 
     public static string gettype(string tar)

@@ -119,6 +119,29 @@ public class shopmanager : MonoBehaviour
         itemdisc.text = ingreddiscription.getinfo(itname);
     }
 
+    // Yes 按鈕：確認要買提示（先不扣錢）
+    public void OnHintYes()
+    {
+        // 解鎖「當前關卡」的 hint
+        data.SetHintUnlocked(data.nowstage, true);
+
+        Debug.Log($"[Hint] Stage {data.nowstage} hint unlocked. Price = {data.hintPrice} (not charged yet)");
+
+        // 先關掉購買介面
+        closehint();
+
+        if (effect != null && clicksound != null) effect.PlayOneShot(clicksound);
+    }
+
+    // No 按鈕：不買，直接關掉
+    public void OnHintNo()
+    {
+        closehint();
+
+        if (effect != null && clicksound != null) effect.PlayOneShot(clicksound);
+    }
+
+
     public void plusnum(int nn)
     {
         amount += nn;
