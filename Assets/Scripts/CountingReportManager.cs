@@ -171,7 +171,7 @@ public class CountingReportManager : MonoBehaviour
         int flow = cashIn - cashOut;
 
         StringBuilder sb = new StringBuilder();
-        sb.AppendLine(FormatLabelWithRightAlignedValue("Balance", $"${flow}"));
+        sb.AppendLine($"Balance ${flow}");
         return sb.ToString();
     }
 
