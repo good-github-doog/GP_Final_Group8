@@ -44,7 +44,7 @@ public class IngredientManager : MonoBehaviour
         activeSlots.Clear();
 
         // 讓本關商店販售的食材排前面，其餘維持原順序
-        var toolOrder = new Dictionary<string, int> { { "oven", 0 }, { "mixer", 1 } };
+        var toolOrder = new Dictionary<string, int> { { "oven", 0 }, { "mixer", 1 }, { "steak", 2 }, { "doublesauce", 3 } };
         data.goodsmap.TryGetValue(data.nowstage, out var stageGoods);
         Dictionary<string, int> shopOrder = null;
         if (stageGoods != null)
