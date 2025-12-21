@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine.UI;
 
 public class IngredientManager : MonoBehaviour
@@ -42,8 +43,37 @@ public class IngredientManager : MonoBehaviour
         }
         activeSlots.Clear();
 
-        // 根據 data.inbag 生成 Slot
-        foreach (var ingredData in data.inbag)
+        // 讓本關商店販售的食材排前面，其餘維持原順序
+        var toolOrder = new Dictionary<string, int> { { "oven", 0 }, { "mixer", 1 } };
+        data.goodsmap.TryGetValue(data.nowstage, out var stageGoods);
+        Dictionary<string, int> shopOrder = null;
+        if (stageGoods != null)
+        {
+            shopOrder = new Dictionary<string, int>();
+            for (int i = 0; i < stageGoods.Count; i++)
+            {
+                shopOrder[stageGoods[i]] = i;
+            }
+        }
+
+        var orderedBag = data.inbag
+            .Select((ing, idx) => new { ing, idx })
+            .OrderBy(x =>
+            {
+                if (toolOrder.TryGetValue(x.ing.name, out int tOrder)) return 0;
+                if (shopOrder != null && shopOrder.ContainsKey(x.ing.name)) return 1;
+                return 2;
+            })
+            .ThenBy(x =>
+            {
+                if (toolOrder.TryGetValue(x.ing.name, out int tOrder)) return tOrder;
+                if (shopOrder != null && shopOrder.TryGetValue(x.ing.name, out int order)) return order;
+                return x.idx; // 保留非商店項目的原始順序
+            })
+            .Select(x => x.ing);
+
+        // 根據排序後的資料生成 Slot
+        foreach (var ingredData in orderedBag)
         {
             GameObject slotObj = Instantiate(gameslotprefeb, slotContainer);
             foodpic = slotObj.transform.Find("content").GetComponent<Image>();
