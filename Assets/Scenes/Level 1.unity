@@ -1555,15 +1555,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1387196039643301409, guid: 7dd14bf8eae96924ea5cb309ccdf699c, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1794402390284950097, guid: 7dd14bf8eae96924ea5cb309ccdf699c, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 591816653}
     - target: {fileID: 1794402390284950097, guid: 7dd14bf8eae96924ea5cb309ccdf699c, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 1012821819}
+    - target: {fileID: 1794402390284950097, guid: 7dd14bf8eae96924ea5cb309ccdf699c, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: closesetting
+      objectReference: {fileID: 0}
+    - target: {fileID: 1794402390284950097, guid: 7dd14bf8eae96924ea5cb309ccdf699c, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: PlayOneShot
       objectReference: {fileID: 0}
     - target: {fileID: 1794402390284950097, guid: 7dd14bf8eae96924ea5cb309ccdf699c, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
@@ -1599,7 +1607,7 @@ PrefabInstance:
       objectReference: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
     - target: {fileID: 3916047071251570310, guid: 7dd14bf8eae96924ea5cb309ccdf699c, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5800705006616471890, guid: 7dd14bf8eae96924ea5cb309ccdf699c, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -1687,7 +1695,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7980939304597161631, guid: 7dd14bf8eae96924ea5cb309ccdf699c, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9082655564651865240, guid: 7dd14bf8eae96924ea5cb309ccdf699c, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -3114,6 +3122,8 @@ MonoBehaviour:
   spotDKey: 52
   spotEKey: 53
   killCooldownTime: 20
+  effect: {fileID: 1012821819}
+  killclip: {fileID: 8300000, guid: d2e721bd7970e1c439773e132f7831ed, type: 3}
 --- !u!4 &1339529658
 Transform:
   m_ObjectHideFlags: 0
@@ -4030,7 +4040,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1595404625
 RectTransform:
   m_ObjectHideFlags: 0

@@ -49,6 +49,9 @@ public class CustomerManager : MonoBehaviour
     public float killCooldownTime = 20f;  // 冷卻時間（秒）
     private float lastKillTime = -999f;  // 上次殺顧客的時間（初始值設為很久以前）
 
+    public AudioSource effect;
+    public AudioClip killclip;
+
     // ==================== UNITY LIFECYCLE ====================
     private void Awake()
     {
@@ -68,26 +71,31 @@ public class CustomerManager : MonoBehaviour
         if (Input.GetKeyDown(spotAKey) && customerSpots.Count > 0)
         {
             KillCustomerAtSpot(0);
+            effect.PlayOneShot(killclip);
         }
 
         if (Input.GetKeyDown(spotBKey) && customerSpots.Count > 1)
         {
             KillCustomerAtSpot(1);
+            effect.PlayOneShot(killclip);
         }
 
         if (Input.GetKeyDown(spotCKey) && customerSpots.Count > 2)
         {
             KillCustomerAtSpot(2);
+            effect.PlayOneShot(killclip);
         }
 
         if (Input.GetKeyDown(spotDKey) && customerSpots.Count > 3)
         {
             KillCustomerAtSpot(3);
+            effect.PlayOneShot(killclip);
         }
 
         if (Input.GetKeyDown(spotEKey) && customerSpots.Count > 4)
         {
             KillCustomerAtSpot(4);
+            effect.PlayOneShot(killclip);
         }
     }
 

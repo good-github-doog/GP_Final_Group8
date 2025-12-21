@@ -9,6 +9,8 @@ public class shopmanager : MonoBehaviour
     public TextMeshProUGUI show;
     public TextMeshProUGUI itemprise;
     public TextMeshProUGUI itemdisc;
+    public TextMeshProUGUI inbagitemtyp;
+    public TextMeshProUGUI inbagitemdes;
     public TMP_InputField nowamount;
     public Slider slider;
     public AudioSource bgm;
@@ -18,9 +20,11 @@ public class shopmanager : MonoBehaviour
     public GameObject buypanel;
     public GameObject illustpanel;
     public GameObject hintpanel;
+    public GameObject inbagshowpanel;
     public TextMeshProUGUI itemNameText;
     public bagpool pool;
     public bagpool poolforgoods;
+    public Image inbagitemimg;
 
     private string nowbuyingitem;
     private List<string> nowgoods;
@@ -50,6 +54,10 @@ public class shopmanager : MonoBehaviour
             if (remains.quantity <= 0) continue;
             GameObject uiObj = pool.GetObject();
             uiObj.GetComponent<ingredient>().setingredient(remains.name, remains.quantity);
+            string tmp = remains.name;
+            uiObj.GetComponent<Button>().onClick.RemoveAllListeners();
+            uiObj.GetComponent<Button>().onClick.AddListener(() => openinbagshow(tmp));
+            uiObj.GetComponent<Button>().onClick.AddListener(() => effect.PlayOneShot(clicksound));
         }
 
         data.goodsmap.TryGetValue(data.nowstage, out nowgoods);
@@ -303,6 +311,19 @@ public class shopmanager : MonoBehaviour
         illustpanel.SetActive(false);
     }
 
+    public void openinbagshow(string itemname)
+    {
+        inbagshowpanel.SetActive(true);
+        inbagitemimg.sprite = data.GetSprite(itemname);
+        inbagitemtyp.text = "type : " + data.gettype(itemname);
+        inbagitemdes.text = ingreddiscription.getinfo(itemname);
+    }
+
+    public void closeinbagshow()
+    {
+        inbagshowpanel.SetActive(false);
+    }
+
     public void AddItem()
     {
         if (data.money < totalprise) return;
@@ -310,6 +331,8 @@ public class shopmanager : MonoBehaviour
         show.text = "" + data.money;
         data.costIngredients += totalprise;   // 🔸記錄材料花費
         data.AddIngredientPurchase(nowbuyingitem, amount, totalprise);
+
+        string tmp = nowbuyingitem;
 
         data.ingreds_data isexist = data.inbag.Find(x => x.name == nowbuyingitem);
         if (isexist != null)
@@ -326,6 +349,9 @@ public class shopmanager : MonoBehaviour
                 isexist.quantity = amount;
                 GameObject uiObj = pool.GetObject();
                 uiObj.GetComponent<ingredient>().setingredient(nowbuyingitem, isexist.quantity);
+                uiObj.GetComponent<Button>().onClick.RemoveAllListeners();
+                uiObj.GetComponent<Button>().onClick.AddListener(() => openinbagshow(tmp));
+                uiObj.GetComponent<Button>().onClick.AddListener(() => effect.PlayOneShot(clicksound));
             }
         }
         else
@@ -334,6 +360,9 @@ public class shopmanager : MonoBehaviour
 
             GameObject uiObj = pool.GetObject();
             uiObj.GetComponent<ingredient>().setingredient(nowbuyingitem, amount);
+            uiObj.GetComponent<Button>().onClick.RemoveAllListeners();
+            uiObj.GetComponent<Button>().onClick.AddListener(() => openinbagshow(tmp));
+            uiObj.GetComponent<Button>().onClick.AddListener(() => effect.PlayOneShot(clicksound));
         }
     }
 
