@@ -230,10 +230,10 @@ public class shopmanager : MonoBehaviour
                     data.hintUnlockedByStage[0] = true;
                     break;
                 case 2:
-                    data.hintUnlockedByStage[0] = true;
+                    data.hintUnlockedByStage[1] = true;
                     break;
                 case 3:
-                    data.hintUnlockedByStage[0] = true;
+                    data.hintUnlockedByStage[2] = true;
                     break;
             }
             data.money -= data.hintPrice;
